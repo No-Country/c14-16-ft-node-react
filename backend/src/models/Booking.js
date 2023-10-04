@@ -21,7 +21,9 @@ export const Booking = sequelize.define('Booking', {
         type: DataTypes.FLOAT,
         allowNull: false
     }
-  });
+},{
+    timestamps: false
+});
   
 Pet.belongsToMany(Branch, {
     through: Booking,

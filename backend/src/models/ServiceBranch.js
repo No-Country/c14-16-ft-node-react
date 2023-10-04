@@ -9,7 +9,9 @@ export const ServiceBranch = sequelize.define('ServiceBranch', {
         primaryKey: true,
         autoIncrement: true,
     },
-  });
+  },{
+    timestamps: false
+});
   
 Service.belongsToMany(Branch, {
     through: ServiceBranch,

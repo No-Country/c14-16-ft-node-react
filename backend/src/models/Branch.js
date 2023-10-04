@@ -29,6 +29,14 @@ export const Branch = sequelize.define('Branch',{
         type: DataTypes.INTEGER,
         allowNull: false
     },
+    phone:{
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    address:{
+        type: DataTypes.STRING,
+        allowNull: false
+    },
 },{
     timestamps: false
 });

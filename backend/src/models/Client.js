@@ -11,6 +11,14 @@ export const Client = sequelize.define('Client',{
         type: DataTypes.STRING,
         allowNull: false
     },
+    phone:{
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    address:{
+      type: DataTypes.STRING,
+      allowNull: false
+    },
     email: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -18,15 +26,15 @@ export const Client = sequelize.define('Client',{
         validate: {
           isEmail: true,
         },
-      },
-      pass: {
+    },
+    pass: {
         type: DataTypes.STRING,
         allowNull: false,
-      },
-      profile_picture: {
+    },
+    profile_picture: {
         type: DataTypes.STRING,
         allowNull: true,
-      },
+    },
 },{
     timestamps: false
 });
