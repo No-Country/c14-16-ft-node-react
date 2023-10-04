@@ -1,7 +1,8 @@
 import { sequelize } from '../config/config.js';
 import { DataTypes } from 'sequelize';
+import { Client } from './Client.js';
 
-export const Client = sequelize.define('Client',{
+export const Pet = sequelize.define('Pet',{
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -11,22 +12,23 @@ export const Client = sequelize.define('Client',{
         type: DataTypes.STRING,
         allowNull: false
     },
-    email: {
+    type:{
         type: DataTypes.STRING,
-        allowNull: false,
-        unique: true,
-        validate: {
-          isEmail: true,
-        },
-      },
-      pass: {
+        allowNull: false
+    },
+    breed:{
         type: DataTypes.STRING,
-        allowNull: false,
-      },
-      profile_picture: {
-        type: DataTypes.STRING,
-        allowNull: true,
-      },
+        allowNull: false
+    },
+    weight:{
+        type: DataTypes.FLOAT,
+        allowNull: false
+    }
 },{
     timestamps: false
+});
+
+Pet.belongsTo(Client, {
+    foreignKey: 'client_id',
+    allowNull: false,
 });
