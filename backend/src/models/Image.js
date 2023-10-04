@@ -12,7 +12,3 @@ export const Image = sequelize.define('Image', {
       allowNull: false,
     },
 });
-
-Image.belongsTo(Post, {
-   foreignKey: 'branch_id',
-});

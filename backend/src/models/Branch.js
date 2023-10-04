@@ -40,4 +40,4 @@ Branch.belongsTo(Company, {
 
 Branch.hasMany(Image, {
     foreignKey: 'branch_id',
-  });
+});
