@@ -1,5 +1,6 @@
 import { sequelize } from '../config/config.js';
 import { DataTypes } from 'sequelize';
+import { hash } from 'bcrypt';
 
 export const Client = sequelize.define('Client',{
     id: {
@@ -37,4 +38,9 @@ export const Client = sequelize.define('Client',{
     },
 },{
     timestamps: false
+});
+
+Client.beforeCreate(async (client) => {
+    const hashedPassword = await hash(client.pass, 10);
+    client.pass = hashedPassword;
 });
