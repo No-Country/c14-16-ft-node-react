@@ -5,7 +5,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 //'database','username','password'
-export const sequelize = new Sequelize('pets',process.env.DB_USER, process.env.DB_PASSWORD,{
+export const sequelize = new Sequelize('pets','root', '',{
     host:'localhost',
     dialect: 'mysql'
 });

@@ -1,6 +1,8 @@
 import express from 'express';
 import cors  from 'cors';
-import { AuthRouter } from './routes/AuthRouter.js';
+import { ClientRouter } from './routes/ClientRouter.js';
+import { CompanyRouter } from './routes/CompanyRouter.js';
+import { PetsRouter } from './routes/petsRouter.js';
 //conexion a la base de datos
 import './config/config.js';
 //creacion de tablas
@@ -11,7 +13,9 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
-app.use('/api/user', AuthRouter);
+app.use('/api/client', ClientRouter);
+app.use('/api/company', CompanyRouter);
+app.use('/api/pets', PetsRouter);
 
 
 app.listen( PORT, () =>{
