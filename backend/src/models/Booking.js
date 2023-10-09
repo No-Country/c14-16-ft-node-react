@@ -20,6 +20,10 @@ export const Booking = sequelize.define('Booking', {
     price: {
         type: DataTypes.FLOAT,
         allowNull: false
+    },
+    transport: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false
     }
 },{
     timestamps: false

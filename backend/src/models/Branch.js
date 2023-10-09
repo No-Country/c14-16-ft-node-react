@@ -37,6 +37,10 @@ export const Branch = sequelize.define('Branch',{
         type: DataTypes.STRING,
         allowNull: false
     },
+    rate:{
+        type: DataTypes.FLOAT,
+        allowNull: false
+    },
 },{
     timestamps: false
 });
