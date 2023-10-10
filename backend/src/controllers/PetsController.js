@@ -1,5 +1,6 @@
 import { Pet } from '../models/Pet.js';
 import { Client } from '../models/Client.js';
+import { AnimalTypes } from '../models/AnimalTypes.js';
 
 export const getPets = async ( req, res ) =>{
     try {
@@ -9,6 +10,7 @@ export const getPets = async ( req, res ) =>{
         return res.status( 500 ).json({ message: error }); 
     }
 }
+
 export const getOnePets = async ( req, res ) =>{
     try {
         const { id } = req.params;
@@ -19,28 +21,37 @@ export const getOnePets = async ( req, res ) =>{
         
         const getPet = await Pet.findByPk( id );
 
-        return res.status( 200 ).json({ result: getService }); 
+        return res.status( 200 ).json({ result: getPet }); 
     } catch (error) {
         return res.status( 500 ).json({ message: error });
     }
 }
+
 export const createPets = async ( req, res ) =>{
     try {
-        const { name, type, breed, weight, client_id } =  req.body
+        const { name, breed, weight, client_id , type_id } =  req.body
 
         const client = await Client.findByPk( client_id );
 
+        const type = await AnimalTypes.findByPk( client_id );
+
+
         if (!client) {
-          return res.status(404).json({ message: 'Mascota no encontrada' });
+          return res.status(404).json({ message: 'Cliente no encontrado' });
         }
+
+        if (!type) {
+            return res.status(404).json({ message: 'Tipo no encontrado' });
+          }
         
-        const createdPet = await Pet.create({ name, type, breed, weight, client_id: client.id})
+        const createdPet = await Pet.create({ name, breed, weight, client_id: client.id, type_id: type.id})
 
         return res.status( 201 ).json({ result: createdPet });
     } catch (error) {
         return res.status( 500 ).json({ message: error });
     }
 }
+
 export const updatePets = async ( req, res ) =>{
     try {
         const { id } = req.params;
@@ -62,6 +73,7 @@ export const updatePets = async ( req, res ) =>{
         return res.status( 500 ).json({ message: error });
     }
 }
+
 export const deletePets = async ( req, res ) =>{
     try {
         const { id } = req.params;

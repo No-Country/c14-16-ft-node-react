@@ -13,10 +13,6 @@ export const Pet = sequelize.define('Pet',{
         type: DataTypes.STRING,
         allowNull: false
     },
-    type:{
-        type: DataTypes.STRING,
-        allowNull: false
-    },
     breed:{
         type: DataTypes.STRING,
         allowNull: false
