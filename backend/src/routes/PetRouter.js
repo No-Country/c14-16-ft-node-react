@@ -2,7 +2,6 @@ import express from "express";
 import { getPets, getOnePets, createPets, updatePets, deletePets} from '../controllers/PetsController.js';
 export const PetRouter = express.Router(); 
 
-//Rutas de mi path usuarios
 PetRouter.get('/', getPets);
 PetRouter.get('/:id', getOnePets);
 PetRouter.post('/', createPets);

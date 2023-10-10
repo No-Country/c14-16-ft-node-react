@@ -37,9 +37,9 @@ export const createClient = async (req, res) =>{
             throw new BusinessError({message:'El cliente ya existe', code: 400});
         }
         
-        const createClient = await Client.create({ name, phone, address, email, pass, profile_picture });
+        const createdClient = await Client.create({ name, phone, address, email, pass, profile_picture });
 
-        return res.status( 200 ).json({ result: createClient });
+        return res.status( 201 ).json({ result: createClient });
     } catch ( error ) {
         return res.status( 500 ).json({ message: error.message });
     }
@@ -48,10 +48,15 @@ export const createClient = async (req, res) =>{
 export const updateClient = async (req, res) =>{
     try {
         const { id } = req.params;
-        const updateClient = await Client.findByPk( id );
-        updateClient.set( req.body );
-        updateClient.save();
-        return res.status( 200 ).json({ result: updateClient });
+        const clientToUpdate = await Client.findByPk( id );
+
+        if(!clientToUpdate){
+            throw new BusinessError({message:'El cliente no existe', code: 404});
+        }
+
+        clientToUpdate.set( req.body );
+        clientToUpdate.save();
+        return res.status( 200 ).json({ result: clientToUpdate });
     } catch ( error ) {
         return res.status( 500 ).json({ message: error });
     }
