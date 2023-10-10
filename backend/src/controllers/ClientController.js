@@ -34,12 +34,13 @@ export const createClient = async (req, res) =>{
         const clientExist = await Client.findOne({ where: { email } });
 
         if(clientExist) {
+            console.log("entro")
             throw new BusinessError({message:'El cliente ya existe', code: 400});
         }
         
         const createdClient = await Client.create({ name, phone, address, email, pass, profile_picture });
 
-        return res.status( 201 ).json({ result: createClient });
+        return res.status( 201 ).json({ result: createdClient });
     } catch ( error ) {
         return res.status( 500 ).json({ message: error.message });
     }

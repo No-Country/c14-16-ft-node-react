@@ -1,8 +1,9 @@
 import express from "express"
-import { getServices, getService, createService, updateService, deleteService } from "../controllers/ServiceController";
-const ServiceRouter = express.Router()
+import { getServices, getService, createService, updateService, deleteService } from "../controllers/ServiceController.js";
+import { checkSession } from "../middlewares/session.js";
+export const ServiceRouter = express.Router()
 
-
+ServiceRouter.use(checkSession)
 ServiceRouter.get('/', getServices);
 ServiceRouter.get('/:id', getService);
 ServiceRouter.post("/", createService)

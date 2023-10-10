@@ -4,6 +4,7 @@ import { ClientRouter } from './routes/ClientRouter.js';
 import { CompanyRouter } from './routes/CompanyRouter.js';
 import { PetRouter } from './routes/PetRouter.js';
 import { AuthRouter } from './routes/AuthRouter.js';
+import { ServiceRouter } from './routes/ServiceRouter.js';
 //conexion a la base de datos
 import './config/config.js';
 //creacion de tablas
@@ -18,6 +19,7 @@ app.use("/api/auth", AuthRouter)
 app.use('/api/clients', ClientRouter);
 app.use('/api/companies', CompanyRouter);
 app.use('/api/pets', PetRouter);
+app.use("/api/services", ServiceRouter)
 
 
 app.listen( PORT, () =>{
