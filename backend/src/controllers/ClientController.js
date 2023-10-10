@@ -1,4 +1,5 @@
 import { Client } from '../models/Client.js';
+import BusinessError from '../middlewares/BusinessError.js';
 
 
 export const getClient = async ( req, res ) =>{
@@ -13,7 +14,13 @@ export const getClient = async ( req, res ) =>{
 export const getOneClient = async ( req, res ) =>{
     try {
         const { id } = req.params;
+        if(!id){
+            throw new BusinessError({message:'El id es obligatorio', code: 400});
+        }
         const getOneClient = await Client.findByPk( id );
+        if(!getOneClient){
+            throw new BusinessError({message:'El cliente no existe', code: 404});
+        }
         return res.status( 200 ).json({ result: getOneClient }); 
     } catch ( error ) {
         return res.status( 500 ).json({ message: error }); 
@@ -26,7 +33,9 @@ export const createClient = async (req, res) =>{
 
         const clientExist = await Client.findOne({ where: { email } });
 
-        if(clientExist) return res.status( 400 ).json({ message: 'El usuario ya existe' });
+        if(clientExist) {
+            throw new BusinessError({message:'El cliente ya existe', code: 400});
+        }
         
         const createClient = await Client.create({ name, phone, address, email, pass, profile_picture });
 

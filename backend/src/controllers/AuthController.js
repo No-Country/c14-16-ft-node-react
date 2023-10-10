@@ -1,7 +1,8 @@
 import { compare } from "bcrypt";
+import { Client } from "../models/Client.js";
 import jwt from "jsonwebtoken"
 import dotenv from 'dotenv';
-import { Client } from "../models/Client.js";
+import BusinessError from '../middlewares/BusinessError.js';
 
 dotenv.config();
 
@@ -11,13 +12,13 @@ export const login = async(req, res) => {
     try {
         const client = await Client.findOne({ where: { email } });
         if (!client) {
-            return res.status(401).json({ message: 'Usuario no encontrado' });
+            throw new BusinessError({ message: 'Usuario no encontrado', code: 404 });
         }
 
         const passwordMatch = await compare(pass, client.pass);
 
         if (!passwordMatch) {
-            return res.status(401).json({ message: 'Contraseña incorrecta' });
+            throw new BusinessError({ message: 'Contraseña incorrecta', code: 400 });
         }
 
         const token = jwt.sign({ id: client.id }, process.env.JWT_SECRET);

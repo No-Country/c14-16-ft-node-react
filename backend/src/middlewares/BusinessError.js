@@ -1,6 +1,6 @@
 export default class BusinessError extends Error{
-    constructor (error, statusCode){
-        super( error, statusCode);
-        this.statusCode = statusCode;
+    constructor (message, statusCode){
+        super( message, statusCode );
+        this.statusCode = message;
     }
 }

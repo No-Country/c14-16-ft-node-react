@@ -1,20 +1,28 @@
 import { Company } from '../models/Company.js';
+import BusinessError from '../middlewares/BusinessError.js';
 
 export const getCompany = async (req ,res) =>{
     try {
         const getCompany = await Company.findAll();
         return res.status( 200 ).json({ result: getCompany }); 
     } catch ( error ) {
-        return res.status( 500 ).json({ message: error }); 
+         next();
     }
 }
 export const getOneCompany = async (req ,res) =>{
     try {
         const { id } = req.params;
+        if( !id ) {
+            throw new BusinessError({message:'El id es obligatorio', code: 400});
+        }
         const getOneCompany = await Company.findByPk( id );
+
+        if( !getOneCompany ) {
+            throw new BusinessError({message:'La compañia no existe', code: 404});
+        }
         return res.status( 200 ).json({ result: getOneCompany }); 
     } catch ( error ) {
-        return res.status( 500 ).json({ message: error }); 
+        return res.status( 500 ).json({ message: error });
     }
 }
 export const createCompany = async (req ,res) =>{
@@ -22,7 +30,9 @@ export const createCompany = async (req ,res) =>{
         const { name } = req.body;
 
         const companyExist = await Company.findOne({ where: { name } });
-        if(companyExist) return res.status( 400 ).json({ message: 'La compañia ya existe' });
+        if(companyExist) {
+            throw new BusinessError({message:'La compañia ya existe', code: 400});
+        }
 
         const createCompany = await Company.create({ name });
         return res.status( 200 ).json({ result: createCompany });
