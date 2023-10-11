@@ -59,44 +59,51 @@ const Home = () => {
             </p>
           </div>
         </div>
-        
+
+        {/* Servicios incluidos */}
+
         <div className="p-4 text-center grid grid-cols-2 md:grid-cols-3 gap-4">
           <h3 className="text-2xl font-bold text-center m-4 col-span-2 md:col-span-3">Servicios incluidos</h3>
 
           <div className="bg-gray-400 rounded-lg shadow-md p-4 text-center">
-            <button className="text-white font-bold py-2 px-4 rounded" type="button">
-              Peluqueria
-            </button>
+            <p className="text-white font-bold py-2 px-4">Peluqueria</p>
+            <img src="./assets/pelu.png" alt="peluqueria" width={45} className="pt-2 mx-auto" />
           </div>
 
           <div className="bg-gray-400 rounded-lg shadow-md p-4 text-center">
-            <button className="text-white font-bold py-2 px-4 rounded" type="button">
+            <p className="text-white font-bold py-2 px-4" >
               Dietas especiales
-            </button>
+            </p>
+            <img src="./assets/food.png" alt="Foot dog" width={70} className=" mx-auto" />
           </div>
 
           <div className="bg-gray-400 rounded-lg shadow-md p-4 text-center">
-            <button className="text-white font-bold py-2 px-4 rounded" type="button">
+            <p className="text-white font-bold py-2 px-4">
               Paseos personales
-            </button>
+            </p>
+            <img src="./assets/menDogWalk.png" alt="men Dog Walk" width={45} className="mx-auto" />
           </div>
 
+
           <div className="bg-gray-400 rounded-lg shadow-md p-4 text-center">
-            <button className="text-white font-bold py-2 px-4 rounded" type="button">
+            <p className="text-white font-bold py-2 px-4">
               Paseos sociales
-            </button>
+            </p>
+            <img src="./assets/walkWithDog.png" alt="walk with dog" width={65} className="mx-auto" />
           </div>
 
           <div className="bg-gray-400 rounded-lg shadow-md p-4 text-center">
-            <button className="text-white font-bold py-2 px-4 rounded" type="button">
-              Veterinaria
-            </button>
+            <p className="text-white font-bold py-2 px-4 " >
+              Veterinaria 
+            </p>
+            <img src="./assets/veterinario.png" alt="Veterinaria" width={50} className="pt-2 mx-auto" />
           </div>
 
           <div className="bg-gray-400 rounded-lg shadow-md p-4 text-center">
-            <button className="text-white font-bold py-2 px-4 rounded" type="button">
-              Juegos y actividades
-            </button>
+            <p className="text-white font-bold py-2 px-4" >
+              Actividades
+            </p>
+            <img src="./assets/playing.png" alt="Playing" width={70} className="mx-auto" />
           </div>
         </div>
 

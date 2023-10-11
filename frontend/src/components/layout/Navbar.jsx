@@ -63,7 +63,7 @@ const Navbar = () => {
                     className="text-black font-bold hover:underline"
                     onClick={closeMenu}
                 >
-                    Home
+                    Inicio
                 </Link>
                 <Link
                     to="/about"
