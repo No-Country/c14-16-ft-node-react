@@ -1,8 +1,13 @@
+import { BrowserRouter } from "react-router-dom";
+import AppRouter from "./router/AppRouter";
+
+
+
 function App() {
   return (
-    <>
-      <h1 className="bg-red-500 font-bold text-xl">Frontend Branch</h1>
-    </>
+    <BrowserRouter>
+      <AppRouter />
+    </BrowserRouter>
   );
 }
 
