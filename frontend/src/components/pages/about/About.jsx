@@ -21,7 +21,7 @@ const About = () => {
     <div>
       <header style={heroStyle}>
         <div className="container mx-auto">
-          <h1 className="py-32 text-center text-white text-6xl">Sobre Nosotros</h1>
+          <h1 className="py-32 text-center text-white text-6xl">About Us</h1>
         </div>
       </header>
       <main>
