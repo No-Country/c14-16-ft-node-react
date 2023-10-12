@@ -1,19 +1,20 @@
 import DogCat from '/assets/bgDogCat.jpeg';
 
 const About = () => {
-    const mainStyle = {
+    const pageStyle = {
         backgroundImage: `url(${DogCat})`,
-        backgroundSize: 'cover', 
-        backgroundPosition: 'center',  
-        backgroundRepeat: 'no-repeat',  
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+        minHeight: '100vh', 
     };
 
     return (
-        <div>
+        <div style={pageStyle}>
             <header className="container mx-auto">
                 <h1 className="text-center">Sobre Nosotros</h1>
             </header>
-            <main style={mainStyle}>
+            <main>
                 <section className="container mx-auto p-8">
                     <article className="p-8 bg-[rgba(224,224,224,0.80)] rounded-xl">
                         <h3 className="text-black font-bold text-lg">¿Quienes somos?</h3>
