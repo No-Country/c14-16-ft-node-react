@@ -4,7 +4,7 @@ import { checkSession } from "../middlewares/session.js"
 
 export const BranchRouter = express.Router()
 
-BranchRouter.use(checkSession)
+//BranchRouter.use(checkSession)
 
 BranchRouter.get("/", getBranches)
 BranchRouter.get("/:id" , getBranch)

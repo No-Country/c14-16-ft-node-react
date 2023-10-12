@@ -6,6 +6,7 @@ export const CompanyRouter = express.Router();
 
 //Rutas de mi path usuarios
 CompanyRouter.use(checkSession)
+
 /**
  * @openapi
  * /api/companies:

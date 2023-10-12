@@ -8,13 +8,15 @@ import { ServiceBranch } from './ServiceBranch.js'
 import { Booking } from './Booking.js'
 import { AnimalTypes } from './AnimalTypes.js';
 import { BranchAnimalTypes } from './BranchAnimalType.js';
+import { Rate } from './Rate.js';
 
 await Client.sync();
 await Company.sync();
 await Service.sync();
 await Branch.sync();
-await ServiceBranch.sync();
+await Rate.sync();
 await Image.sync();
+await ServiceBranch.sync()
 await AnimalTypes.sync();
 await Pet.sync();
 await Booking.sync();

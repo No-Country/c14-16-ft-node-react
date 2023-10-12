@@ -2,6 +2,7 @@ import { sequelize } from '../config/config.js';
 import { DataTypes } from 'sequelize';
 import { Company } from './Company.js';
 import { Image } from './Image.js';
+import { Rate } from './Rate.js';
 
 export const Branch = sequelize.define('Branch',{
     id: {
@@ -36,11 +37,7 @@ export const Branch = sequelize.define('Branch',{
     address:{
         type: DataTypes.STRING,
         allowNull: false
-    },
-    rate:{
-        type: DataTypes.FLOAT,
-        allowNull: false
-    },
+    }
 },{
     timestamps: false
 });
@@ -55,6 +52,14 @@ Branch.belongsTo(Company, {
 Branch.hasMany(Image, {
     foreignKey: 'branch_id',
     onDelete: 'CASCADE', 
+    hooks: true 
+}
+);
+
+Branch.hasMany(Rate, {
+    foreignKey: 'branch_id',
+    onDelete: 'CASCADE',
+    allowNull: false,
     hooks: true 
 }
 );
