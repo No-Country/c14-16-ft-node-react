@@ -4,7 +4,7 @@ import Login from "../components/pages/login/Login";
 import NotFound from "../components/NotFound/NotFound";
 import Home from "../components/pages/home/Home";
 import Register from "../components/pages/register/Register";
-import Navbar from "../components/Layout/Navbar";
+import Navbar from "../components/layout/Navbar";
 import About from "../components/pages/about/About";
 
 const AppRouter = () => {

@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const Navbar = () => {
+    const location = useLocation();
     const [menuOpen, setMenuOpen] = useState(false);
 
     const toggleMenu = () => {
@@ -12,10 +13,12 @@ const Navbar = () => {
         setMenuOpen(false);
     };
 
+    const isAboutPage = location.pathname === "/about";
+
     return (
-        <nav className="bg-gray-100 p-4 flex justify-between items-center">
+        <nav className={`p-4 flex justify-between items-center ${isAboutPage ? "transparent-background" : "bg-gray-100"}`} >
             <div className="flex items-center">
-                <Link to="/"> 
+                <Link to="/">
                     <img
                         src='/assets/LogoDog.png'
                         alt="Doggy's House"
@@ -63,7 +66,7 @@ const Navbar = () => {
                     className="text-black font-bold hover:underline"
                     onClick={closeMenu}
                 >
-                    Home
+                    Inicio
                 </Link>
                 <Link
                     to="/about"
