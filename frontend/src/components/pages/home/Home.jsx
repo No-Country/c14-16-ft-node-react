@@ -10,7 +10,7 @@ const Home = () => {
     <div className="bg-gray-100 py-8">
       <div className="container mx-auto px-4">
         <h1 className="text-3xl font-semibold text-center mb-8">
-          Un lugar seguro para tu mascota
+          Un lugar seguro para tu mascotatita
         </h1>
         <p className="text-lg font-semibold text-center mb-8">
           En Dog Garden queremos que siempre estés tranquilo y confiado de que
