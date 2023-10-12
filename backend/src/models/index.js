@@ -15,7 +15,7 @@ await Service.sync();
 await Branch.sync();
 await ServiceBranch.sync();
 await Image.sync();
-await Pet.sync();
 await AnimalTypes.sync();
+await Pet.sync();
 await Booking.sync();
 await BranchAnimalTypes.sync();

@@ -37,6 +37,9 @@ export const Client = sequelize.define('Client',{
         allowNull: true,
     },
 },{
+    defaultScope: {
+      attributes: { exclude: ['pass'] }
+    },
     timestamps: false
 });
 

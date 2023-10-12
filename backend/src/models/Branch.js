@@ -48,8 +48,13 @@ export const Branch = sequelize.define('Branch',{
 Branch.belongsTo(Company, {
     foreignKey: 'company_id',
     allowNull: false,
+    onDelete: 'CASCADE',
+    hooks: true,
 });
 
 Branch.hasMany(Image, {
     foreignKey: 'branch_id',
-});
+    onDelete: 'CASCADE', 
+    hooks: true 
+}
+);

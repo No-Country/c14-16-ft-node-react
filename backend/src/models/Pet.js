@@ -28,9 +28,11 @@ export const Pet = sequelize.define('Pet',{
 Pet.belongsTo(Client, {
     foreignKey: 'client_id',
     allowNull: false,
+    onDelete: "CASCADE",
+    hooks: true
 });
 
-Pet.hasOne(AnimalTypes, {
+Pet.belongsTo(AnimalTypes, {
     foreignKey: 'type_id',
     allowNull: false,
 });

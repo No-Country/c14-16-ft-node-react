@@ -7,17 +7,17 @@ import { AuthRouter } from './routes/AuthRouter.js';
 import { ServiceRouter } from './routes/ServiceRouter.js';
 import { AnimalTypesRouter } from './routes/AnimalTypeRouter.js';
 import { BranchRouter } from './routes/BranchRouter.js';
-
-//conexion a la base de datos
+import { swaggerDocs } from './doc/swagger.js';
 import './config/config.js';
-//creacion de tablas
 import './models/index.js';
 
 const PORT = process.env.PORT || 3000;
 const app = express();
 
+
 app.use(cors());
 app.use(express.json());
+
 app.use("/api/auth", AuthRouter)
 app.use('/api/clients', ClientRouter);
 app.use('/api/companies', CompanyRouter);
@@ -29,4 +29,5 @@ app.use("/api/branches", BranchRouter)
 
 app.listen( PORT, () =>{
     console.log(`Port runing in port http://localhost:${PORT}`);
+    swaggerDocs(app, PORT)
 })

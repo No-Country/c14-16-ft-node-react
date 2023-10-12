@@ -1,5 +1,6 @@
 import { Branch } from "../models/Branch.js"
 import { Company } from "../models/Company.js";
+import { Image } from "../models/Image.js";
 
 
 export const getBranches = async ( req, res ) => {
@@ -47,10 +48,10 @@ export const getBranchesByCompany = async(req, res) => {
 
 export const createBranch = async(req, res) => {
     try {
-        const { name, description, city, capacity, amount, phone, address, rate, company_id } = req.body
+        const { name, description, city, capacity, amount, phone, address, rate, company_id, images } = req.body
 
 
-        if(!name || !description || !city || !capacity || !amount || !phone || !address || !rate || !company_id){
+        if(!name || !description || !city || !capacity || !phone || !address || !rate || !company_id){
             return res.status( 400 ).json({ message: "El cuerpo de la solicitud está incompleto. Debes proporcionar todos los parámetros requeridos" }); 
         }
 
@@ -66,8 +67,20 @@ export const createBranch = async(req, res) => {
             return res.status( 400 ).json({ message: "La sucursal ya existe"})
         }
 
-        const createdBranch = await Branch.create({ name, description, city, capacity, amount, phone, address, rate, company_id: company.id });
+        let createdBranch = await Branch.create({ name, description, city, capacity, amount, phone, address, rate, company_id: company.id });
 
+        if (createdBranch) {
+            if (images && Array.isArray(images)) {
+                const createdImages = await Image.bulkCreate(images.map(image => ({ branch_id: createdBranch.id, route: image })));
+                const imageRoutes = createdImages.map(image => image.route);
+                createdBranch.images = imageRoutes;
+
+                createdBranch = {
+                    ...createdBranch.get({ plain: true }),
+                    images: imageRoutes,
+                  };
+            }
+        }
         return res.status( 201 ).json({ result: createdBranch });
     } catch (error) {
         return res.status( 500 ).json({ message: error }); 
@@ -103,13 +116,14 @@ export const deleteBranch = async ( req, res ) =>{
         if(!id){
             return res.status( 400 ).json({ message: "El id es obligatorio" }); 
         }
-        
-        const deleteBranch = await Branch.destroy({
+
+        await Branch.destroy({
             where: {
                 id
             }
         });
-        return res.status( 200 ).json({ result: deleteBranch })
+        
+        return res.status( 200 ).json({ result: `Sucursal ${id} eliminada correctamente` })
     } catch ( error ) {
         return res.status( 500 ).json({ message: error });
     }

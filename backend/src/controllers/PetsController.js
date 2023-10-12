@@ -33,7 +33,7 @@ export const createPets = async ( req, res ) =>{
 
         const client = await Client.findByPk( client_id );
 
-        const type = await AnimalTypes.findByPk( client_id );
+        const type = await AnimalTypes.findByPk( type_id );
 
 
         if (!client) {
