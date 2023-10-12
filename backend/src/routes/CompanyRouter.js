@@ -25,6 +25,8 @@ CompanyRouter.use(checkSession)
  *               properties:
  *                 result:
  *                   type: array
+ *                   items:
+ *                    type: string
  *       500:
  *         description: Error del servidor.
  *         content:

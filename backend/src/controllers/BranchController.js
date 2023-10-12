@@ -1,6 +1,6 @@
 import { Branch } from "../models/Branch.js"
 import { Company } from "../models/Company.js";
-import { Image } from "../models/Image.js";
+import { createImages } from "./ImageController.js";
 
 
 export const getBranches = async ( req, res ) => {
@@ -71,14 +71,7 @@ export const createBranch = async(req, res) => {
 
         if (createdBranch) {
             if (images && Array.isArray(images)) {
-                const createdImages = await Image.bulkCreate(images.map(image => ({ branch_id: createdBranch.id, route: image })));
-                const imageRoutes = createdImages.map(image => image.route);
-                createdBranch.images = imageRoutes;
-
-                createdBranch = {
-                    ...createdBranch.get({ plain: true }),
-                    images: imageRoutes,
-                  };
+                createdBranch = createImages(images, createdBranch)
             }
         }
         return res.status( 201 ).json({ result: createdBranch });

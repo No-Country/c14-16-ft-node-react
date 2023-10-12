@@ -51,6 +51,64 @@ export const AuthRouter = express.Router();
  *                   type: string
 */
 AuthRouter.post("/login", login)
+
+/**
+ * @openapi
+ * /api/auth/register:
+ *   post:
+ *     tags:
+ *       - Auth
+ *     summary: Registrar.
+ *     description:  Registrar un nuevo usuario.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *               phone:
+ *                 type: string
+ *               address:
+ *                 type: string
+ *               email:
+ *                 type: string
+ *               pass:
+ *                 type: string
+ *               profile_picture:
+ *                 type: string 
+ *                 nullable: true
+ *     responses:
+ *       200:
+ *         description: El usuario creado.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 result:
+ *                   type: object
+ *       400:
+ *         description: Error de la solicitud.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *       500:
+ *         description: Error del servidor.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+*/
 AuthRouter.post("/register", register)
 
 

@@ -23,6 +23,8 @@ AnimalTypesRouter.use(checkSession)
  *               properties:
  *                 result:
  *                   type: array
+ *                   items:
+ *                    type: string
  *       401:
  *         description: No autorizado.
  *         content:
