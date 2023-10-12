@@ -13,10 +13,6 @@ export const Pet = sequelize.define('Pet',{
         type: DataTypes.STRING,
         allowNull: false
     },
-    type:{
-        type: DataTypes.STRING,
-        allowNull: false
-    },
     breed:{
         type: DataTypes.STRING,
         allowNull: false
@@ -32,9 +28,11 @@ export const Pet = sequelize.define('Pet',{
 Pet.belongsTo(Client, {
     foreignKey: 'client_id',
     allowNull: false,
+    onDelete: "CASCADE",
+    hooks: true
 });
 
-Pet.hasOne(AnimalTypes, {
+Pet.belongsTo(AnimalTypes, {
     foreignKey: 'type_id',
     allowNull: false,
 });
