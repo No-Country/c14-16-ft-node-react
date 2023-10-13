@@ -52,7 +52,8 @@ Branch.belongsTo(Company, {
 Branch.hasMany(Image, {
     foreignKey: 'branch_id',
     onDelete: 'CASCADE', 
-    hooks: true 
+    hooks: true,
+    as: 'images',
 }
 );
 
@@ -60,6 +61,7 @@ Branch.hasMany(Rate, {
     foreignKey: 'branch_id',
     onDelete: 'CASCADE',
     allowNull: false,
-    hooks: true 
+    hooks: true,
+    as: 'rates',
 }
 );

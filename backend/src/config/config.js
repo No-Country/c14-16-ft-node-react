@@ -8,12 +8,12 @@ dotenv.config();
 export const sequelize = new Sequelize('pets',process.env.DB_USER, process.env.DB_PASSWORD,{
     host: process.env.DB_HOST ,
     dialect: 'mysql',
-    dialectOptions: {
+/*     dialectOptions: {
         ssl: {
           ca: process.env.DB_ROUTE_SSL,
           rejectUnauthorized: false,
         }
-    }
+    } */
 });
 
 try {
