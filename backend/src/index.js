@@ -7,6 +7,7 @@ import { AuthRouter } from './routes/AuthRouter.js';
 import { ServiceRouter } from './routes/ServiceRouter.js';
 import { AnimalTypesRouter } from './routes/AnimalTypeRouter.js';
 import { BranchRouter } from './routes/BranchRouter.js';
+import { BookingRouter } from './routes/BookingRouter.js';
 import { swaggerDocs } from './doc/swagger.js';
 import './config/config.js';
 import './models/index.js';
@@ -25,6 +26,7 @@ app.use('/api/pets', PetRouter);
 app.use("/api/services", ServiceRouter)
 app.use("/api/animaltypes", AnimalTypesRouter)
 app.use("/api/branches", BranchRouter)
+app.use("/api/bookings", BookingRouter)
 
 
 app.listen( PORT, () =>{

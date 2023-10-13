@@ -183,7 +183,7 @@ export const createBranch = async(req, res) => {
 export const updateBranch = async ( req, res ) =>{
     try {
         const { id } = req.params;
-        const { name, description, city, capacity, amount, phone, address, company_id, images, rates, services, animalTypes } = req.body
+        
 
         if(!id){
             return res.status( 400 ).json({ message: "El id es obligatorio" }); 
