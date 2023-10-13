@@ -3,10 +3,32 @@ import { Company } from "../models/Company.js";
 import { Image } from "../models/Image.js";
 import { Rate } from "../models/Rate.js";
 import { ServiceBranch } from "../models/ServiceBranch.js";
+import { BranchAnimalTypes } from "../models/BranchAnimalType.js"
+import { Service } from "../models/Service.js";
+import { AnimalTypes } from "../models/AnimalTypes.js";
 
 export const getBranches = async ( req, res ) => {
     try {
-        const branches = await Branch.findAll();
+        const branches = await Branch.findAll({
+            include: [
+                {
+                  model: Image,
+                  as: 'images',
+                },
+                {
+                  model: Rate,
+                  as: 'rates',
+                },
+                {
+                  model: Service,
+                  as: 'services',
+                },
+                {
+                  model: AnimalTypes,
+                  as: 'animalTypes',
+                },
+              ]
+        });
         return res.status( 200 ).json({ result: branches }); 
     } catch ( error ) {
         return res.status( 500 ).json({ message: error.message }); 
@@ -19,7 +41,28 @@ export const getBranch = async (req, res ) => {
         if(!id){
             return res.status( 400 ).json({ message: "El id es obligatorio" }); 
         }
-        const getBranch = await Branch.findByPk( id );
+        const getBranch = await Branch.findByPk( id,
+            {
+                include: [
+                    {
+                      model: Image,
+                      as: 'images',
+                    },
+                    {
+                      model: Rate,
+                      as: 'rates',
+                    },
+                    {
+                      model: Service,
+                      as: 'services',
+                    },
+                    {
+                      model: AnimalTypes,
+                      as: 'animalTypes',
+                    },
+                ]
+            }
+            );
 
         if(!getBranch){
             return res.status( 404 ).json({ message: "La sucursal no existe" }); 
@@ -39,7 +82,26 @@ export const getBranchesByCompany = async(req, res) => {
             return res.status( 400 ).json({ message: "El id es obligatorio" }); 
         }
 
-        const branchesByCompany = await Branch.findAll({where: id});
+        const branchesByCompany = await Branch.findAll({where: {company_id: id},
+            include: [
+                    {
+                      model: Image,
+                      as: 'images',
+                    },
+                    {
+                      model: Rate,
+                      as: 'rates',
+                    },
+                    {
+                      model: Service,
+                      as: 'services',
+                    },
+                    {
+                      model: AnimalTypes,
+                      as: 'animalTypes',
+                    },
+                ]
+        });
 
         return res.status( 200 ).json({ result: branchesByCompany }); 
     } catch ( error ) {
@@ -49,10 +111,10 @@ export const getBranchesByCompany = async(req, res) => {
 
 export const createBranch = async(req, res) => {
     try {
-        const { name, description, city, capacity, amount, phone, address, company_id, images, rates, services } = req.body
+        const { name, description, city, capacity, amount, phone, address, company_id, images, rates, services, animalTypes } = req.body
 
 
-        if(!name || !description || !city || !capacity || !phone || !address || !company_id || !rates || !services){
+        if(!name || !description || !city || !capacity || !phone || !address || !company_id || !rates || !services || !animalTypes){
             return res.status( 400 ).json({ message: "El cuerpo de la solicitud está incompleto. Debes proporcionar todos los parámetros requeridos" }); 
         }
 
@@ -89,6 +151,7 @@ export const createBranch = async(req, res) => {
                     ],
                     transaction,
                 });
+
             if(createdBranch){
                 const serviceBranchData = services.map((service) => ({
                     branch_id: createdBranch.id,
@@ -97,6 +160,15 @@ export const createBranch = async(req, res) => {
                 const createdServices = await ServiceBranch.bulkCreate(serviceBranchData, { transaction });
 
                 createdBranch.setDataValue('services', createdServices)
+
+                const animalTypesData = animalTypes.map((type) => ({
+                    branch_id: createdBranch.id,
+                    animal_type_id: type.id,
+                }))
+                const createdTypes = await BranchAnimalTypes.bulkCreate(animalTypesData, {transaction})
+
+                createdBranch.setDataValue('animalTypes' , createdTypes)
+
             }
 
             return createdBranch
@@ -111,6 +183,7 @@ export const createBranch = async(req, res) => {
 export const updateBranch = async ( req, res ) =>{
     try {
         const { id } = req.params;
+        const { name, description, city, capacity, amount, phone, address, company_id, images, rates, services, animalTypes } = req.body
 
         if(!id){
             return res.status( 400 ).json({ message: "El id es obligatorio" }); 
