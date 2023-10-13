@@ -29,7 +29,7 @@ export const login = async(req, res) => {
         res.status(200).json({ result: {"token":token , "client" : client} });
     } catch (error) {
         console.log(error)
-        return res.status( 500 ).json({ message: error }); 
+        return res.status( 500 ).json({message: error.message }); 
     }
 }
 
@@ -52,7 +52,7 @@ export const register = async (req, res) =>{
 
         return res.status( 201 ).json({ result: createdClient });
     } catch ( error ) {
-        return res.status( 500 ).json({ message: error });
+        return res.status( 500 ).json({message: error.message });
     }
 }
 

@@ -2,6 +2,7 @@ import { Branch } from "../models/Branch.js"
 import { Company } from "../models/Company.js";
 import { Image } from "../models/Image.js";
 import { Rate } from "../models/Rate.js";
+import { ServiceBranch } from "../models/ServiceBranch.js";
 
 export const getBranches = async ( req, res ) => {
     try {
@@ -48,10 +49,10 @@ export const getBranchesByCompany = async(req, res) => {
 
 export const createBranch = async(req, res) => {
     try {
-        const { name, description, city, capacity, amount, phone, address, company_id, images, rates } = req.body
+        const { name, description, city, capacity, amount, phone, address, company_id, images, rates, services } = req.body
 
 
-        if(!name || !description || !city || !capacity || !phone || !address || !company_id || !rates){
+        if(!name || !description || !city || !capacity || !phone || !address || !company_id || !rates || !services){
             return res.status( 400 ).json({ message: "El cuerpo de la solicitud está incompleto. Debes proporcionar todos los parámetros requeridos" }); 
         }
 
@@ -69,7 +70,7 @@ export const createBranch = async(req, res) => {
 
         const { sequelize } = Branch;
         const createdBranch = await sequelize.transaction(async (transaction) => {
-             return await Branch.create(
+            const createdBranch = await Branch.create(
                 { 
                     name, description, city, capacity, amount, phone, address, company_id: company.id,
                     images: images.map((image) => ({ route: image.route })),
@@ -88,6 +89,17 @@ export const createBranch = async(req, res) => {
                     ],
                     transaction,
                 });
+            if(createdBranch){
+                const serviceBranchData = services.map((service) => ({
+                    branch_id: createdBranch.id,
+                    service_id: service.id,
+                }));
+                const createdServices = await ServiceBranch.bulkCreate(serviceBranchData, { transaction });
+
+                createdBranch.setDataValue('services', createdServices)
+            }
+
+            return createdBranch
         })
 
         return res.status( 201 ).json({ result: createdBranch });

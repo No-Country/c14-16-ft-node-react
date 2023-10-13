@@ -20,5 +20,5 @@ Service.belongsToMany(Branch, {
   
 Branch.belongsToMany(Service, {
     through: ServiceBranch,
-    foreignKey: 'company_id',
+    foreignKey: 'branch_id',
 });

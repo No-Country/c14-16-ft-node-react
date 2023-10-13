@@ -7,7 +7,7 @@ export const getPets = async ( req, res ) =>{
         const getPets = await Pet.findAll();
         return res.status( 200 ).json({ result: getPets }); 
     } catch ( error ) {
-        return res.status( 500 ).json({ message: error }); 
+        return res.status( 500 ).json({message: error.message}); 
     }
 }
 
@@ -23,7 +23,7 @@ export const getOnePets = async ( req, res ) =>{
 
         return res.status( 200 ).json({ result: getPet }); 
     } catch (error) {
-        return res.status( 500 ).json({ message: error });
+        return res.status( 500 ).json({message: error.message});
     }
 }
 
@@ -48,7 +48,7 @@ export const createPets = async ( req, res ) =>{
 
         return res.status( 201 ).json({ result: createdPet });
     } catch (error) {
-        return res.status( 500 ).json({ message: error });
+        return res.status( 500 ).json({message: error.message});
     }
 }
 
@@ -70,7 +70,7 @@ export const updatePets = async ( req, res ) =>{
         petToUpdate.save();
         return res.status( 200 ).json({ result: petToUpdate });
     } catch ( error ) {
-        return res.status( 500 ).json({ message: error });
+        return res.status( 500 ).json({message: error.message});
     }
 }
 
@@ -89,6 +89,6 @@ export const deletePets = async ( req, res ) =>{
         });
         return res.status( 200 ).json({ result: deletePet })
     } catch ( error ) {
-        return res.status( 500 ).json({ message: error });
+        return res.status( 500 ).json({message: error.message});
     }
 }

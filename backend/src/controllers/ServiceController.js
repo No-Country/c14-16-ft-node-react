@@ -5,7 +5,7 @@ export const getServices = async ( req, res ) =>{
         const getServices = await Service.findAll();
         return res.status( 200 ).json({ result: getServices }); 
     } catch ( error ) {
-        return res.status( 500 ).json({ message: error }); 
+        return res.status( 500 ).json({ message: error.message }); 
     }
 }
 
@@ -22,7 +22,7 @@ export const getService = async (req, res) => {
 
         return res.status( 200 ).json({ result: getService }); 
     } catch (error) {
-        return res.status( 500 ).json({ message: error });
+        return res.status( 500 ).json({ message: error.message });
     }
 }
 
@@ -40,7 +40,7 @@ export const createService = async (req, res) => {
 
         return res.status( 201 ).json({ result: createdService });
     } catch (error) {
-        return res.status( 500 ).json({ message: error });
+        return res.status( 500 ).json({ message: error.message });
     }
 }
 
@@ -64,7 +64,7 @@ export const updateService = async(req, res) => {
 
         return res.status( 200 ).json({ result: serviceToUpdate });
     } catch (error) {
-        return res.status( 500 ).json({ message: error });
+        return res.status( 500 ).json({ message: error.message });
     }
 
 }
@@ -84,6 +84,6 @@ export const deleteService = async(req, res) => {
 
         return res.status( 200 ).json({ result: deletedService })
     }catch(error){
-        return res.status( 500 ).json({ message: error });
+        return res.status( 500 ).json({ message: error.message });
     }
 }

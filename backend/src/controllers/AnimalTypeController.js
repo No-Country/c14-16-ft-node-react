@@ -6,7 +6,7 @@ export const getTypes = async ( req, res ) =>{
         const getTypes = await AnimalTypes.findAll();
         return res.status( 200 ).json({ result: getTypes }); 
     } catch ( error ) {
-        return res.status( 500 ).json({ message: error }); 
+        return res.status( 500 ).json({ message: error.message }); 
     }
 }
 
@@ -22,7 +22,7 @@ export const getType = async ( req, res ) =>{
 
         return res.status( 200 ).json({ result: getType }); 
     } catch (error) {
-        return res.status( 500 ).json({ message: error });
+        return res.status( 500 ).json({ message: error.message });
     }
 }
 export const createType = async ( req, res ) =>{
@@ -39,7 +39,7 @@ export const createType = async ( req, res ) =>{
 
         return res.status( 201 ).json({ result: createdType });
     } catch (error) {
-        return res.status( 500 ).json({ message: error });
+        return res.status( 500 ).json({ message: error.message });
     }
 }
 export const updateType = async ( req, res ) =>{
@@ -60,7 +60,7 @@ export const updateType = async ( req, res ) =>{
         typeToUpdate.save();
         return res.status( 200 ).json({ result: typeToUpdate });
     } catch ( error ) {
-        return res.status( 500 ).json({ message: error });
+        return res.status( 500 ).json({ message: error.message });
     }
 }
 export const deleteType = async ( req, res ) =>{
@@ -78,6 +78,6 @@ export const deleteType = async ( req, res ) =>{
         });
         return res.status( 200 ).json({ result: deleteType })
     } catch ( error ) {
-        return res.status( 500 ).json({ message: error });
+        return res.status( 500 ).json({ message: error.message });
     }
 }

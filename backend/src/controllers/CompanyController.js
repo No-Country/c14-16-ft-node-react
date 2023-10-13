@@ -5,7 +5,7 @@ export const getCompany = async (req ,res) =>{
         const getCompany = await Company.findAll();
         return res.status( 200 ).json({ result: getCompany }); 
     } catch ( error ) {
-        return res.status( 500 ).json({ message: error });
+        return res.status( 500 ).json({ message: error.message });
     }
 }
 export const getOneCompany = async (req ,res) =>{
@@ -21,7 +21,7 @@ export const getOneCompany = async (req ,res) =>{
         }
         return res.status( 200 ).json({ result: getOneCompany }); 
     } catch ( error ) {
-        return res.status( 500 ).json({ message: error });
+        return res.status( 500 ).json({ message: error.message });
     }
 }
 export const createCompany = async (req ,res) =>{
@@ -40,7 +40,7 @@ export const createCompany = async (req ,res) =>{
         const createdCompany = await Company.create({ name });
         return res.status( 200 ).json({ result: createdCompany });
     } catch ( error ) {
-        return res.status( 500 ).json({ message: error });
+        return res.status( 500 ).json({ message: error.message });
     }
 }
 export const updateCompany = async (req ,res) =>{
@@ -62,7 +62,7 @@ export const updateCompany = async (req ,res) =>{
         companyToUpdate.save();
         return res.status( 200 ).json({ result: companyToUpdate });
     } catch ( error ) {
-        return res.status( 500 ).json({ message: error });
+        return res.status( 500 ).json({ message: error.message });
     }
 }
 export const deleteCompany = async (req ,res) =>{
@@ -81,6 +81,6 @@ export const deleteCompany = async (req ,res) =>{
         
         return res.status( 200 ).json({ result: deleteCompany })
     } catch ( error ) {
-        return res.status( 500 ).json({ message: error });
+        return res.status( 500 ).json({ message: error.message });
     }
 }
