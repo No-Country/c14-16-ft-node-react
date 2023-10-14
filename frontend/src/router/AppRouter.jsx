@@ -6,6 +6,8 @@ import Home from "../components/pages/home/Home";
 import Register from "../components/pages/register/Register";
 import Navbar from "../components/layout/Navbar";
 import About from "../components/pages/about/About";
+import Footer from "../components/Footer/Footer";
+
 
 const AppRouter = () => {
     return (
@@ -18,6 +20,7 @@ const AppRouter = () => {
                 <Route path="/about" element={<About />} />
                 <Route path="*" element={<NotFound />} />
             </Routes>
+            <Footer />
         </div>
     );
 };
