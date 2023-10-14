@@ -58,7 +58,7 @@ const About = () => {
           <article className="mb-16 flex gap-16 justify-center">
             <div>
               <h4 className="text-4xl text-center font-bold">
-                <span>1537</span> días
+                <span>1537</span>
               </h4>
               <p>Días reservados el último mes</p>
             </div>
@@ -76,7 +76,7 @@ const About = () => {
             </div>
           </article>
 
-          <Link>Buscar Guardería</Link>
+          <Link to="/">Buscar Guardería</Link>
         </section>
       </main>
     </div>
