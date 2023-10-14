@@ -1,16 +1,17 @@
-
-
+import { useState } from "react";
+import  './Home.css'
 const Home = () => {
+  const [tipoAnimal, setTipoAnimal] = useState("Perro");
+
   const buscarEstablecimientos = () => {
-    // agregar la lógica de búsqueda similar a la anterior respuesta.
-    // reemplazar la simulación de resultados ficticios con tu lógica real.
+    // Agregar la lógica de búsqueda aquí usando el valor de tipoAnimal
   };
 
   return (
     <div className="bg-gray-100 py-8">
       <div className="container mx-auto px-4">
         <h1 className="text-3xl font-semibold text-center mb-8">
-          Un lugar seguro para tu mascotatita
+          Un lugar seguro para tu mascota
         </h1>
         <p className="text-lg font-semibold text-center mb-8">
           En Dog Garden queremos que siempre estés tranquilo y confiado de que
@@ -84,7 +85,6 @@ const Home = () => {
             <img src="./assets/menDogWalk.png" alt="men Dog Walk" width={45} className="mx-auto" />
           </div>
 
-
           <div className="bg-gray-400 rounded-lg shadow-md p-4 text-center">
             <p className="text-white font-bold py-2 px-4">
               Paseos sociales
@@ -94,7 +94,7 @@ const Home = () => {
 
           <div className="bg-gray-400 rounded-lg shadow-md p-4 text-center">
             <p className="text-white font-bold py-2 px-4 " >
-              Veterinaria 
+              Veterinaria
             </p>
             <img src="./assets/veterinario.png" alt="Veterinaria" width={50} className="pt-2 mx-auto" />
           </div>
@@ -122,19 +122,23 @@ const Home = () => {
             <form className="w-full max-w-md">
               <div className="flex flex-col items-center">
                 <input
-                  className="appearance-none bg-transparent border-b-2 border-gray-500 w-full text-gray-700 py-1 px-2 leading-tight mb-4 focus:outline-none"
+                  className="input-field"
                   type="text"
-                  placeholder="La Plata"
+                  placeholder="Provincia, ciudad, localidad"
                   id="ciudad"
                   name="ciudad"
                 />
-                <input
-                  className="appearance-none bg-transparent border-b-2 border-gray-500 w-full text-gray-700 py-1 px-2 leading-tight mb-4 focus:outline-none"
-                  type="text"
-                  placeholder="¿Qué animalito tienes?"
+                <select
+                  className="input-field"
                   id="tipo-animal"
                   name="tipo-animal"
-                />
+                  value={tipoAnimal}
+                  onChange={(e) => setTipoAnimal(e.target.value)}
+                >
+                  <option value="Perro">Perro</option>
+                  <option value="Gato">Gato</option>
+                  <option value="Otros">Otros</option>
+                </select>
                 <button
                   className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                   type="button"
