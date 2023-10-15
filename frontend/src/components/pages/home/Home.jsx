@@ -1,11 +1,13 @@
 import { useState } from "react";
-import  './Home.css'
+import { useNavigate } from "react-router-dom";
+import './Home.css'
+
+
 const Home = () => {
   const [tipoAnimal, setTipoAnimal] = useState("Perro");
+  const navigate = useNavigate();
+  const handleClick = () => { navigate('/search') }
 
-  const buscarEstablecimientos = () => {
-    // Agregar la lógica de búsqueda aquí usando el valor de tipoAnimal
-  };
 
   return (
     <div className="bg-gray-100 py-8">
@@ -139,10 +141,10 @@ const Home = () => {
                   <option value="Gato">Gato</option>
                   <option value="Otros">Otros</option>
                 </select>
-                <button
-                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                  type="button"
-                  onClick={buscarEstablecimientos}
+                <button 
+                  className="w-full max-w-lg py-4 md:mx-auto text-xl font-bold bg-amber-600 rounded-md"
+                  type="submit"
+                  onClick={handleClick}
                 >
                   Buscar
                 </button>
