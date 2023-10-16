@@ -1,4 +1,3 @@
-import React from "react";
 
 const CardAbout = ({ title, text, styles }) => {
   return (
