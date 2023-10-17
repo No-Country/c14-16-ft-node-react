@@ -1,18 +1,18 @@
-import { useState } from "react";
+// import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import DogHome from '/assets/Images/DogHome.jpeg'
 import StyledImage from './StyledImage';
 import './Home.css';
 
 const Home = () => {
-  const [tipoAnimal, setTipoAnimal] = useState("Perro");
+  // const [tipoAnimal, setTipoAnimal] = useState("Perro");
   const navigate = useNavigate();
   const handleClick = () => {
     navigate('/search');
   };
 
   const imageStyles = {
-    background: 'linear-gradient(-45deg, #FCFC9A 0%, #55CFC0 50%, #31B541 100%)',
+    background: '#FFA500',
   };
 
   const textStyles = {
@@ -23,7 +23,7 @@ const Home = () => {
   };
 
   const boxStyle = {
-    background: 'linear-gradient(-45deg, #FCFC9A 0%, #55CFC0 50%, #31B541 100%)',
+    background: '#FFA500',
   };
 
   const HeaderStyle = {
@@ -43,14 +43,14 @@ const Home = () => {
           <h1 className="text-4xl text-white font-semibold text-center pt-5 mb-4">
             Un lugar seguro para tu mascota
           </h1>
-          <p className="text-3xl font-semibold text-center text-white mb-8">
+          <p className="text-2xl font-semibold text-center text-white mb-8">
             Guarderias que cuidan cada detalle para que tu mascota se sienta en como en casa,
             sin preocupaciones ni inquietudes. Aquí tendran un espacio para jugar, tambien tendran ricas comidas, jugaran y pasearan libremente.
             con los mejores profesionales y servicios de calidad.
           </p>
         </div>
         {/* Formulario de Búsqueda */}
-        <div className="bg-gray-200 rounded-lg p-6 text-center w-3/5 mx-auto bg-opacity-5 backdrop-blur-md">
+        <div className="bg-gray-200 rounded-lg p-6 text-center w-full sm:w-3/5 md:w-2/5 mx-auto bg-opacity-5 backdrop-blur-md">
           <h2 className="text-lg font-semibold text-black mb-4">
             Reserva un lugar para tu peludito donde y cuando quieras
           </h2>
@@ -64,7 +64,7 @@ const Home = () => {
                   id="ciudad"
                   name="ciudad"
                 />
-                <select
+                {/* <select
                   className="input-field"
                   id="tipo-animal"
                   name="tipo-animal"
@@ -74,11 +74,23 @@ const Home = () => {
                   <option value="Perro">Perro</option>
                   <option value="Gato">Gato</option>
                   <option value="Otros">Otros</option>
-                </select>
+                </select> */}
+
+                <div className="fx-block">
+                  <div className="toggle">
+                    <div>
+                      <input type="checkbox" id="toggles" />
+                      <div data-unchecked="Perro" data-checked="Gato">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
                 <button
                   className="w-full max-w-lg py-4 text-xl font-bold"
                   style={{
-                    background: '#FFA500', 
+                    background: '#FFA500',
                     color: 'black',
                     border: 'none',
                     borderRadius: '8px',
@@ -89,12 +101,12 @@ const Home = () => {
                   type="submit"
                   onClick={handleClick}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.background = '#55CFC0';
-                    e.currentTarget.style.color = 'white'; 
+                    e.currentTarget.style.background = '#c98405';
+                    e.currentTarget.style.color = 'white';
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.background = '#FFA500'; 
-                    e.currentTarget.style.color = 'black'; 
+                    e.currentTarget.style.background = '#FFA500';
+                    e.currentTarget.style.color = 'black';
                   }}
                 >
                   Buscar
@@ -108,7 +120,7 @@ const Home = () => {
       </header>
 
       <main className="bg-gray-100 py-8">
-        <p className="text-3xl font-semibold text-center text-black mb-8">
+        <p className="text-2xl font-semibold text-center text-black mb-8">
           En Doggy&#39;s queremos que estes tranquilo y confiado de que
           tu mascota está en buenas manos con nosotros. Por eso, queremos
           contarte un poco sobre lo que tenemos para ofrecer.
@@ -118,7 +130,7 @@ const Home = () => {
           <div
             className="md:w-1/3 bg-gray-400 rounded-lg shadow-md p-4 text-center"
             style={{
-              background: 'linear-gradient(-45deg, #FCFC9A 0%, #55CFC0 50%, #31B541 100%)',
+              background: '#FFA500',
             }}
           >
             <img
@@ -136,7 +148,7 @@ const Home = () => {
           <div
             className="md:w-1/3 bg-gray-400 rounded-lg shadow-md p-4 text-center"
             style={{
-              background: 'linear-gradient(-45deg, #FCFC9A 0%, #55CFC0 50%, #31B541 100%)',
+              background: '#FFA500',
             }}
           >
             <img
@@ -155,7 +167,7 @@ const Home = () => {
           <div
             className="md:w-1/3 bg-gray-400 rounded-lg shadow-md p-4 text-center"
             style={{
-              background: 'linear-gradient(-45deg, #FCFC9A 0%, #55CFC0 50%, #31B541 100%)',
+              background: '#FFA500',
             }}
           >
             <img
