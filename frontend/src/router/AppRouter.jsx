@@ -6,7 +6,8 @@ import Home from "../components/pages/home/Home";
 import Register from "../components/pages/register/Register";
 import Navbar from "../components/layout/Navbar";
 import About from "../components/pages/about/About";
-
+import Footer from "../components/Footer/Footer";
+import SearchPage from "../components/pages/search/SearchPage";
 const AppRouter = () => {
     return (
         <div>
@@ -16,8 +17,10 @@ const AppRouter = () => {
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/about" element={<About />} />
+                <Route path="/search" element={<SearchPage />} />
                 <Route path="*" element={<NotFound />} />
             </Routes>
+            <Footer />
         </div>
     );
 };
