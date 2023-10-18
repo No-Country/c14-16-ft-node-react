@@ -11,9 +11,9 @@ function Login() {
       <ImageBlock
         url="/assets/gatito.webp"
         clase="w-[60%]"
-        claseSection="h-[90%]"
+        claseSection="h-[100%]"
       />
-      <div className="bg-white p-8 rounded shadow-2xl shadow-black/30 w-[80%] mx-auto h-[90%]">
+      <div className="bg-white p-8 rounded shadow-2xl shadow-black/30 w-[80%] mx-auto h-[100%]">
         <h2 className="text-2xl font-semibold mb-6">Iniciar sesión</h2>
         <form className="flex flex-col space-y-5">
           <Label label="Correo Electronico" />
