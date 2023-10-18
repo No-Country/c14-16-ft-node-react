@@ -1,15 +1,39 @@
-// import { useState } from "react";
+
+
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { SearchContext } from "../../../context/SearchContext";
 import DogHome from '/assets/Images/DogHome.jpeg'
 import StyledImage from './StyledImage';
-import './Home.css';
+import "./Home.css";
 
 const Home = () => {
-  // const [tipoAnimal, setTipoAnimal] = useState("Perro");
+  const [place, setPlace] = useState("");
+  const [pet, setPet] = useState("");
+
   const navigate = useNavigate();
-  const handleClick = () => {
-    navigate('/search');
+
+  const userSearch = {
+    place,
+    pet,
   };
+
+  const { handleSearchTerm } = useContext(SearchContext);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(userSearch);
+    if (Object.values(userSearch).includes("")) {
+      alert("Todos los campos son obligatorios");
+      return;
+    }
+    handleSearchTerm(userSearch);
+    setPet("");
+    setPlace("");
+    navigate("/search");
+
+  };
+
 
   const imageStyles = {
     background: '#FFA500',
@@ -55,64 +79,41 @@ const Home = () => {
             Reserva un lugar para tu peludito donde y cuando quieras
           </h2>
           <div className="flex justify-center">
-            <form className="w-full max-w-md mb-8">
+            <form className="w-full max-w-md" onSubmit={handleSubmit}>
               <div className="flex flex-col items-center">
                 <input
                   className="input-field"
                   type="text"
-                  placeholder="Provincia, ciudad, localidad"
+                  placeholder="Ingresa una localidad"
                   id="ciudad"
                   name="ciudad"
+                  value={place}
+                  onChange={(e) => {
+                    //userSearch.place = e.target.value;
+                    setPlace(e.target.value);
+                  }}
                 />
-                {/* <select
+                <select
                   className="input-field"
                   id="tipo-animal"
                   name="tipo-animal"
-                  value={tipoAnimal}
-                  onChange={(e) => setTipoAnimal(e.target.value)}
+                  value={pet}
+                  onChange={(e) => {
+                    //userSearch.pet = e.target.value;
+                    setPet(e.target.value);
+                  }}
                 >
+                  <option value="">Seleccione una Mascota</option>
                   <option value="Perro">Perro</option>
                   <option value="Gato">Gato</option>
                   <option value="Otros">Otros</option>
-                </select> */}
-
-                <div className="fx-block">
-                  <div className="toggle">
-                    <div>
-                      <input type="checkbox" id="toggles" />
-                      <div data-unchecked="Perro" data-checked="Gato">
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-
+                </select>
                 <button
-                  className="w-full max-w-lg py-4 text-xl font-bold"
-                  style={{
-                    background: '#FFA500',
-                    color: 'black',
-                    border: 'none',
-                    borderRadius: '8px',
-                    padding: '1rem 2rem',
-                    fontSize: '1.5rem',
-                    transition: 'background 0.3s',
-                  }}
+                  className="w-full max-w-lg py-4 md:mx-auto text-xl font-bold bg-amber-600 rounded-md"
                   type="submit"
-                  onClick={handleClick}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.background = '#c98405';
-                    e.currentTarget.style.color = 'white';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.background = '#FFA500';
-                    e.currentTarget.style.color = 'black';
-                  }}
                 >
                   Buscar
                 </button>
-
-
               </div>
             </form>
           </div>
@@ -138,7 +139,9 @@ const Home = () => {
               alt="Imagen 1"
               className="w-full h-48 mx-auto rounded-lg"
             />
-            <h3 className="text-2xl font-semibold text-center m-4">Dog Working</h3>
+            <h3 className="text-2xl font-semibold text-center m-4">
+              Dog Working
+            </h3>
             <p className="mt-4">
               Nuestro equipo de expertos está dedicado al cuidado de tu mascota.
             </p>
@@ -156,7 +159,9 @@ const Home = () => {
               alt="Imagen 2"
               className="w-full h-48 mx-auto rounded-lg"
             />
-            <h3 className="text-2xl font-semibold text-center m-4">Dog Office</h3>
+            <h3 className="text-2xl font-semibold text-center m-4">
+              Dog Office
+            </h3>
             <p className="mt-4">
               Ofrecemos un ambiente seguro y divertido para que tu mascota se
               sienta como en casa.
@@ -175,7 +180,9 @@ const Home = () => {
               alt="Imagen 3"
               className="w-full h-48 mx-auto rounded-lg"
             />
-            <h3 className="text-2xl font-semibold text-center m-4">Dog Hotel</h3>
+            <h3 className="text-2xl font-semibold text-center m-4">
+              Dog Hotel
+            </h3>
             <p className="mt-4">
               Nos preocupamos por la salud y el bienestar de cada animalito que
               llega a nosotros.

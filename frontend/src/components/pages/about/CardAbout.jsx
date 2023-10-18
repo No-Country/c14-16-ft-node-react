@@ -1,3 +1,6 @@
+
+
+
 const CardAbout = ({ title, text, styles }) => {
   return (
     <div className={`w-full flex ${styles}`}>
