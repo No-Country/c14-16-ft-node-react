@@ -1,25 +1,3 @@
-// import { useState } from "react"
-// import { SearchContext } from "./SearchContext"
-
-// function SearchProvider({ children }) {
-//     const [searchTerm, setSearchTerm] = useState("");
-//     const handleSearchTerm = (objSearch) => {
-//         setSearchTerm(objSearch)
-//     }
-//     return (
-//         <SearchContext.Provider
-//             value={{
-//                 searchTerm,
-//                 handleSearchTerm
-//             }}
-//         >
-//             {children}
-//         </SearchContext.Provider>
-//     )
-// }
-
-// export default SearchProvider
-
 import { useState } from "react";
 import { SearchContext } from "./SearchContext";
 import PropTypes from "prop-types";
