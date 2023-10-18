@@ -24,6 +24,7 @@ const About = () => {
     backgroundRepeat: "no-repeat",
   };
 
+
   return (
     <div>
       <header style={heroStyle}>
@@ -37,47 +38,47 @@ const About = () => {
             <CardAbout
               title="¿Quienes Somos?"
               text={texts[0]}
-              styles="md:justify-end"
+              styles="md:justify-end pr-4"
             />
             <CardAbout
               title="¿De donde nace la idea?"
               text={texts[1]}
-              styles="md:justify-start"
+              styles="md:justify-start pl-4"
             />
             <CardAbout
               title="¿Por qué elegir Doggy’s House?"
               text={texts[2]}
-              styles="md:justify-end"
+              styles="md:justify-end pr-4"
             />
           </div>
         </section>
-        <section className="p-16 container flex flex-col items-center mx-auto">
+        <section className="p-16 container flex flex-col items-center mx-auto mt-8">
           <h2 className="mb-16 text-4xl text-center font-bold">
             Doggy’s House en numeros
           </h2>
-          <article className="mb-16 flex gap-16 justify-center">
-            <div>
+          <article className="mb-16 flex flex-col md:flex-row gap-16 justify-center">
+            <div className="mb-8 md:mb-0"> {/* Añadido un margen inferior */}
               <h4 className="text-4xl text-center font-bold">
                 <span>1537</span>
               </h4>
-              <p>Días reservados el último mes</p>
+              <p className="text-center">Días reservados el último mes</p>
             </div>
-            <div>
+            <div className="mb-8 md:mb-0"> {/* Añadido un margen inferior */}
               <h4 className="text-4xl text-center font-bold">
                 <span>8</span>
               </h4>
-              <p>Sucursales Habilitadas</p>
+              <p className="text-center">Sucursales Habilitadas</p>
             </div>
-            <div>
+            <div> {/* Eliminado el margen inferior para evitar que la última caja esté muy separada */}
               <h4 className="text-4xl text-center font-bold">
                 <span>486</span>
               </h4>
-              <p>Reseñas de 5 estrellas</p>
+              <p className="text-center">Reseñas de 5 estrellas</p>
             </div>
           </article>
-
           <Link to="/">Buscar Guardería</Link>
         </section>
+        F
       </main>
     </div>
   );

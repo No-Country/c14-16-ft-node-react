@@ -13,8 +13,13 @@ const Navbar = () => {
 
     const isAboutPage = location.pathname === "/about";
 
+    const navbarStyle = {
+        background: '#f8d444',
+        borderBottom: "2px solid #000",
+    };
+
     return (
-        <nav className={`bg-gray-100 p-4 flex justify-between items-center ${isAboutPage ? "transparent-background" : ""}`} style={{ zIndex: 1 }}>
+        <nav style={navbarStyle} className={`navbar p-4 flex justify-between items-center ${isAboutPage ? "transparent-background" : ""}`}>
             <div className="flex items-center">
                 <Link to="/">
                     <img src="/assets/LogoDog.png" alt="Doggy's House" className="w-12 h-12 mr-2" />
