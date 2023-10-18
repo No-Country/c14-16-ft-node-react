@@ -17,9 +17,6 @@ const Footer = () => {
                                     <Link to="/contacto" className="hover:underline">Contáctenos</Link>
                                 </li>
                                 <li className="mb-2">
-                                    <Link to="/suscribirse" className="hover:underline">Suscribite</Link>
-                                </li>
-                                <li className="mb-2">
                                     <Link to="/about" className="hover:underline">Quiénes Somos</Link>
                                 </li>
                                 <li className="mb-2">
