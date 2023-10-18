@@ -13,9 +13,19 @@ function Register() {
     password: "",
     confirmPassword: "",
   });
+  const [formData, setFormData] = useState({
+    username: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
 
   const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState({});
 
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -37,7 +47,31 @@ function Register() {
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
+  const validateForm = () => {
+    const newErrors = {};
+    if (!formData.username) {
+      newErrors.username = "Por favor, ingresa un nombre de usuario.";
+    }
+    if (!formData.email) {
+      newErrors.email = "Por favor, ingresa un correo electrónico válido.";
+    }
+    if (!formData.password || formData.password.length < 6) {
+      newErrors.password = "La contraseña debe tener al menos 6 caracteres.";
+    }
+    if (formData.password !== formData.confirmPassword) {
+      newErrors.confirmPassword = "Las contraseñas no coinciden.";
+    }
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (validateForm()) {
+      // Aquí puedes agregar la lógica para enviar los datos de registro al servidor
+      console.log("Datos enviados:", formData);
+    }
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validateForm()) {
