@@ -1,6 +1,14 @@
+import { useEffect, useState } from "react";
+
 import "./Filter.css";
 
-const Filter = () => {
+const Filter = ({ branchList, updateBranches }) => {
+  const [filteredBranches, setFilteredBranches] = useState(branchList);
+
+  useEffect(() => {
+    updateBranches(filteredBranches);
+  }, [filteredBranches]);
+
   return (
     <div className="container mx-auto p-8 bg-[#F0A225] sm:rounded-xl">
       <h2 className="mb-8 text-xl text-center text-white font-bold">
