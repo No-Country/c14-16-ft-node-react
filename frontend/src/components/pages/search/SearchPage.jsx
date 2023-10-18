@@ -1,21 +1,11 @@
-import { useContext, useState } from "react";
-import ListResults from "./ListResults";
+import ListBranches from "./ListBranches";
 import Filter from "./Filter";
-import { SearchContext } from "../../../context/SearchContext";
 
 const SearchPage = () => {
-  const [branchList, setBranchList] = useState([]);
-
-  const { searchTerm } = useContext(SearchContext);
-
-  const updateBranches = (filteredBranches) => {
-    setBranchList(filteredBranches);
-  };
-
   return (
     <main>
-      <Filter branchList={branchList} updateBranches={updateBranches} />
-      <ListResults search={searchTerm} />
+      <Filter />
+      <ListBranches />
     </main>
   );
 };

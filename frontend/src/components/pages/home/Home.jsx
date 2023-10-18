@@ -4,23 +4,28 @@ import "./Home.css";
 import { SearchContext } from "../../../context/SearchContext";
 
 const Home = () => {
+  const [place, setPlace] = useState("");
+  const [pet, setPet] = useState("");
+
   const navigate = useNavigate();
+
+  const userSearch = {
+    place,
+    pet,
+  };
 
   const { handleSearchTerm } = useContext(SearchContext);
 
-  const userSearch = {
-    place: "",
-    petType: "",
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    console.log(userSearch);
     if (Object.values(userSearch).includes("")) {
       alert("Todos los campos son obligatorios");
       return;
     }
     handleSearchTerm(userSearch);
+    setPet("");
+    setPlace("");
     navigate("/search");
   };
 
@@ -171,18 +176,24 @@ const Home = () => {
                 <input
                   className="input-field"
                   type="text"
-                  placeholder="Provincia, ciudad, localidad"
+                  placeholder="Ingresa una localidad"
                   id="ciudad"
                   name="ciudad"
+                  value={place}
                   onChange={(e) => {
-                    userSearch.place = e.target.value;
+                    //userSearch.place = e.target.value;
+                    setPlace(e.target.value);
                   }}
                 />
                 <select
                   className="input-field"
                   id="tipo-animal"
                   name="tipo-animal"
-                  onChange={(e) => (userSearch.petType = e.target.value)}
+                  value={pet}
+                  onChange={(e) => {
+                    //userSearch.pet = e.target.value;
+                    setPet(e.target.value);
+                  }}
                 >
                   <option value="">Seleccione una Mascota</option>
                   <option value="Perro">Perro</option>
