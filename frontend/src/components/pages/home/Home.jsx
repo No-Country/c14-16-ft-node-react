@@ -1,17 +1,38 @@
-// import { useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { SearchContext } from "../../../context/SearchContext";
 import DogHome from "/assets/Images/DogHome.jpeg";
 import StyledImage from "./StyledImage";
+import "./Home.css";
 
 const Home = () => {
-  // const [tipoAnimal, setTipoAnimal] = useState("Perro");
+  const [place, setPlace] = useState("");
+  const [pet, setPet] = useState("");
+
   const navigate = useNavigate();
-  const handleClick = () => {
+
+  const userSearch = {
+    place,
+    pet,
+  };
+
+  const { handleSearchTerm } = useContext(SearchContext);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(userSearch);
+    // if (Object.values(userSearch).includes("")) {
+    //   alert("Todos los campos son obligatorios");
+    //   return;
+    // }
+    handleSearchTerm(userSearch);
+    setPet("");
+    setPlace("");
     navigate("/search");
   };
 
   const imageStyles = {
-    background: "#FFA500",
+    background: "#f8d444",
   };
 
   const textStyles = {
@@ -22,7 +43,7 @@ const Home = () => {
   };
 
   const boxStyle = {
-    background: "#FFA500",
+    background: "#f8d444",
   };
 
   const HeaderStyle = {
@@ -51,69 +72,54 @@ const Home = () => {
           </p>
         </div>
         {/* Formulario de Búsqueda */}
-        <div className="bg-gray-200 rounded-lg p-6 text-center w-full sm:w-3/5 md:w-2/5 mx-auto bg-opacity-5 backdrop-blur-md">
-          <h2 className="text-lg font-semibold text-black mb-4">
-            Reserva un lugar para tu peludito donde y cuando quieras
-          </h2>
-          <div className="flex justify-center">
-            <form className="w-full max-w-md mb-8">
-              <div className="flex flex-col items-center">
-                <input
-                  className="input-field"
-                  type="text"
-                  placeholder="Provincia, ciudad, localidad"
-                  id="ciudad"
-                  name="ciudad"
-                />
-                <select
-                  className="input-field"
-                  id="tipo-animal"
-                  name="tipo-animal"
-                  value={tipoAnimal}
-                  onChange={(e) => setTipoAnimal(e.target.value)}
-                >
-                  <option value="Perro">Perro</option>
-                  <option value="Gato">Gato</option>
-                  <option value="Otros">Otros</option>
-                </select>
-
-                <div className="fx-block">
-                  <div className="toggle">
-                    <div>
-                      <input type="checkbox" id="toggles" />
-                      <div data-unchecked="Perro" data-checked="Gato"></div>
-                    </div>
-                  </div>
+        <section className=" py-6 sm:py-8 lg:py-12">
+          <div className="bg-[rgba(224,224,224,0.55)] backdrop-blur-md rounded-lg p-6 text-center w-full sm:w-3/5 md:w-2/5 mx-auto mt-0">
+            <h2 className="text-lg font-semibold text-black mb-4">
+              Reserva un lugar para tu peludito donde y cuando quieras
+            </h2>
+            <div className="flex justify-center">
+              <form className="w-full max-w-md" onSubmit={handleSubmit}>
+                <div className="flex flex-col items-center">
+                  <input
+                    className="input-field"
+                    type="text"
+                    placeholder="Ingresa una localidad"
+                    id="ciudad"
+                    name="ciudad"
+                    required
+                    value={place}
+                    onChange={(e) => {
+                      //userSearch.place = e.target.value;
+                      setPlace(e.target.value);
+                    }}
+                  />
+                  <select
+                    className="input-field"
+                    id="tipo-animal"
+                    name="tipo-animal"
+                    required
+                    value={pet}
+                    onChange={(e) => {
+                      //userSearch.pet = e.target.value;
+                      setPet(e.target.value);
+                    }}
+                  >
+                    <option value="">Seleccione una Mascota</option>
+                    <option value="Perro">Perro</option>
+                    <option value="Gato">Gato</option>
+                    <option value="Otros">Otros</option>
+                  </select>
+                  <button
+                    className="w-full max-w-lg py-4 md:mx-auto text-xl font-bold bg-amber-600 rounded-md hover:bg-amber-400"
+                    type="submit"
+                  >
+                    Buscar
+                  </button>
                 </div>
-
-                <button
-                  className="w-full max-w-lg py-4 text-xl font-bold"
-                  style={{
-                    background: "#FFA500",
-                    color: "black",
-                    border: "none",
-                    borderRadius: "8px",
-                    padding: "1rem 2rem",
-                    fontSize: "1.5rem",
-                    transition: "background 0.3s",
-                  }}
-                  type="submit"
-                  onClick={handleClick}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.background = "#c98405";
-                    e.currentTarget.style.color = "white";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.background = "#FFA500";
-                    e.currentTarget.style.color = "black";
-                  }}
-                >
-                  Buscar
-                </button>
-              </div>
-            </form>
+              </form>
+            </div>
           </div>
-        </div>
+        </section>
       </header>
 
       <main className="bg-gray-100 py-8">
@@ -127,7 +133,7 @@ const Home = () => {
           <div
             className="md:w-1/3 bg-gray-400 rounded-lg shadow-md p-4 text-center"
             style={{
-              background: "#FFA500",
+              background: "#f8d444",
             }}
           >
             <img
@@ -147,7 +153,7 @@ const Home = () => {
           <div
             className="md:w-1/3 bg-gray-400 rounded-lg shadow-md p-4 text-center"
             style={{
-              background: "#FFA500",
+              background: "#f8d444",
             }}
           >
             <img
@@ -168,7 +174,7 @@ const Home = () => {
           <div
             className="md:w-1/3 bg-gray-400 rounded-lg shadow-md p-4 text-center"
             style={{
-              background: "#FFA500",
+              background: "#f8d444",
             }}
           >
             <img

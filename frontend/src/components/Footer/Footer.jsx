@@ -7,7 +7,8 @@ const Footer = () => {
                 <div className="md:flex md:justify-between items-center">
                     <div className="mb-4 text-center md:text-left md:w-1/2 md:pr-8">
                         <h2 className="text-2xl text-center font-bold mb-2">Sobre Doggy&apos;s House</h2>
-                        <p className="mb-6">Somos una empresa dedicada al cuidado de mascotas. Conoce más sobre nosotros.</p>
+
+                        <p className="mb-6">Nos dedicamos al cuidado de tus mascotas. Conoce más sobre nosotros.</p>
                     </div>
                     <div className="flex flex-col md:flex-row items-center md:w-1/2">
                         <div className="mb-4 md:mb-0 md:w-1/2">
