@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { SearchContext } from "../context/SearchContext";
-import Input from "./ui/input";
+import Input from "./ui/inputs";
 import Select from "./ui/select";
 import Button from "./ui/button";
 
