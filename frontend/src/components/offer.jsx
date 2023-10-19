@@ -51,7 +51,7 @@ function Offer() {
                 }}
               >
                 <SwiperSlide>
-                  <div className="relative flex flex-col items-center w-[50%] h-[60%] mx-auto">
+                  <div className="relative flex flex-col items-center w-full sm:w-[50%] sm:h-[60%] mx-auto">
                     <img
                       src="/assets/Images/Dog-Working.png"
                       alt=""
@@ -67,7 +67,7 @@ function Offer() {
                   </div>
                 </SwiperSlide>
                 <SwiperSlide>
-                  <div className="relative flex flex-col items-center w-[50%] h-[60%] mx-auto">
+                  <div className="relative flex flex-col items-center w-full sm:w-[50%] sm:h-[60%] mx-auto">
                     <img
                       src="/assets/Images/Dog-Office.png"
                       alt=""
@@ -83,7 +83,7 @@ function Offer() {
                   </div>
                 </SwiperSlide>
                 <SwiperSlide>
-                  <div className="relative flex flex-col items-center w-[50%] h-[60%] mx-auto">
+                  <div className="relative flex flex-col items-center w-full lg:w-[50%] lg:h-[60%] mx-auto">
                     <img
                       src="/assets/Images/Dog-Hotel.png"
                       alt=""

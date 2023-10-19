@@ -63,8 +63,8 @@ const Home = () => {
       </header>
 
       <main className="bg-gray-100 py-8  mx-auto">
-        <div className="mt-20 mb-10 w-[80%] mx-auto">
-          <p className="text-2xl font-semibold text-center text-gray-700 mb-8">
+        <div className="mt-5 sm:mt-20 mb-10 w-[95%] sm:w-[80%] mx-auto">
+          <p className="text-lg sm:text-2xl font-semibold text-center text-gray-700 mb-8">
             En Doggy&#39;s queremos que estes tranquilo y confiado de que tu
             mascota está en buenas manos con nosotros. Por eso, queremos
             contarte un poco sobre lo que tenemos para ofrecer.
