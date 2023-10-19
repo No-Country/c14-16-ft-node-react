@@ -8,7 +8,7 @@ import Navbar from "../components/layout/Navbar";
 import About from "../components/pages/about/About";
 import ForgotPass from "../components/pages/forgot-pass/forgot-pass";
 import Reserver from "../components/pages/reserver/reserver";
-
+import Footer from "../components/Footer/Footer";
 const AppRouter = () => {
   return (
     <div>
@@ -22,6 +22,7 @@ const AppRouter = () => {
         <Route path="/reserver" element={<Reserver />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
+      <Footer />
     </div>
   );
 
