@@ -24,6 +24,7 @@ const AppRouter = () => {
       </Routes>
     </div>
   );
+
 };
 
 export default AppRouter;
