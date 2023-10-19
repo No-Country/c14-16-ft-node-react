@@ -14,19 +14,19 @@ const Navbar = () => {
     const isAboutPage = location.pathname === "/about";
 
     const navbarStyle = {
-        background: '#f8d444',
+        background: '#F0A225',
         borderBottom: "2px solid #ff8c00",
     };
 
     return (
-        <nav style={navbarStyle} className={`navbar p-4 flex justify-between items-center ${isAboutPage ? "transparent-background" : ""}`}>
+        <nav style={navbarStyle} className={`navbar px-4 py-6 flex justify-between items-center ${isAboutPage ? "transparent-background" : ""}`}>
             <div className="flex items-center">
                 <Link to="/">
                     <img src="/assets/LogoDog.png" alt="Doggy's House" className="w-12 h-12 mr-2" />
                 </Link>
                 <span className="text-xl md:text-2xl lg:text-4xl xl:text-5xl pl-3">
-                    <span className="text-blue-500 font-bold">Doggy&apos;s</span>
-                    <span className="text-green-500 font-bold">House</span>
+                    <span className="text-gray-100 font-bold">Doggy&apos;s</span>
+                    <span className="text-gray-100 font-bold">House</span>
                 </span>
 
             </div>
@@ -43,24 +43,24 @@ const Navbar = () => {
             </div>
             <div className={`md:flex ${menuOpen ? "md:flex-col md:space-y-4 md:items-center menu-open" : "hidden"}`}>
                 <div className="box">
-                    <Link to="/" className="text-gray-600 font-bold hover:underline md:my-2" onClick={closeMenu}>
+                    <Link to="/" className="text-xl text-gray-100 font-semibold hover:underline md:my-2" onClick={closeMenu}>
                         Inicio
                     </Link>
                 </div>
                 <div className="box">
-                    <Link to="/about" className="text-gray-600 font-bold hover:underline md:my-2" onClick={closeMenu}>
+                    <Link to="/about" className="text-xl text-gray-100 font-semibold hover:underline md:my-2" onClick={closeMenu}>
                         Nosotros
                     </Link>
                 </div>
                 {isLoggedIn ? (
                     <div className="box">
-                        <button onClick={() => setIsLoggedIn(false)} className="text-blue-500 font-bold hover:underline md:my-2">
+                        <button onClick={() => setIsLoggedIn(false)} className="text-blue-500 font-semibold hover:underline md:my-2">
                             Logout
                         </button>
                     </div>
                 ) : (
                     <div className="box">
-                        <Link to="/login" className="text-gray-600 font-bold hover:underline md:my-2" onClick={closeMenu}>
+                        <Link to="/login" className="text-xl text-gray-100 font-semibold hover:underline md:my-2" onClick={closeMenu}>
                             Iniciar Sesión
                         </Link>
                     </div>
