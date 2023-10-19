@@ -1,4 +1,3 @@
-import React from "react";
 
 const BranchCard = ({ branch }) => {
   console.log(branch);
