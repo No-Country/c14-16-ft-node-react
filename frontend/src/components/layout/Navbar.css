@@ -4,9 +4,10 @@
     text-align: center;
 }
 
+
 .menu-open {
-    position: fixed;
-    top: 112px;
+    position: absolute;
+    top: 82px;
     right: 0;
     bottom: 0;
     width: 160px;
