@@ -6,6 +6,7 @@ import StyledImage from "./StyledImage";
 import "./Home.css";
 
 import Hero from "../../hero";
+import Offer from "../../offer";
 
 const Home = () => {
   const [place, setPlace] = useState("");
@@ -61,78 +62,17 @@ const Home = () => {
         <Hero />
       </header>
 
-      <main className="bg-gray-100 py-8">
-        <p className="text-2xl font-semibold text-center text-black mb-8">
-          En Doggy&#39;s queremos que estes tranquilo y confiado de que tu
-          mascota está en buenas manos con nosotros. Por eso, queremos contarte
-          un poco sobre lo que tenemos para ofrecer.
-        </p>
-        <div className="flex flex-col md:flex-row m-4 justify-center items-center gap-6">
-          {/* Box 1 */}
-          <div
-            className="md:w-1/3 bg-gray-400 rounded-lg shadow-md p-4 text-center"
-            style={{
-              background: "#f8d444",
-            }}
-          >
-            <img
-              src="/assets/Images/Dog-Working.png"
-              alt="Imagen 1"
-              className="w-full h-48 mx-auto rounded-lg"
-            />
-            <h3 className="text-2xl font-semibold text-center m-4">
-              Dog Working
-            </h3>
-            <p className="mt-4">
-              Nuestro equipo de expertos está dedicado al cuidado de tu mascota.
-            </p>
-          </div>
-
-          {/* Box 2 */}
-          <div
-            className="md:w-1/3 bg-gray-400 rounded-lg shadow-md p-4 text-center"
-            style={{
-              background: "#f8d444",
-            }}
-          >
-            <img
-              src="/assets/Images/Dog-Office.png"
-              alt="Imagen 2"
-              className="w-full h-48 mx-auto rounded-lg"
-            />
-            <h3 className="text-2xl font-semibold text-center m-4">
-              Dog Office
-            </h3>
-            <p className="mt-4">
-              Ofrecemos un ambiente seguro y divertido para que tu mascota se
-              sienta como en casa.
-            </p>
-          </div>
-
-          {/* Box 3 */}
-          <div
-            className="md:w-1/3 bg-gray-400 rounded-lg shadow-md p-4 text-center"
-            style={{
-              background: "#f8d444",
-            }}
-          >
-            <img
-              src="/assets/Images/Dog-Hotel.png"
-              alt="Imagen 3"
-              className="w-full h-48 mx-auto rounded-lg"
-            />
-            <h3 className="text-2xl font-semibold text-center m-4">
-              Dog Hotel
-            </h3>
-            <p className="mt-4">
-              Nos preocupamos por la salud y el bienestar de cada animalito que
-              llega a nosotros.
-            </p>
-          </div>
+      <main className="bg-gray-100 py-8  mx-auto">
+        <div className="mt-20 mb-10 w-[80%] mx-auto">
+          <p className="text-2xl font-semibold text-center text-gray-700 mb-8">
+            En Doggy&#39;s queremos que estes tranquilo y confiado de que tu
+            mascota está en buenas manos con nosotros. Por eso, queremos
+            contarte un poco sobre lo que tenemos para ofrecer.
+          </p>
+          <Offer />
         </div>
 
         {/* Servicios  */}
-
         <h2 className="text-4xl text-black font-bold text-center pt-5 mb-4">
           Servicios
         </h2>
