@@ -31,6 +31,10 @@ export const createPets = async ( req, res ) =>{
     try {
         const { name, breed, weight, client_id , type_id } =  req.body
 
+        if(!name || !client_id || !type_id || !weight){
+            return res.status( 400 ).json({ message: "El cuerpo de la solicitud está incompleto. Debes proporcionar todos los parámetros requeridos" }); 
+        }
+
         const client = await Client.findByPk( client_id );
 
         const type = await AnimalTypes.findByPk( type_id );
@@ -82,12 +86,12 @@ export const deletePets = async ( req, res ) =>{
             return res.status( 400 ).json({ message: "El id es obligatorio" }); 
         }
         
-        const deletePet = await Pet.destroy({
+        await Pet.destroy({
             where: {
                 id
             }
         });
-        return res.status( 200 ).json({ result: deletePet })
+        return res.status( 200 ).json({ result: `Mascota ${id} eliminada correctamente` })
     } catch ( error ) {
         return res.status( 500 ).json({message: error.message});
     }

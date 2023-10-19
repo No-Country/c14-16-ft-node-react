@@ -6,15 +6,12 @@ import { ServiceBranch } from "../models/ServiceBranch.js";
 import { BranchAnimalTypes } from "../models/BranchAnimalType.js"
 import { Service } from "../models/Service.js";
 import { AnimalTypes } from "../models/AnimalTypes.js";
+import { saveImages, getImages, deleteImages, updateImages } from "../services/ImageService.js";
 
 export const getBranches = async ( req, res ) => {
     try {
         const branches = await Branch.findAll({
             include: [
-                {
-                  model: Image,
-                  as: 'images',
-                },
                 {
                   model: Rate,
                   as: 'rates',
@@ -41,13 +38,10 @@ export const getBranch = async (req, res ) => {
         if(!id){
             return res.status( 400 ).json({ message: "El id es obligatorio" }); 
         }
+
         const getBranch = await Branch.findByPk( id,
             {
                 include: [
-                    {
-                      model: Image,
-                      as: 'images',
-                    },
                     {
                       model: Rate,
                       as: 'rates',
@@ -68,6 +62,13 @@ export const getBranch = async (req, res ) => {
             return res.status( 404 ).json({ message: "La sucursal no existe" }); 
         }
 
+        const imagesObject = await Image.findAll({where: {branch_id: id}})
+
+        if(getImages){
+            const images = await getImages(imagesObject)
+            getBranch.setDataValue("images", images)
+        }
+
         return res.status( 200 ).json({ result: getBranch }); 
     } catch (error) {
         return res.status( 500 ).json({ message: error.message }); 
@@ -81,13 +82,14 @@ export const getBranchesByCompany = async(req, res) => {
         if(!id){
             return res.status( 400 ).json({ message: "El id es obligatorio" }); 
         }
+        const company = await Company.findByPk( id )
+
+        if(!company){
+            return res.status(404).json({message: "La empresa no existe"})
+        }
 
         const branchesByCompany = await Branch.findAll({where: {company_id: id},
             include: [
-                    {
-                      model: Image,
-                      as: 'images',
-                    },
                     {
                       model: Rate,
                       as: 'rates',
@@ -111,9 +113,12 @@ export const getBranchesByCompany = async(req, res) => {
 
 export const createBranch = async(req, res) => {
     try {
-        const { name, description, city, capacity, amount, phone, address, company_id, images, rates, services, animalTypes } = req.body
+        const { name, description, city, capacity, amount, phone, address, company_id, rates, services, animalTypes, images } = req.body  
+        let routes
 
-
+        if(images){
+            routes = await saveImages(images, company_id, name, res)
+        }
         if(!name || !description || !city || !capacity || !phone || !address || !company_id || !rates || !services || !animalTypes){
             return res.status( 400 ).json({ message: "El cuerpo de la solicitud está incompleto. Debes proporcionar todos los parámetros requeridos" }); 
         }
@@ -124,18 +129,19 @@ export const createBranch = async(req, res) => {
             return res.status(404).json({ message: 'Empresa no encontrada' });
         }
 
-        const branchExist = await Branch.findOne({ where: { name, address, company_id } });
+        const branchExist = await Branch.findOne({ where: { name, address, city , company_id } });
 
         if(branchExist) {
             return res.status( 400 ).json({ message: "La sucursal ya existe"})
         }
 
+        
         const { sequelize } = Branch;
         const createdBranch = await sequelize.transaction(async (transaction) => {
             const createdBranch = await Branch.create(
                 { 
                     name, description, city, capacity, amount, phone, address, company_id: company.id,
-                    images: images.map((image) => ({ route: image.route })),
+                    images: routes.map((image) => ({route: image})),
                     rates: rates.map((rate) => ({ weightFrom: rate.weightFrom, weightTo: rate.weightTo, price: rate.price }))
                 },
                 {
@@ -195,10 +201,45 @@ export const updateBranch = async ( req, res ) =>{
             return res.status( 404 ).json({ message: 'La sucursal no existe' });
         }
 
-        branchToUpdate.set( req.body );
-        branchToUpdate.save();
-        return res.status( 200 ).json({ result: branchToUpdate });
+        const updatedData = { ...req.body }
+        if(updatedData.services){
+
+            const newServicesIds = await updateBranchServices(updatedData.services)
+
+            if( newServicesIds.length > 0){
+                await branchToUpdate.setServices([])
+                await branchToUpdate.addServices(newServicesIds);
+            }
+
+            delete updatedData.services
+        }
+
+        if(updatedData.rates){
+            await updateBranchRates( branchToUpdate.id, updatedData.rates)
+        }
+
+        if(updatedData.animalTypes){
+            const newTypesIds = await updateBranchAnimalType(updatedData.animalTypes)
+
+            if(newTypesIds.length > 0) {
+                await branchToUpdate.setAnimalTypes([])
+                await branchToUpdate.addAnimalTypes(newTypesIds)
+            }
+
+            delete updatedData.animalTypes
+        }
+        if(updatedData.images){
+            const imagesToUpdate = await Image.findAll({where: {branch_id: id}})
+            await updateBranchImage(imagesToUpdate, updatedData.images, branchToUpdate.company_id, branchToUpdate.name, res, branchToUpdate.id)
+            delete updatedData.images
+        }
+
+        branchToUpdate.set(updatedData)
+        const newBranch = await branchToUpdate.save({returning: true,});
+
+        return res.status( 200 ).json({ result: newBranch });
     } catch ( error ) {
+        console.log(error)
         return res.status( 500 ).json({ message: error.message });
     }
 }
@@ -211,6 +252,17 @@ export const deleteBranch = async ( req, res ) =>{
             return res.status( 400 ).json({ message: "El id es obligatorio" }); 
         }
 
+        const branchExist = await Branch.findByPk( id )
+
+        if( !branchExist ) {
+            return res.status( 404 ).json({ message: "La sucursal no existe" }); 
+        }
+
+        const getImages = await Image.findAll({where: { branch_id: id }})
+
+        if(getImages){
+            await deleteImages(getImages)
+        }
         await Branch.destroy({
             where: {
                 id
@@ -221,4 +273,28 @@ export const deleteBranch = async ( req, res ) =>{
     } catch ( error ) {
         return res.status( 500 ).json({ message: error.message });
     }
+}
+
+const updateBranchServices = async(services) => {
+    return services.map(service => service.id)
+
+}
+
+const updateBranchRates = async(branch_id, rates) => {
+    await Rate.destroy({where: {branch_id: branch_id}})
+    await Rate.bulkCreate(rates.map((rate) => ({ weightFrom: rate.weightFrom, weightTo: rate.weightTo, price: rate.price, branch_id: branch_id })))
+}
+
+const updateBranchAnimalType = async(animalTypes) => {
+    return animalTypes.map(animalType => animalType.id)
+}
+
+const updateBranchImage = async(imagesToUpdate, images, company_id, name, res, id)=>{
+    await Image.destroy({
+        where: { branch_id: id },
+    });
+    const routes = await updateImages(imagesToUpdate,images 
+        , company_id, name, res)
+
+    await Image.bulkCreate(routes.map(route => ({route: route , branch_id: id})))
 }

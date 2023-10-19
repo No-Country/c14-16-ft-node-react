@@ -24,6 +24,10 @@ export const Booking = sequelize.define('Booking', {
     transport: {
         type: DataTypes.BOOLEAN,
         allowNull: false
+    },
+    comments: {
+        type: DataTypes.STRING,
+        allowNull: true
     }
 },{
     timestamps: false

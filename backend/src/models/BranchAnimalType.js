@@ -20,6 +20,7 @@ Branch.belongsToMany(AnimalTypes, {
     onDelete: "CASCADE",
     hooks: true
 });
+
 AnimalTypes.belongsToMany(Branch, {
     through: BranchAnimalTypes,
     foreignKey: 'animal_type_id',

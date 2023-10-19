@@ -18,13 +18,14 @@ export const getType = async ( req, res ) =>{
             return res.status( 400 ).json({ message: "El id es obligatorio" }); 
         }
         
-        const getType = await Type.findByPk( id );
+        const getType = await AnimalTypes.findByPk( id );
 
         return res.status( 200 ).json({ result: getType }); 
     } catch (error) {
         return res.status( 500 ).json({ message: error.message });
     }
 }
+
 export const createType = async ( req, res ) =>{
     try {
         const { name } =  req.body
@@ -42,6 +43,7 @@ export const createType = async ( req, res ) =>{
         return res.status( 500 ).json({ message: error.message });
     }
 }
+
 export const updateType = async ( req, res ) =>{
     try {
         const { id } = req.params;
@@ -63,6 +65,7 @@ export const updateType = async ( req, res ) =>{
         return res.status( 500 ).json({ message: error.message });
     }
 }
+
 export const deleteType = async ( req, res ) =>{
     try {
         const { id } = req.params;
@@ -71,12 +74,12 @@ export const deleteType = async ( req, res ) =>{
             return res.status( 400 ).json({ message: "El id es obligatorio" }); 
         }
         
-        const deleteType = await AnimalTypes.destroy({
+        await AnimalTypes.destroy({
             where: {
                 id
             }
         });
-        return res.status( 200 ).json({ result: deleteType })
+        return res.status( 200 ).json({ result: `Tipo de animal ${id} eliminado correctamente` })
     } catch ( error ) {
         return res.status( 500 ).json({ message: error.message });
     }

@@ -76,13 +76,14 @@ export const deleteService = async(req, res) => {
         if(!id){
             return res.status( 400 ).json({ message: "El id es obligatorio" }); 
         }
-        const deletedService = await Service.destroy({
+        
+        await Service.destroy({
             where: {
                 id
             }
         });
 
-        return res.status( 200 ).json({ result: deletedService })
+        return res.status( 200 ).json({ result: `Servicio ${id} eliminado correctamente` })
     }catch(error){
         return res.status( 500 ).json({ message: error.message });
     }

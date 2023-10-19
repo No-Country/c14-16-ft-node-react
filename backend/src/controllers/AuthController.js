@@ -1,5 +1,6 @@
 import { compare } from "bcrypt";
 import { Client } from "../models/Client.js";
+import { getImage, saveImage } from "../services/ImageService.js";
 import jwt from "jsonwebtoken"
 import dotenv from 'dotenv';
 
@@ -24,6 +25,11 @@ export const login = async(req, res) => {
 
         delete client.dataValues.pass
 
+        if (client.profile_picture) {
+            const image = await getImage(client.profile_picture)
+            client.setDataValue("profile_picture", image)
+        }
+
         const token = jwt.sign({ id: client.id }, process.env.JWT_SECRET);
 
         res.status(200).json({ result: {"token":token , "client" : client} });
@@ -38,6 +44,7 @@ export const register = async (req, res) =>{
     try {
         const { name, phone, address, email, pass, profile_picture } = req.body;
 
+        let route = null
         if(!name || !phone || !address || !email || !pass){
             return res.status( 400 ).json({ message: "El cuerpo de la solicitud está incompleto. Debes proporcionar todos los parámetros requeridos" }); 
         }
@@ -47,8 +54,12 @@ export const register = async (req, res) =>{
         if(clientExist) {
             return res.status( 400 ).json({ message: "El cliente ya existe"})
         }
+
+        if(profile_picture){
+            route = await saveImage(profile_picture, name)
+        }
         
-        const createdClient = await Client.create({ name, phone, address, email, pass, profile_picture });
+        const createdClient = await Client.create({ name, phone, address, email, pass, profile_picture: route });
 
         return res.status( 201 ).json({ result: createdClient });
     } catch ( error ) {

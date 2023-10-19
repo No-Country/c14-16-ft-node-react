@@ -15,7 +15,7 @@ export const Pet = sequelize.define('Pet',{
     },
     breed:{
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: true
     },
     weight:{
         type: DataTypes.FLOAT,
