@@ -90,7 +90,6 @@ BookingRouter.get("/:id", getBooking)
  *     summary: Crear una nueva reserva.
  *     description: Crea una nueva reserva con los datos proporcionados en el cuerpo de la solicitud.
  *     requestBody:
- *       description: Datos para crear una nueva reserva.
  *       required: true
  *       content:
  *         application/json:
@@ -100,7 +99,7 @@ BookingRouter.get("/:id", getBooking)
  *               "to_date": "2023-10-10",
  *               "price": 200,
  *               "transport": false,
- *               "comments": "Tiene alergia a x remedio"
+ *               "comments": "Tiene alergia a x remedio",
  *               "pet_id": 1,
  *               "branch_id": 2
  *             }

@@ -34,6 +34,10 @@ export const Branch = sequelize.define('Branch',{
         type: DataTypes.STRING,
         allowNull: false
     },
+    price_km:{
+        type: DataTypes.FLOAT,
+        allowNull: false
+    },
     address:{
         type: DataTypes.STRING,
         allowNull: false

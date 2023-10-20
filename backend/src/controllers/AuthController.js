@@ -7,23 +7,23 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 export const login = async(req, res) => {
-    const {email, pass} = req.body
-    if(!email || !pass){
+    const {email, password} = req.body
+    if(!email || !password){
         return res.status( 400 ).json({ message: "El cuerpo de la solicitud está incompleto. Debes proporcionar todos los parámetros requeridos" }); 
     }
     try {
-        const client = await Client.findOne({ where: { email },attributes: ['id', 'name' , 'phone' , 'address' , 'email' , 'pass' , 'profile_picture']});
+        const client = await Client.findOne({ where: { email },attributes: ['id', 'name' , 'phone' , 'address' , 'email' , 'password' , 'profile_picture']});
         if (!client) {
             return res.status( 404 ).json({ message: 'Usuario no encontrado' }); 
         }
 
-        const passwordMatch = await compare(pass, client.pass);
+        const passwordMatch = await compare(password, client.password);
 
         if (!passwordMatch) {
             return res.status( 400 ).json({ message: 'Contraseña incorrecta' }); 
         }
 
-        delete client.dataValues.pass
+        delete client.dataValues.password
 
         if (client.profile_picture) {
             const image = await getImage(client.profile_picture)
@@ -42,10 +42,10 @@ export const login = async(req, res) => {
 
 export const register = async (req, res) =>{
     try {
-        const { name, phone, address, email, pass, profile_picture } = req.body;
+        const { name, phone, address, email, password, profile_picture } = req.body;
 
         let route = null
-        if(!name || !phone || !address || !email || !pass){
+        if(!name || !phone || !address || !email || !password){
             return res.status( 400 ).json({ message: "El cuerpo de la solicitud está incompleto. Debes proporcionar todos los parámetros requeridos" }); 
         }
 
@@ -59,7 +59,7 @@ export const register = async (req, res) =>{
             route = await saveImage(profile_picture, name)
         }
         
-        const createdClient = await Client.create({ name, phone, address, email, pass, profile_picture: route });
+        const createdClient = await Client.create({ name, phone, address, email, password, profile_picture: route });
 
         return res.status( 201 ).json({ result: createdClient });
     } catch ( error ) {

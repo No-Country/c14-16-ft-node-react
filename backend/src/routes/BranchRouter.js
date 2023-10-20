@@ -158,6 +158,8 @@ BranchRouter.get("/byCompany/:id",getBranchesByCompany)
  *                 type: integer
  *               amount:
  *                 type: integer
+ *               price_km:
+ *                 type: number
  *               phone:
  *                 type: string
  *               address:
