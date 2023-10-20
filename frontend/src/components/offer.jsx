@@ -57,10 +57,10 @@ function Offer() {
                       alt=""
                       className="object-cover rounded-sm shadow-lg w-full "
                     />
-                    <h3 className="text-2xl font-bold mt-2 text-gray-700">
+                    <h3 className="text-2xl font-bold font-roboto mt-2 text-gray-700">
                       Dog Working
                     </h3>
-                    <p className="mt-4 text-xl font-semibold text-gray-500 text-center">
+                    <p className="mt-4 text-xl font-semibold font-josefin text-gray-500 text-center">
                       Nuestro equipo de expertos está dedicado al cuidado de tu
                       mascota.
                     </p>
@@ -73,10 +73,10 @@ function Offer() {
                       alt=""
                       className="object-cover rounded-sm shadow-lg w-full"
                     />
-                    <h3 className="text-2xl font-bold mt-2 text-gray-700">
+                    <h3 className="text-2xl font-bold font-roboto mt-2 text-gray-700">
                       Dog Office
                     </h3>
-                    <p className="mt-4 text-xl font-semibold text-gray-500 text-center">
+                    <p className="mt-4 text-xl font-semibold font-josefin text-gray-500 text-center">
                       Ofrecemos un ambiente seguro y divertido para que tu
                       mascota se sienta como en casa.
                     </p>
@@ -89,10 +89,10 @@ function Offer() {
                       alt=""
                       className="object-cover rounded-sm shadow-lg w-full"
                     />
-                    <h3 className="text-2xl font-bold mt-2 text-gray-700">
+                    <h3 className="text-2xl font-bold font-roboto mt-2 text-gray-700">
                       Dog Hotel
                     </h3>
-                    <p className="mt-4 text-xl font-semibold text-gray-500 text-center">
+                    <p className="mt-4 text-xl font-semibold font-josefin text-gray-500 text-center">
                       Nos preocupamos por la salud y el bienestar de cada
                       animalito que llega a nosotros.
                     </p>

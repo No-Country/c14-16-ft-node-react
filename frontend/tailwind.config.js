@@ -7,6 +7,11 @@ export default {
         primary: "#F0A225",
       },
     },
+    fontFamily: {
+      dancing: ["Dancing Script", "cursive"],
+      josefin: ["Josefin Sans", "sans-serif"],
+      roboto: ["Roboto", "sans-serif"],
+    },
   },
   plugins: [],
 };

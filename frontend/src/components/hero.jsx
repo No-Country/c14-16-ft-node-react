@@ -31,10 +31,10 @@ function Hero() {
   return (
     <>
       <div className="container mx-auto px-4 h-[70vh]">
-        <h1 className="text-4xl text-gray-100 font-semibold text-center pt-5 mb-4">
+        <h1 className="text-4xl text-gray-700 font-semibold font-roboto text-center pt-5 mb-4 font-mono">
           Un lugar seguro para tu mascota
         </h1>
-        <p className="text-2xl font-semibold text-center text-gray-100 ">
+        <p className="text-2xl font-semibold font-josefin text-center text-gray-800 ">
           Guarderias que cuidan cada detalle para que tu mascota se sienta en
           como en casa, sin preocupaciones ni inquietudes. Aquí tendran un
           espacio para jugar, tambien tendran ricas comidas, jugaran y pasearan
@@ -44,7 +44,7 @@ function Hero() {
       {/* Formulario de Búsqueda */}
       <section className=" py-6 sm:py-8 lg:py-0">
         <div className="bg-[rgb(250,250,250)] backdrop-blur-md rounded-t-lg px-6 pt-5 pb-10 text-center w-[90%] sm:w-3/5 md:w-2/5 mx-auto mt-0">
-          <h2 className="text-lg font-semibold text-black mb-4">
+          <h2 className="text-xl font-roboto text-black mb-4">
             Reserva un lugar para tu peludito donde y cuando quieras
           </h2>
           <div className="flex justify-center">

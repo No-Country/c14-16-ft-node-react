@@ -21,7 +21,7 @@ const Navbar = () => {
   return (
     <nav
       style={navbarStyle}
-      className={`navbar p-6 flex justify-between items-center ${
+      className={`navbar py-3 px-6 flex justify-between items-center ${
         isAboutPage ? "transparent-background" : ""
       }`}
     >
@@ -30,10 +30,10 @@ const Navbar = () => {
           <img
             src="/assets/icons/icon.png"
             alt="Doggy's House"
-            className="w-12 h-12 mr-2 text-white"
+            className="w-12 h-12 mr-2 text-white "
           />
         </Link>
-        <span className="text-xl md:text-2xl lg:text-4xl xl:text-5xl pl-3">
+        <span className="text-[50px] pl-3 font-dancing space-x-2">
           <span className="text-gray-100 font-semibold">Doggy&apos;s</span>
           <span className="text-gray-100 font-semibold">House</span>
         </span>
@@ -69,7 +69,7 @@ const Navbar = () => {
         </button>
       </div>
       <div
-        className={`md:flex ${
+        className={`md:flex  ${
           menuOpen
             ? "md:flex-col md:space-y-4 md:items-center menu-open"
             : "hidden"
@@ -78,7 +78,7 @@ const Navbar = () => {
         <div className="box">
           <Link
             to="/"
-            className="text-xl text-gray-100 font-semibold hover:underline md:my-2"
+            className="text-xl text-gray-100 font-roboto hover:underline md:my-2"
             onClick={closeMenu}
           >
             Inicio
@@ -87,7 +87,7 @@ const Navbar = () => {
         <div className="box">
           <Link
             to="/about"
-            className="text-xl text-gray-100 font-semibold hover:underline md:my-2"
+            className="text-xl text-gray-100 font-roboto hover:underline md:my-2"
             onClick={closeMenu}
           >
             Nosotros
@@ -97,7 +97,7 @@ const Navbar = () => {
           <div className="box">
             <button
               onClick={() => setIsLoggedIn(false)}
-              className="text-blue-500 font-semibold hover:underline md:my-2"
+              className="text-blue-500 font-roboto hover:underline md:my-2"
             >
               Logout
             </button>
