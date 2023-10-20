@@ -7,6 +7,7 @@ import "./Home.css";
 
 import Hero from "../../hero";
 import Offer from "../../offer";
+import Services from "../../services";
 
 const Home = () => {
   const [place, setPlace] = useState("");
@@ -73,83 +74,7 @@ const Home = () => {
         </div>
 
         {/* Servicios  */}
-        <h2 className="text-4xl text-black font-bold text-center pt-5 mb-4">
-          Servicios
-        </h2>
-        <div className="flex flex-col md:flex-row m-4 justify-center items-center gap-6">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-            <div
-              className="bg-gray-400 rounded-lg p-4 text-center"
-              style={boxStyle}
-            >
-              <StyledImage
-                imageSrc="/assets/Images/Peluqueria.png"
-                imageStyle={imageStyles}
-                textStyles={textStyles}
-                text="Peluqueria"
-              />
-            </div>
-
-            <div
-              className="bg-gray-400 rounded-lg  p-4 text-center"
-              style={boxStyle}
-            >
-              <StyledImage
-                imageSrc="/assets/Images/PaseosIndividuales.png"
-                imageStyle={imageStyles}
-                textStyles={textStyles}
-                text="Paseos individuales"
-              />
-            </div>
-
-            <div
-              className="bg-gray-400 rounded-lg  p-4 text-center"
-              style={boxStyle}
-            >
-              <StyledImage
-                imageSrc="/assets/Images/PaseosGrupales.png"
-                imageStyles={imageStyles}
-                textStyles={textStyles}
-                text="Paseos grupales"
-              />
-            </div>
-
-            <div
-              className="bg-gray-400 rounded-lg  p-4 text-center"
-              style={boxStyle}
-            >
-              <StyledImage
-                imageSrc="/assets/Images/Veterinario.png"
-                imageStyles={imageStyles}
-                textStyles={textStyles}
-                text="Veterinario"
-              />
-            </div>
-            <div
-              className="bg-gray-400 rounded-lg  p-4 text-center"
-              style={boxStyle}
-            >
-              <StyledImage
-                imageSrc="/assets/Images/DietasEspeciales.png"
-                imageStyles={imageStyles}
-                textStyles={textStyles}
-                text="Dietas especiales"
-              />
-            </div>
-
-            <div
-              className="bg-gray-400 rounded-lg  p-4 text-center"
-              style={boxStyle}
-            >
-              <StyledImage
-                imageSrc="/assets/Images/JuegosActividades.png"
-                imageStyles={imageStyles}
-                textStyles={textStyles}
-                text="Juegos y actividades"
-              />
-            </div>
-          </div>
-        </div>
+        <Services />
       </main>
     </>
   );
