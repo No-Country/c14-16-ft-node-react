@@ -72,6 +72,7 @@ const Home = () => {
           </p>
           <Offer />
         </div>
+        <hr className="border-2 border-primary" />
 
         {/* Servicios  */}
         <Services />
