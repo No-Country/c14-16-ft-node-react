@@ -1,53 +1,45 @@
-
-
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { SearchContext } from "../../../context/SearchContext";
-import DogHome from '/assets/Images/DogHome.jpeg'
-import StyledImage from './StyledImage';
+import DogHome from "/assets/Images/DogHome.jpeg";
+import StyledImage from "./StyledImage";
 import "./Home.css";
 
 const Home = () => {
-  const [place, setPlace] = useState("");
-  const [pet, setPet] = useState("");
-
-  const navigate = useNavigate();
-
-  const userSearch = {
-    place,
-    pet,
-  };
+  const [userSearch, setUserSearch] = useState({
+    city: "",
+    animalType: "",
+  });
 
   const { handleSearchTerm } = useContext(SearchContext);
+
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(userSearch);
-    // if (Object.values(userSearch).includes("")) {
-    //   alert("Todos los campos son obligatorios");
-    //   return;
-    // }
     handleSearchTerm(userSearch);
-    setPet("");
-    setPlace("");
-    navigate("/search");
+    setUserSearch({
+      city: "",
+      animalType: "",
+    });
 
+    navigate("/search");
   };
 
-
   const imageStyles = {
-    background: '#f8d444',
+    background: "#f8d444",
   };
 
   const textStyles = {
-    color: '#000',
-    fontSize: '1.5em',
-    fontWeight: 'bold',
-    padding: '2px 4px',
+    color: "#000",
+    fontSize: "1.5em",
+    fontWeight: "bold",
+    padding: "2px 4px",
   };
 
   const boxStyle = {
-    background: '#f8d444',
+    background: "#f8d444",
   };
 
   const HeaderStyle = {
@@ -68,9 +60,11 @@ const Home = () => {
             Un lugar seguro para tu mascota
           </h1>
           <p className="text-2xl font-semibold text-center text-white mb-8">
-            Guarderias que cuidan cada detalle para que tu mascota se sienta en como en casa,
-            sin preocupaciones ni inquietudes. Aquí tendran un espacio para jugar, tambien tendran ricas comidas, jugaran y pasearan libremente.
-            con los mejores profesionales y servicios de calidad.
+            Guarderias que cuidan cada detalle para que tu mascota se sienta en
+            como en casa, sin preocupaciones ni inquietudes. Aquí tendran un
+            espacio para jugar, tambien tendran ricas comidas, jugaran y
+            pasearan libremente. con los mejores profesionales y servicios de
+            calidad.
           </p>
         </div>
         {/* Formulario de Búsqueda */}
@@ -87,23 +81,27 @@ const Home = () => {
                     type="text"
                     placeholder="Ingresa una localidad"
                     id="ciudad"
-                    name="ciudad"
+                    name="city"
                     required
-                    value={place}
+                    value={userSearch.city}
                     onChange={(e) => {
-                      //userSearch.place = e.target.value;
-                      setPlace(e.target.value);
+                      setUserSearch((userSearch) => ({
+                        ...userSearch,
+                        [e.target.name]: e.target.value,
+                      }));
                     }}
                   />
                   <select
                     className="input-field"
                     id="tipo-animal"
-                    name="tipo-animal"
+                    name="animalType"
                     required
-                    value={pet}
+                    value={userSearch.animalType}
                     onChange={(e) => {
-                      //userSearch.pet = e.target.value;
-                      setPet(e.target.value);
+                      setUserSearch((userSearch) => ({
+                        ...userSearch,
+                        [e.target.name]: e.target.value,
+                      }));
                     }}
                   >
                     <option value="">Seleccione una Mascota</option>
@@ -117,7 +115,6 @@ const Home = () => {
                   >
                     Buscar
                   </button>
-
                 </div>
               </form>
             </div>
@@ -127,16 +124,16 @@ const Home = () => {
 
       <main className="bg-gray-100 py-8">
         <p className="text-2xl font-semibold text-center text-black mb-8">
-          En Doggy&#39;s queremos que estes tranquilo y confiado de que
-          tu mascota está en buenas manos con nosotros. Por eso, queremos
-          contarte un poco sobre lo que tenemos para ofrecer.
+          En Doggy&#39;s queremos que estes tranquilo y confiado de que tu
+          mascota está en buenas manos con nosotros. Por eso, queremos contarte
+          un poco sobre lo que tenemos para ofrecer.
         </p>
         <div className="flex flex-col md:flex-row m-4 justify-center items-center gap-6">
           {/* Box 1 */}
           <div
             className="md:w-1/3 bg-gray-400 rounded-lg shadow-md p-4 text-center"
             style={{
-              background: '#f8d444',
+              background: "#f8d444",
             }}
           >
             <img
@@ -156,7 +153,7 @@ const Home = () => {
           <div
             className="md:w-1/3 bg-gray-400 rounded-lg shadow-md p-4 text-center"
             style={{
-              background: '#f8d444',
+              background: "#f8d444",
             }}
           >
             <img
@@ -177,7 +174,7 @@ const Home = () => {
           <div
             className="md:w-1/3 bg-gray-400 rounded-lg shadow-md p-4 text-center"
             style={{
-              background: '#f8d444',
+              background: "#f8d444",
             }}
           >
             <img
@@ -197,10 +194,15 @@ const Home = () => {
 
         {/* Servicios  */}
 
-        <h2 className="text-4xl text-black font-bold text-center pt-5 mb-4">Servicios</h2>
+        <h2 className="text-4xl text-black font-bold text-center pt-5 mb-4">
+          Servicios
+        </h2>
         <div className="flex flex-col md:flex-row m-4 justify-center items-center gap-6">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-            <div className="bg-gray-400 rounded-lg p-4 text-center" style={boxStyle}>
+            <div
+              className="bg-gray-400 rounded-lg p-4 text-center"
+              style={boxStyle}
+            >
               <StyledImage
                 imageSrc="/assets/Images/Peluqueria.png"
                 imageStyle={imageStyles}
@@ -209,7 +211,10 @@ const Home = () => {
               />
             </div>
 
-            <div className="bg-gray-400 rounded-lg  p-4 text-center" style={boxStyle}>
+            <div
+              className="bg-gray-400 rounded-lg  p-4 text-center"
+              style={boxStyle}
+            >
               <StyledImage
                 imageSrc="/assets/Images/PaseosIndividuales.png"
                 imageStyle={imageStyles}
@@ -218,7 +223,10 @@ const Home = () => {
               />
             </div>
 
-            <div className="bg-gray-400 rounded-lg  p-4 text-center" style={boxStyle}>
+            <div
+              className="bg-gray-400 rounded-lg  p-4 text-center"
+              style={boxStyle}
+            >
               <StyledImage
                 imageSrc="/assets/Images/PaseosGrupales.png"
                 imageStyles={imageStyles}
@@ -227,7 +235,10 @@ const Home = () => {
               />
             </div>
 
-            <div className="bg-gray-400 rounded-lg  p-4 text-center" style={boxStyle}>
+            <div
+              className="bg-gray-400 rounded-lg  p-4 text-center"
+              style={boxStyle}
+            >
               <StyledImage
                 imageSrc="/assets/Images/Veterinario.png"
                 imageStyles={imageStyles}
@@ -235,7 +246,10 @@ const Home = () => {
                 text="Veterinario"
               />
             </div>
-            <div className="bg-gray-400 rounded-lg  p-4 text-center" style={boxStyle}>
+            <div
+              className="bg-gray-400 rounded-lg  p-4 text-center"
+              style={boxStyle}
+            >
               <StyledImage
                 imageSrc="/assets/Images/DietasEspeciales.png"
                 imageStyles={imageStyles}
@@ -244,7 +258,10 @@ const Home = () => {
               />
             </div>
 
-            <div className="bg-gray-400 rounded-lg  p-4 text-center" style={boxStyle}>
+            <div
+              className="bg-gray-400 rounded-lg  p-4 text-center"
+              style={boxStyle}
+            >
               <StyledImage
                 imageSrc="/assets/Images/JuegosActividades.png"
                 imageStyles={imageStyles}
