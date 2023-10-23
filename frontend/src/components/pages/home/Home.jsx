@@ -6,28 +6,24 @@ import StyledImage from "./StyledImage";
 import "./Home.css";
 
 const Home = () => {
-  const [place, setPlace] = useState("");
-  const [pet, setPet] = useState("");
-
-  const navigate = useNavigate();
-
-  const userSearch = {
-    place,
-    pet,
-  };
+  const [userSearch, setUserSearch] = useState({
+    city: "",
+    animalType: "",
+  });
 
   const { handleSearchTerm } = useContext(SearchContext);
+
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(userSearch);
-    // if (Object.values(userSearch).includes("")) {
-    //   alert("Todos los campos son obligatorios");
-    //   return;
-    // }
     handleSearchTerm(userSearch);
-    setPet("");
-    setPlace("");
+    setUserSearch({
+      city: "",
+      animalType: "",
+    });
+
     navigate("/search");
   };
 
@@ -85,23 +81,27 @@ const Home = () => {
                     type="text"
                     placeholder="Ingresa una localidad"
                     id="ciudad"
-                    name="ciudad"
+                    name="city"
                     required
-                    value={place}
+                    value={userSearch.city}
                     onChange={(e) => {
-                      //userSearch.place = e.target.value;
-                      setPlace(e.target.value);
+                      setUserSearch((userSearch) => ({
+                        ...userSearch,
+                        [e.target.name]: e.target.value,
+                      }));
                     }}
                   />
                   <select
                     className="input-field"
                     id="tipo-animal"
-                    name="tipo-animal"
+                    name="animalType"
                     required
-                    value={pet}
+                    value={userSearch.animalType}
                     onChange={(e) => {
-                      //userSearch.pet = e.target.value;
-                      setPet(e.target.value);
+                      setUserSearch((userSearch) => ({
+                        ...userSearch,
+                        [e.target.name]: e.target.value,
+                      }));
                     }}
                   >
                     <option value="">Seleccione una Mascota</option>
