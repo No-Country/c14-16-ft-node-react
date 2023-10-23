@@ -1,0 +1,107 @@
+{
+  "branches": [
+    {
+      "id": 1,
+      "name": "Sucursal Mascotera 001",
+      "description": "En nuestra sucursal ofrecemos un trato escepcional para tu mascota. Aquí se sentirá como en casa y vos podrás descansar tranquilamente",
+      "city": "Parana",
+      "capacity": 10,
+      "amount": 0,
+      "phone": "343-4556699",
+      "address": "Selva de Montiel 2040",
+      "services": [
+        "Peluquería",
+        "Paseo-Grupal",
+        "Paseo-Personal",
+        "Veterinaria",
+        "Juegos"
+      ],
+      "animaltypes": ["Perro", "Gato", "Otros"],
+      "price": 3500,
+      "bookings": [],
+      "companies": [],
+      "clients": [],
+      "pets": []
+    },
+    {
+      "id": 2,
+      "name": "Sucursal Mascotera 002",
+      "description": "En nuestra sucursal ofrecemos un trato escepcional para tu mascota. Aquí se sentirá como en casa y vos podrás descansar tranquilamente",
+      "city": "La Plata",
+      "capacity": 8,
+      "amount": 0,
+      "phone": "323-4528849",
+      "address": "Belgrano 777",
+      "services": ["Peluquería", "Paseo-Grupal", "Paseo-Personal", "Juegos"],
+      "animaltypes": ["Perro", "Gato"],
+      "price": 2500,
+      "bookings": [],
+      "companies": [],
+      "clients": [],
+      "pets": []
+    },
+    {
+      "id": 3,
+      "name": "Sucursal Mascotera 003",
+      "description": "En nuestra sucursal ofrecemos un trato escepcional para tu mascota. Aquí se sentirá como en casa y vos podrás descansar tranquilamente",
+      "city": "Santa Fe",
+      "capacity": 20,
+      "amount": 0,
+      "phone": "342-4223421",
+      "address": "Av. Ramirez 1034",
+      "services": [
+        "Peluquería",
+        "Paseo-Grupal",
+        "Paseo-Personal",
+        "Veterinaria",
+        "Juegos"
+      ],
+      "animaltypes": ["Perro", "Gato", "Otros"],
+      "price": 4500,
+      "bookings": [],
+      "companies": [],
+      "clients": [],
+      "pets": []
+    },
+    {
+      "id": 4,
+      "name": "Sucursal Mascotera 004",
+      "description": "En nuestra sucursal ofrecemos un trato escepcional para tu mascota. Aquí se sentirá como en casa y vos podrás descansar tranquilamente",
+      "city": "Córdoba",
+      "capacity": 10,
+      "amount": 0,
+      "phone": "345-4244317",
+      "address": "Bvar. San pedro 16",
+      "services": ["Peluquería", "Paseo-Grupal", "Paseo-Personal"],
+      "animaltypes": ["Perro", "Gato"],
+      "price": 5000,
+      "bookings": [],
+      "companies": [],
+      "clients": [],
+      "pets": []
+    },
+    {
+      "id": 5,
+      "name": "Sucursal Mascotera 005",
+      "description": "En nuestra sucursal ofrecemos un trato escepcional para tu mascota. Aquí se sentirá como en casa y vos podrás descansar tranquilamente",
+      "city": "San Martín",
+      "capacity": 15,
+      "amount": 0,
+      "phone": "323-4362526",
+      "address": "Victorio Camerano 300",
+      "services": [
+        "Peluquería",
+        "Paseo-Grupal",
+        "Paseo-Personal",
+        "Veterinaria",
+        "Juegos"
+      ],
+      "animaltypes": ["Perro", "Otros"],
+      "price": 4000,
+      "bookings": [],
+      "companies": [],
+      "clients": [],
+      "pets": []
+    }
+  ]
+}
