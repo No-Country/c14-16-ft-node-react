@@ -11,6 +11,7 @@ import { BookingRouter } from './routes/BookingRouter.js';
 import { swaggerDocs } from './doc/swagger.js';
 import './config/config.js';
 import './models/index.js';
+import { updateBookingDaily } from './services/Sheduler.js';
 
 const PORT = process.env.PORT || 3000;
 const app = express();

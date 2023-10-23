@@ -1,13 +1,13 @@
 import { schedule } from "node-cron"
-import { Branch } from "../models/Branch"
-import { Booking } from "../models/Booking"
+import { Branch } from "../models/Branch.js"
+import { Booking } from "../models/Booking.js"
 import { Op } from "sequelize"
 import moment from "moment"
 
 export const updateBookingDaily = async() => {
 
     try{
-        const today = moment().startOf("day")
+        const today = moment().utc().startOf("day")
 
         await bookingToIncrement(today)
         await bookingToDecrement(today)
