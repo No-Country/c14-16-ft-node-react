@@ -8,6 +8,7 @@ import "./Home.css";
 import Hero from "../../hero";
 import Offer from "../../offer";
 import Services from "../../services";
+import Prices from "../../prices";
 
 const Home = () => {
   const [place, setPlace] = useState("");
@@ -72,8 +73,17 @@ const Home = () => {
           </p>
           <Offer />
         </div>
-        <hr className="border-2 border-primary" />
-
+        <hr className="border-2 border-primary mb-10" />
+        {/**
+         * Precios
+         */}
+        <div>
+          <h2 className="block text-center text-gray-600 font-bold font-roboto text-4xl pb-4">
+            Precios
+          </h2>
+          <Prices />
+        </div>
+        <hr className="border-2 border-primary mx-10" />
         {/* Servicios  */}
         <Services />
       </main>

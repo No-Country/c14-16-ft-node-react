@@ -7,7 +7,7 @@ function Services() {
       className="min-h-screen flex items-center justify-center"
     >
       <div className="container">
-        <h2 className="text-4xl text-black font-bold text-center pt-5 mb-4">
+        <h2 className="text-4xl text-gray-700 font-bold text-center pt-5 mb-4">
           Servicios
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 ">
