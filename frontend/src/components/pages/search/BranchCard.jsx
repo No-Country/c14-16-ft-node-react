@@ -1,7 +1,6 @@
-import image from "../../../../public/assets/sucursales/sucursal_004.jpg";
-import scissors from "../../../../public/assets/icons/scissors.svg";
+import image from "/assets/sucursales/sucursal_004.jpg";
+import scissors from "/assets/icons/scissors.svg";
 const BranchCard = ({ branch }) => {
-  console.log(branch);
   return (
     <article className="flex flex-col gap-4 max-w-[750px] p-8  bg-gradient-to-r from-orange-400 via-orange-300 to-orange-100 rounded-xl shadow-lg">
       <div className="flex gap-4">
@@ -24,8 +23,11 @@ const BranchCard = ({ branch }) => {
           <div className="mt-8 flex gap-4">
             <h2 className="text-md font-bold">Servicios:</h2>
             <div className="flex flex-wrap gap-2">
-              {branch.services.map((service) => (
-                <span className="flex items-center text-xs p-2 bg-primary rounded-md">
+              {branch.services.map((service, index) => (
+                <span
+                  key={index}
+                  className="flex items-center text-xs p-2 bg-primary rounded-md"
+                >
                   {service.name}
                   <img
                     src={scissors}

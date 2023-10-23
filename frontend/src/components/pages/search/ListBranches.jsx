@@ -1,11 +1,13 @@
 import { useContext, useState, useEffect } from "react";
 import { SearchContext } from "../../../context/SearchContext";
 import BranchCard from "./BranchCard";
-import pets from "../../../../public/assets/filter-pets.png";
+import pets from "/assets/filter-pets.png";
 
 const ListBranches = ({ branches }) => {
   const [filteredBranches, setFilteredBranches] = useState([]);
+
   const { searchTerm } = useContext(SearchContext);
+
   console.log(branches);
 
   useEffect(() => {
@@ -14,12 +16,16 @@ const ListBranches = ({ branches }) => {
         branch.city === searchTerm.city &&
         branch.animalTypes.some(
           (animalType) => animalType.name === searchTerm.animalType
+        ) &&
+        searchTerm.services.every((service) =>
+          branch.services.some((obj) => obj.name === service)
         )
     );
+
     console.log(branchesFiltered);
 
     setFilteredBranches(branchesFiltered);
-  }, []);
+  }, [searchTerm]);
 
   return (
     <div className="container mx-auto my-8 text-center">
@@ -35,7 +41,9 @@ const ListBranches = ({ branches }) => {
           />
         </div>
       ) : (
-        filteredBranches.map((branch) => <BranchCard branch={branch} />)
+        filteredBranches.map((branch) => (
+          <BranchCard key={branch.id} branch={branch} />
+        ))
       )}
     </div>
   );
