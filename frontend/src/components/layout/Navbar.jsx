@@ -11,11 +11,21 @@ const Navbar = () => {
         setMenuOpen(false);
     };
 
-    const isAboutPage = location.pathname === "/about";
+    const isAboutPage = location.pathname === "/";
 
     const navbarStyle = {
         background: '#F0A225',
         borderBottom: "2px solid #ff8c00",
+    };
+
+    const loginButtonText = isLoggedIn ? "Cerrar Sesión" : "Iniciar Sesión";
+
+    const handleLogin = () => {
+        setIsLoggedIn(true); // Cambia esta línea para controlar el inicio de sesión
+    };
+
+    const handleLogout = () => {
+        setIsLoggedIn(false); // Cambia esta línea para controlar el cierre de sesión
     };
 
     return (
@@ -28,7 +38,6 @@ const Navbar = () => {
                     <span className="text-gray-100 font-bold">Doggy&apos;s</span>
                     <span className="text-gray-100 font-bold">House</span>
                 </span>
-
             </div>
             <div className="md:hidden">
                 <button onClick={() => setMenuOpen(!menuOpen)} className="text-blue-500 font-bold focus:outline-none focus:text-white">
@@ -54,14 +63,14 @@ const Navbar = () => {
                 </div>
                 {isLoggedIn ? (
                     <div className="box">
-                        <button onClick={() => setIsLoggedIn(false)} className="text-blue-500 font-semibold hover:underline md:my-2">
-                            Logout
+                        <button onClick={handleLogout} className="text-blue-500 font-semibold hover:underline md:my-2">
+                            Cerrar Sesión
                         </button>
                     </div>
                 ) : (
                     <div className="box">
-                        <Link to="/login" className="text-xl text-gray-100 font-semibold hover:underline md:my-2" onClick={closeMenu}>
-                            Iniciar Sesión
+                        <Link to="/login" className="text-xl text-gray-100 font-semibold hover:underline md:my-2" onClick={handleLogin}>
+                            {loginButtonText}
                         </Link>
                     </div>
                 )}
@@ -71,3 +80,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
