@@ -1,10 +1,11 @@
-import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import ImageBlock from '../../ui/image-block';
-import Input from '../../ui/Input';
-import Button from '../../ui/button';
-import { FcGoogle } from 'react-icons/fc';
-import { API_REGISTER } from '../../../constants/api';
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import ImageBlock from "../../ui/image-block";
+import Input from "../../ui/Input";
+import Button from "../../ui/button";
+import { FcGoogle } from "react-icons/fc";
+// import { RiImageAddLine } from "react-icons/ri";
+import { API_REGISTER } from "../../../constants/api";
 
 function Register() {
   const [formData, setFormData] = useState({

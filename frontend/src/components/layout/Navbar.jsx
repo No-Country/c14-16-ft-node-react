@@ -1,16 +1,11 @@
-import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { useState } from "react";
+import Button from "../ui/button";
 import "./Navbar.css";
 
 const Navbar = () => {
     const location = useLocation();
     const [menuOpen, setMenuOpen] = useState(false);
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-    const closeMenu = () => {
-        setMenuOpen(false);
-    };
-
     const isAboutPage = location.pathname === "/";
 
     const navbarStyle = {
@@ -18,15 +13,25 @@ const Navbar = () => {
         borderBottom: "2px solid #ff8c00",
     };
 
-    const loginButtonText = isLoggedIn ? "Cerrar Sesión" : "Iniciar Sesión";
-
-    const handleLogin = () => {
-        setIsLoggedIn(true); // Cambia esta línea para controlar el inicio de sesión
+    const closeMenu = () => {
+        setMenuOpen(false);
     };
 
-    const handleLogout = () => {
-        setIsLoggedIn(false); // Cambia esta línea para controlar el cierre de sesión
-    };
+    const isLoggedIn = localStorage.getItem("token") !== null;
+
+    // isLoggedIn será true si hay un token en el localStorage, lo que indica que el usuario está logueado
+
+    // Si el usuario no está logueado, puedes eliminar el token para asegurarte de que esté deslogueado
+    if (!isLoggedIn) {
+        localStorage.removeItem("token");
+
+    }
+
+
+    const buttonLabel = isLoggedIn ? "Iniciar Sesión" : "Cerrar Sesión";
+
+
+
 
     return (
         <nav style={navbarStyle} className={`navbar px-4 py-6 flex justify-between items-center ${isAboutPage ? "transparent-background" : ""}`}>
@@ -40,7 +45,10 @@ const Navbar = () => {
                 </span>
             </div>
             <div className="md:hidden">
-                <button onClick={() => setMenuOpen(!menuOpen)} className="text-blue-500 font-bold focus:outline-none focus:text-white">
+                <button
+                    onClick={() => setMenuOpen(!menuOpen)}
+                    className="text-blue-500 font-bold focus:outline-none focus:text-white"
+                >
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         {menuOpen ? (
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -61,23 +69,41 @@ const Navbar = () => {
                         Nosotros
                     </Link>
                 </div>
-                {isLoggedIn ? (
-                    <div className="box">
-                        <button onClick={handleLogout} className="text-blue-500 font-semibold hover:underline md:my-2">
-                            Cerrar Sesión
-                        </button>
-                    </div>
-                ) : (
-                    <div className="box">
-                        <Link to="/login" className="text-xl text-gray-100 font-semibold hover:underline md:my-2" onClick={handleLogin}>
-                            {loginButtonText}
-                        </Link>
-                    </div>
-                )}
+                <div className="box">
+                    <Link to="/login" className="text-xl text-gray-100 font-semibold hover:underline md:my-2">
+                        Iniciar Sesión
+                    </Link>
+                </div>
+                <div className="box">
+
+                    <Button
+                        type="button"
+                        className="text-gray-100 font-semibold hover:underline md:my-2"
+                        style={{ backgroundColor: '#FF0000' }}
+                        onClick={() => {
+                            if (isLoggedIn) {
+                                // Si está logueado, realiza acciones de cierre de sesión
+                                console.log("Botón de cerrar sesión clicado");
+                                // Limpia la información de la sesión
+                                localStorage.removeItem("token");
+                                // Redirige al usuario a la página de inicio de sesión o a otra página
+                                window.location.href = "/login";
+                            } else {
+                                // Si no está logueado, redirige al usuario a la página de inicio de sesión
+                                window.location.href = "/login";
+                            }
+                        }}
+                        label={buttonLabel}
+                    >
+                        {buttonLabel}
+                    </Button>
+
+
+                </div>
+
             </div>
-        </nav>
+        </nav >
     );
 };
 
 export default Navbar;
-

@@ -21,10 +21,12 @@ function Login() {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleLogin = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     if (!formData.email || !formData.password) {
-      setErrors({ email: 'Campo requerido', password: 'Campo requerido' });
+      setErrors({ 
+        email: 'Campo requerido', 
+        password: 'Campo requerido' });
     } else {
       setLoading(true);
       setErrors({});
@@ -68,7 +70,7 @@ function Login() {
       />
       <div className="bg-white p-8 rounded shadow-2xl shadow-black/30 w-[80%] mx-auto h-[100%]">
         <h2 className="text-2xl font-semibold mb-6">Iniciar sesión</h2>
-        <form onSubmit={handleLogin} className="flex flex-col space-y-5">
+        <form onSubmit={handleSubmit} className="flex flex-col space-y-5">
           <Input
             type="email"
             name="email"
