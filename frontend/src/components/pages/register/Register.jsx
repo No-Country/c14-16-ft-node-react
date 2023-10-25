@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import ImageBlock from "../../ui/image-block";
 import Input from "../../ui/inputs";
@@ -6,8 +6,15 @@ import Button from "../../ui/button";
 import { FcGoogle } from "react-icons/fc";
 import Label from "../../ui/label";
 import { RiImageAddLine } from "react-icons/ri";
+import AlertaContext from "../../../context/alertas/alertaContext";
+import Modal from "../../ui/modal";
+import Confetti from "../../ui/confetti";
 
 function Register() {
+  const alertaContext = useContext(AlertaContext);
+  const { alerta, mostrarAlerta } = alertaContext;
+
+  const [exito, setExito] = useState(false);
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -15,44 +22,82 @@ function Register() {
     adress: "",
     password: "",
     confirmPassword: "",
+    profile_picture: null,
   });
-
-  const [errors, setErrors] = useState({});
+  const {
+    username,
+    email,
+    phone,
+    adress,
+    password,
+    confirmPassword,
+    profile_picture,
+  } = formData;
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const validateForm = () => {
-    const newErrors = {};
-    if (!formData.username) {
-      newErrors.username = "Por favor, ingresa un nombre de usuario.";
-    }
-    if (!formData.email) {
-      newErrors.email = "Por favor, ingresa un correo electrónico válido.";
-    }
-    if (!formData.phone) {
-      newErrors.phone = "Por favor, ingresa un telefono.";
-    }
-    if (!formData.adress) {
-      newErrors.adress = "Por favor, ingresa una dirección.";
-    }
-    if (!formData.password || formData.password.length < 6) {
-      newErrors.password = "La contraseña debe tener al menos 6 caracteres.";
-    }
-    if (formData.password !== formData.confirmPassword) {
-      newErrors.confirmPassword = "Las contraseñas no coinciden.";
-    }
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
+    if (e.target.name === "profile_picture") {
+      const file = e.target.files ? e.target.files[0] : null;
+      setFormData({ ...formData, [e.target.name]: file });
+    } else setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (validateForm()) {
-      // Aquí puedes agregar la lógica para enviar los datos de registro al servidor
-      console.log("Datos enviados:", formData);
+    const phoneRegex = /^\d{1,10}$/;
+    const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+    if (
+      username.trim() === "" ||
+      email.trim() === "" ||
+      phone.trim() === "" ||
+      adress.trim() === "" ||
+      password.trim() === "" ||
+      confirmPassword.trim() === ""
+    ) {
+      console.log("Campos obligatorios vacíos");
+      mostrarAlerta("Todos los campos son obligatorios", "alerta-error");
+      return;
     }
+    if (password.length < 6 || confirmPassword.length < 6) {
+      mostrarAlerta(
+        "La contraseña debe tener al menos 6 caracteres.",
+        "alerta-error"
+      );
+      return;
+    }
+    if (password !== confirmPassword) {
+      mostrarAlerta("Las contraseñas no coinciden.");
+      return;
+    }
+    if (!phoneRegex.test(phone)) {
+      mostrarAlerta(
+        "El teléfono debe contener solo números y tener un máximo de 10 dígitos.",
+        "alerta-error"
+      );
+      return;
+    }
+    if (!emailRegex.test(email)) {
+      mostrarAlerta(
+        "La dirección de correo electrónico no es válida.",
+        "alerta-error"
+      );
+      return;
+    }
+
+    setExito(true);
+
+    setFormData({
+      username: "",
+      email: "",
+      phone: "",
+      adress: "",
+      password: "",
+      confirmPassword: "",
+      profile_picture: null,
+    });
+
+    setTimeout(() => {
+      setExito(false);
+    }, 2000);
   };
 
   return (
@@ -62,16 +107,17 @@ function Register() {
         clase="w-[100%]"
         claseSection="h-[100%]"
       />
+
       <div className="bg-white px-8 shadow-2xl shadow-black/30 h-[100%] w-[80%] mx-auto ">
         <h2 className="text-2xl font-semibold mb-6">Registrarse</h2>
+        {alerta ? <Modal title="Error" msg={alerta.msg} tipo="error" /> : null}
         <form onSubmit={handleSubmit} className="flex flex-col space-y-3 ">
           <Label label="Nombre de Usuario" clase="mb-0 text-lg" />
           <Input
             type="text"
             name="username"
-            value={formData.username}
+            value={username}
             onChange={handleChange}
-            errors={errors.username}
             classInput="py-2"
           />
           <Label label="Telefono" clase="mb-0 text-lg" />
@@ -80,7 +126,6 @@ function Register() {
             name="phone"
             value={formData.phone}
             onChange={handleChange}
-            errors={errors.username}
             classInput="py-2"
           />
           <Label label="Direccion" clase="mb-0 text-lg" />
@@ -89,11 +134,25 @@ function Register() {
             name="adress"
             value={formData.adress}
             onChange={handleChange}
-            errors={errors.username}
             classInput="py-2"
           />
-          <div className="flex justify-end">
-            <button className="flex items-center gap-3 py-2 px-3 bg-primary rounded-lg cursor-pointer">
+          <div className="flex justify-end items-center space-x-2">
+            {profile_picture ? (
+              <p className="text-gray-500">{profile_picture.name}</p>
+            ) : null}
+            <input
+              type="file"
+              id="imageInput"
+              style={{ display: "none" }}
+              accept="image/png, image/jpg"
+              name="profile_picture"
+              onChange={handleChange}
+            />
+            <button
+              className="flex items-center gap-3 py-2 px-3 bg-primary rounded-lg cursor-pointer"
+              onClick={() => document.getElementById("imageInput").click()}
+              type="button"
+            >
               <RiImageAddLine className="text-white text-lg" />
               <span className="text-gray-200 font-semibold hover:text-white">
                 Selecciona una imagen
@@ -106,7 +165,6 @@ function Register() {
             name="email"
             value={formData.email}
             onChange={handleChange}
-            errors={errors.email}
             classInput="py-2"
           />
           <Label label="Contraseña" clase="mb-0 text-lg" />
@@ -115,7 +173,6 @@ function Register() {
             name="password"
             value={formData.password}
             onChange={handleChange}
-            errors={errors.password}
             classInput="py-2"
           />
           <Label label="Confirmar contraseña" clase="mb-0 text-lg" />
@@ -124,7 +181,6 @@ function Register() {
             name="confirmPassword"
             value={formData.confirmPassword}
             onChange={handleChange}
-            errors={errors.confirmPassword}
             classInput="py-2"
           />
 
@@ -147,6 +203,16 @@ function Register() {
             <FcGoogle className="text-2xl" />
             Registrarse con Google
           </button>
+          {exito ? (
+            <>
+              <Modal
+                title="Registro exitoso"
+                msg="Gracias, ya eres parte de la familia"
+                tipo="OK"
+              />
+              <Confetti />
+            </>
+          ) : null}
         </form>
       </div>
     </div>
