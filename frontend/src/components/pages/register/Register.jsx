@@ -53,7 +53,6 @@ function Register() {
       password.trim() === "" ||
       confirmPassword.trim() === ""
     ) {
-      console.log("Campos obligatorios vacíos");
       mostrarAlerta("Todos los campos son obligatorios", "alerta-error");
       return;
     }
