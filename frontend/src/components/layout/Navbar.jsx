@@ -29,7 +29,7 @@ const Navbar = () => {
     );
 
     return (
-        <nav className={`navbar px-4 py-6 text-xl md:text-2xl flex text-black-100 font-semibold justify-between items-center ${isAboutPage ? "bg-yellow-400" : ""}`}>
+        <nav id='container-global' className={`navbar px-4 py-6 text-xl md:text-2xl flex text-black-100 font-semibold justify-between items-center ${isAboutPage ? "bg-yellow-400" : ""}`}>
             <div className="flex items-center">
                 <Link to="/">
                     <img src="/assets/LogoDog.png" alt="Doggy's House" className="w-12 h-12 mr-2" />
