@@ -4,6 +4,7 @@ import BranchCard from "./BranchCard";
 import pets from "/assets/filter-pets.png";
 
 const ListBranches = ({ branches }) => {
+  console.log(branches);
   const [filteredBranches, setFilteredBranches] = useState([]);
 
   const { searchTerm } = useContext(SearchContext);
@@ -13,12 +14,12 @@ const ListBranches = ({ branches }) => {
   useEffect(() => {
     const branchesFiltered = branches.filter(
       (branch) =>
-        branch.city === searchTerm.city &&
+        branch.city === searchTerm.city ||
         branch.animalTypes.some(
           (animalType) => animalType.name === searchTerm.animalType
-        ) &&
-        searchTerm.services.every((service) =>
-          branch.services.some((obj) => obj.name === service)
+        ) ||
+        searchTerm.services?.every((service) =>
+          branch.services?.some((obj) => obj.name === service)
         )
     );
 
