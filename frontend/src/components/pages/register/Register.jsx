@@ -6,6 +6,7 @@ import Button from "../../ui/button";
 import { FcGoogle } from "react-icons/fc";
 // import { RiImageAddLine } from "react-icons/ri";
 import { API_REGISTER } from "../../../constants/api";
+import './Register.css'
 
 function Register() {
   const [formData, setFormData] = useState({
@@ -158,14 +159,23 @@ function Register() {
             classInput="py-2"
 
           />
-
-          {loading ? (
-            <div className="text-center">
-              <div className="loader" />
-            </div>
-          ) : (
-            <Button type="submit" label="Registrarse" clase="py-2" />
-          )}
+          <div>
+            {loading ? (
+              <div className="sk-cube-grid">
+                <div className="sk-cube sk-cube1"></div>
+                <div className="sk-cube sk-cube2"></div>
+                <div className="sk-cube sk-cube3"></div>
+                <div className="sk-cube sk-cube4"></div>
+                <div className="sk-cube sk-cube5"></div>
+                <div className="sk-cube sk-cube6"></div>
+                <div className="sk-cube sk-cube7"></div>
+                <div className="sk-cube sk-cube8"></div>
+                <div className="sk-cube sk-cube9"></div>
+              </div>
+            ) : (
+              <Button type="submit" label="Registrarse" />
+            )}
+          </div>
           <div className="mt-4 text-sm text-gray-600">
             ¿Ya estás registrado?{' '}
             <Link to="/login" className="text-blue-500 hover:underline">

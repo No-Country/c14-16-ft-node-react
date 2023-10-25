@@ -4,8 +4,8 @@ import ImageBlock from '../../ui/image-block';
 import Input from '../../ui/Input';
 import Button from '../../ui/button';
 import { FcGoogle } from 'react-icons/fc';
-import { API_LOGIN } from '../../../constants/api';
-
+import { API_LOGIN, TOKEN_KEY } from '../../../constants/api';
+import './Login.css';
 function Login() {
   const [formData, setFormData] = useState({
     email: '',
@@ -14,8 +14,10 @@ function Login() {
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
 
-  const navigate = useNavigate(); 
-
+  const navigate = useNavigate();
+const setToken = (token)=>{
+  sessionStorage.setItem(TOKEN_KEY, token);
+}
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -24,14 +26,12 @@ function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!formData.email || !formData.password) {
-      setErrors({ 
-        email: 'Campo requerido', 
-        password: 'Campo requerido' });
+      setErrors({ email: 'Campo requerido', password: 'Campo requerido' });
     } else {
       setLoading(true);
       setErrors({});
 
-      //llamada fetch a la URL 
+      // Llamada fetch a la URL
       fetch(API_LOGIN, {
         method: 'POST',
         headers: {
@@ -48,7 +48,7 @@ function Login() {
         .then((data) => {
           // Manejar la respuesta de la API aquí
           console.log('Respuesta de la API:', data);
-
+          setToken(data.token);
           navigate('/');
         })
         .catch((error) => {
@@ -60,14 +60,9 @@ function Login() {
     }
   };
 
-
   return (
     <div className="min-h-screen container grid grid-cols-1 lg:grid-cols-2 p-5 mx-auto">
-      <ImageBlock
-        url="/assets/gatito.webp"
-        clase="w-[60%]"
-        claseSection="h-[100%]"
-      />
+      <ImageBlock url="/assets/gatito.webp" clase="w-[60%]" claseSection="h-[100%]" />
       <div className="bg-white p-8 rounded shadow-2xl shadow-black/30 w-[80%] mx-auto h-[100%]">
         <h2 className="text-2xl font-semibold mb-6">Iniciar sesión</h2>
         <form onSubmit={handleSubmit} className="flex flex-col space-y-5">
@@ -84,6 +79,8 @@ function Login() {
             name="password"
             label="Contraseña"
             value={formData.password}
+            required
+            autoComplete="current-password"
             onChange={handleChange}
             errors={errors.password}
           />
@@ -95,8 +92,16 @@ function Login() {
           </div>
           <div>
             {loading ? (
-              <div className="text-center">
-                <div className="loader" />
+              <div className="sk-cube-grid">
+                <div className="sk-cube sk-cube1"></div>
+                <div className="sk-cube sk-cube2"></div>
+                <div className="sk-cube sk-cube3"></div>
+                <div className="sk-cube sk-cube4"></div>
+                <div className="sk-cube sk-cube5"></div>
+                <div className="sk-cube sk-cube6"></div>
+                <div className="sk-cube sk-cube7"></div>
+                <div className="sk-cube sk-cube8"></div>
+                <div className="sk-cube sk-cube9"></div>
               </div>
             ) : (
               <Button type="submit" label="Iniciar sesión" />
