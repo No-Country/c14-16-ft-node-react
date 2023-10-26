@@ -35,7 +35,7 @@ const Filter = ({ handleSearchTerm }) => {
   };
 
   return (
-    <div className="container mx-auto p-8 bg-[white] shadow-lg sm:rounded-xl">
+    <section className="container mx-auto p-8 bg-[white] shadow-lg sm:rounded-xl">
       <h2 className="my-8 text-xl text-center text-black font-bold">
         Filtro de búsqueda
       </h2>
@@ -185,7 +185,7 @@ const Filter = ({ handleSearchTerm }) => {
           Buscar
         </button>
       </form>
-    </div>
+    </section>
   );
 };
 
