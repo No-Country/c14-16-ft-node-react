@@ -4,7 +4,7 @@ import DatePicker from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
 import Button from "../../ui/button";
-import Input from "../../ui/input";
+import Input from "../../ui/inputs";
 import Select from "../../ui/select";
 import Label from "../../ui/label";
 
