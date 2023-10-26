@@ -20,7 +20,9 @@ const Navbar = () => {
             className="box"
             onClick={logout}
         >
-            Cerrar Sesión
+            <Link className="box"  to="/login" onClick={closeMenu}>
+                Cerrar Sesión
+            </Link>
         </button>
     ) : (
         <Link className="box" to="/login" onClick={closeMenu}>
