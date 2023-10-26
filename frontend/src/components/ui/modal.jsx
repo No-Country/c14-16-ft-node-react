@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { RiAlertLine, RiVerifiedBadgeFill } from "react-icons/ri";
+
 export default function Modal({ title, msg, tipo }) {
   const [showModal, setShowModal] = React.useState(true);
   return (
