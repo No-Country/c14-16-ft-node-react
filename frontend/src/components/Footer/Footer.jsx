@@ -11,8 +11,7 @@ const Footer = () => {
             </h2>
 
             <p className="mb-6">
-              Nos dedicamos al cuidado de tus mascotas. Conoce más sobre
-              nosotros.
+              En Doggy&apos;s House, entendemos que tus mascotas son parte de tu familia, y nuestro compromiso es garantizar que reciban el amor, cuidado y atención que merecen. Nuestro equipo de apasionados amantes de los animales está dedicado a brindar un entorno seguro y acogedor para tus peludos amigos. Estamos comprometidos a cuidar de su bienestar, asegurándonos de que estén felices y saludables en todo momento. Si deseas conocer más acerca de quiénes somos y cómo trabajamos, te invitamos a explorar nuestra historia y servicios.
             </p>
           </div>
           <div className="flex flex-col md:flex-row items-center md:w-1/2">

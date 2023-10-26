@@ -1,77 +1,88 @@
-import { useContext, useState } from "react";
-import { Link } from "react-router-dom";
-import ImageBlock from "../../ui/image-block";
-import Input from "../../ui/inputs";
-import Button from "../../ui/button";
-import { FcGoogle } from "react-icons/fc";
-import Label from "../../ui/label";
-import AlertaContext from "../../../context/alertas/alertaContext";
-import Modal from "../../ui/modal";
-
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import ImageBlock from '../../ui/image-block';
+import Input from '../../ui/inputs';
+import Button from '../../ui/button';
+import { FcGoogle } from 'react-icons/fc';
+import { API_LOGIN, TOKEN_KEY } from '../../../constants/api';
+import './Login.css';
 function Login() {
-  const alertaContext = useContext(AlertaContext);
-  const { alerta, mostrarAlerta } = alertaContext;
-
   const [formData, setFormData] = useState({
-    password: "",
-    email: "",
+    email: '',
+    password: '',
   });
+  const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false);
 
+  const navigate = useNavigate();
+  const setToken = (token) => {
+    sessionStorage.setItem(TOKEN_KEY, token);
+  }
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
-    if (email.trim() === "" || password.trim() === "") {
-      mostrarAlerta("Todos los campos son obligatorios", "alerta-error");
-      return;
+    if (!formData.email || !formData.password) {
+      setErrors({ email: 'Campo requerido', password: 'Campo requerido' });
+    } else {
+      setLoading(true);
+      setErrors({});
+
+      // Llamada fetch a la URL
+      fetch(API_LOGIN, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error('Error en la llamada a la API');
+          }
+          return response.json();
+        })
+        .then((data) => {
+          // Manejar la respuesta de la API aquí
+          console.log('Respuesta de la API:', data);
+          setToken(data.token);
+          navigate('/');
+        })
+        .catch((error) => {
+          console.error('Error en la llamada a la API:', error);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
     }
-    if (password.length < 6) {
-      mostrarAlerta(
-        "La contraseña debe tener al menos 6 caracteres.",
-        "alerta-error"
-      );
-      return;
-    }
-    if (!emailRegex.test(email)) {
-      mostrarAlerta(
-        "La dirección de correo electrónico no es válida.",
-        "alerta-error"
-      );
-      return;
-    }
-    setFormData({
-      password: "",
-      email: "",
-    });
   };
-  const { password, email } = formData;
+
   return (
     <div className="min-h-screen container grid grid-cols-1 lg:grid-cols-2 p-5 mx-auto">
-      <ImageBlock
-        url="/assets/gatito.webp"
-        clase="w-[60%]"
-        claseSection="h-[100%]"
-      />
+      <ImageBlock url="/assets/gatito.webp" clase="w-[60%]" claseSection="h-[100%]" />
       <div className="bg-white p-8 rounded shadow-2xl shadow-black/30 w-[80%] mx-auto h-[100%]">
         <h2 className="text-2xl font-semibold mb-6">Iniciar sesión</h2>
-        {alerta ? <Modal title="Error" msg={alerta.msg} tipo="error" /> : null}
-        <form className="flex flex-col space-y-5" onSubmit={handleSubmit}>
-          <Label label="Correo Electronico" />
+        <form onSubmit={handleSubmit} className="flex flex-col space-y-5">
           <Input
             type="email"
             name="email"
-            value={email}
+            label="Correo Electrónico"
+            value={formData.email}
             onChange={handleChange}
+            errors={errors.email}
           />
-          <Label label="Contraseña" />
           <Input
             type="password"
             name="password"
-            value={password}
+            label="Contraseña"
+            value={formData.password}
+            required
+            autoComplete="current-password"
             onChange={handleChange}
+            errors={errors.password}
           />
           <div className="">
             <label className="flex items-center">
@@ -80,19 +91,26 @@ function Login() {
             </label>
           </div>
           <div>
-            <Button type="submit" label="Iniciar sesión" />
+            {loading ? (
+              <div className="sk-cube-grid">
+                <div className="sk-cube sk-cube1"></div>
+                <div className="sk-cube sk-cube2"></div>
+                <div className="sk-cube sk-cube3"></div>
+                <div className="sk-cube sk-cube4"></div>
+                <div className="sk-cube sk-cube5"></div>
+                <div className="sk-cube sk-cube6"></div>
+                <div className="sk-cube sk-cube7"></div>
+                <div className="sk-cube sk-cube8"></div>
+                <div className="sk-cube sk-cube9"></div>
+              </div>
+            ) : (
+              <Button type="submit" label="Iniciar sesión" />
+            )}
           </div>
           <div className="text-sm text-gray-600">
-            ¿No estás registrado?{" "}
+            ¿No estás registrado?{' '}
             <Link to="/register" className="text-blue-500 hover:underline">
               Regístrate aquí
-            </Link>
-            <span className="text-sm mx-2">|</span>
-            <Link
-              to="/forgot-password"
-              className="text-blue-500 hover:underline"
-            >
-              ¿Olvidaste tu contraseña?
             </Link>
           </div>
           <div className="">
@@ -101,9 +119,9 @@ function Login() {
               <span className="px-4 -mt-4 bg-white">or</span>
             </div>
           </div>
-          <button className="bg-primary text-white font-semibold flex justify-center items-center w-full py-3 gap-4 rounded-lg border-2 hover:bg-transparent hover:border-primary hover:text-primary  transition-colors duration-300 ">
+          <button className="bg-primary text-white font-semibold flex justify-center items-center w-full py-3 gap-4 rounded-lg border-2 hover:bg-transparent hover.border-primary hover.text-primary transition-colors duration-300">
             <FcGoogle className="text-2xl" />
-            Inciar con Google
+            Iniciar con Google
           </button>
         </form>
       </div>
