@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import ImageBlock from "../../ui/image-block";
-import Input from "../../ui/Input";
+import Input from "../../ui/inputs";
 import Button from "../../ui/button";
 import Label from "../../ui/label";
 
