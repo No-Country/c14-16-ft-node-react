@@ -1,6 +1,6 @@
 import { compare } from "bcrypt";
 import { Client } from "../models/Client.js";
-import { getImage, saveImage } from "../services/ImageService.js";
+import { getImage, saveImage, saveImageDefault } from "../services/ImageService.js";
 import jwt from "jsonwebtoken"
 import dotenv from 'dotenv';
 
@@ -57,6 +57,8 @@ export const register = async (req, res) =>{
 
         if(profile_picture){
             route = await saveImage(profile_picture, name)
+        }else{
+            route = saveImageDefault()
         }
         
         const createdClient = await Client.create({ name, phone, address, email, password, profile_picture: route });

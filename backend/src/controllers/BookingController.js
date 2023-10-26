@@ -1,6 +1,8 @@
 import { Booking } from "../models/Booking.js"
 import { Branch } from "../models/Branch.js";
 import { Pet } from "../models/Pet.js"
+import { Rate } from "../models/Rate.js";
+import { calculateTransportPrice } from "../services/BookingService.js";
 
 export const getBookings = async( req, res ) => {
     try {
@@ -106,14 +108,18 @@ export const deleteBooking = async(req, res) => {
 
 export const calculatePrice = async(req, res) => {
     try {
-        const {booking_id , pet_id, days} = req.body
+        const {branch_id , pet_id, days, transport, address} = req.body
         let price = 0
 
-        if(!booking_id || !pet_id || !days){
+        if(!branch_id || !pet_id || !days){
             return res.status( 400 ).json({ message: "El cuerpo de la solicitud está incompleto. Debes proporcionar todos los parámetros requeridos" }); 
         }
+
+        if(transport && !address){
+            return res.status( 400 ).json({ message: "Para incluir transporte la direccion es necesaria" }); 
+        }
         
-        const booking = await Booking.findByPk( booking_id,{
+        const branch = await Branch.findByPk( branch_id,{
             include: [
                 {
                   model: Rate,
@@ -122,7 +128,7 @@ export const calculatePrice = async(req, res) => {
             ]}
         )
 
-        if(!booking) {
+        if(!branch) {
             return res.status( 404 ).json({ message: "La sucursal no existe" }); 
         }
 
@@ -133,16 +139,20 @@ export const calculatePrice = async(req, res) => {
         }
 
         let petWeightInRange = false;
-        booking.rates.map(rate => {
+        branch.rates.map(rate => {
             if(pet.weight >= rate.weightFrom && pet.weight < rate.weightTo){
                 petWeightInRange = true;
                 price = rate.price * days
             }
         })
 
-        console.log(price)
         if(!petWeightInRange){
             return res.status( 404 ).json({ message: "No se encontro una tarifa para ese peso" }); 
+        }
+
+        if(transport){
+            const priceTransport = await calculateTransportPrice(address , branch.address, branch.price_km)
+            price += priceTransport 
         }
 
         return res.status( 200 ).json({ result: { price: price } })

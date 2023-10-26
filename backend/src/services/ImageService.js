@@ -2,10 +2,11 @@ import { mkdirSync, writeFileSync, existsSync, readFileSync, unlinkSync } from "
 import { join, dirname } from "path"
 import { fileURLToPath } from "url"
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 export const saveImage = async(image, name) => {
-    const __filename = fileURLToPath(import.meta.url);
-    const __dirname = dirname(__filename);
+    
 
     const branchPath = join(__dirname, '../../images/profiles');
 
@@ -15,6 +16,13 @@ export const saveImage = async(image, name) => {
     const data = Buffer.from(image, 'base64');
     writeFileSync(filePath, data);
 
+    return filePath
+}
+
+export const saveImageDefault = () => {
+    const defaultImages = ['1.jpeg', '2.jpeg','3.jpeg','4.jpeg']
+    const random = Math.floor(Math.random() * (3 - 0 + 1) + 0)
+    const filePath = join(__dirname,'../../images/profiles/default', defaultImages[random])
     return filePath
 }
 
