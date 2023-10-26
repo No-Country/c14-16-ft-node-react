@@ -2,15 +2,15 @@ const StyledImage = ({ imageSrc, customImageStyles, textStyles, text }) => {
     const containerStyle = {
 
     };
- 
+
 
     const imageContainerStyle = {
-        width: '100%', 
+        width: '100%',
     };
 
     const imageStyles = {
-        maxWidth: '100%', 
-        height: 'auto', 
+        maxWidth: '100%',
+        height: 'auto',
     };
 
     return (
