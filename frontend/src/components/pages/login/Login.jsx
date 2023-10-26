@@ -15,9 +15,9 @@ function Login() {
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
-const setToken = (token)=>{
-  sessionStorage.setItem(TOKEN_KEY, token);
-}
+  const setToken = (token) => {
+    sessionStorage.setItem(TOKEN_KEY, token);
+  }
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
