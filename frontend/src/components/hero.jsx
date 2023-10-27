@@ -64,7 +64,7 @@ function Hero() {
                   <Select
                     name="animalType"
                     value={userSearch.animalType}
-                    values={["", "perro", "gato", "otros"]}
+                    values={["", "perro", "gato", ""]}
                     options={[
                       "Seleccione una mascota",
                       "Perro",

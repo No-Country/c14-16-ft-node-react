@@ -8,7 +8,6 @@ import stick from "/assets/icons/wood-stick.svg";
 import vet from "/assets/icons/map_veterinary-care.svg";
 
 const Filter = ({ branches }) => {
-  console.log(branches);
   const [userFilter, setUserFilter] = useState({
     city: "",
     animalType: "",
@@ -18,21 +17,23 @@ const Filter = ({ branches }) => {
   const { searchTerm, handleFilteredBranches } = useContext(SearchContext);
 
   const branchFilter = () => {
+    console.log(userFilter.services)
     const filteredBranches = branches.filter(
       (branch) =>
-        branch.city.toLowerCase() === userFilter.city.toLowerCase() &&
-        branch.animalTypes.some(
-          (animalType) =>
-            animalType.name.toLowerCase() ===
-            userFilter.animalType.toLowerCase()
-        ) &&
+      (userFilter.city.toLowerCase() == '' || branch.city.toLowerCase() === userFilter.city.toLowerCase()) &&
+          branch.animalTypes.some(
+            (animalType) =>
+              userFilter.animalType === '' ||
+              animalType.name.toLowerCase() ===
+              userFilter.animalType.toLowerCase()
+          ) &&
         userFilter.services.every((service) =>
           branch.services.some(
-            (obj) => obj.name.toLowerCase() === service.toLowerCase()
+            (obj) => {
+              return(obj.name.toLowerCase() === service.toLowerCase())}
           )
         )
     );
-
     return filteredBranches;
   };
 
@@ -40,14 +41,14 @@ const Filter = ({ branches }) => {
     if (searchTerm) {
       const filteredBranches = branches.filter(
         (branch) =>
-          branch.city.toLowerCase() === searchTerm.city.toLowerCase() &&
+          (searchTerm.city === '' || branch.city.toLowerCase() === searchTerm.city.toLowerCase() ) &&
           branch.animalTypes.some(
             (animalType) =>
+              searchTerm.animalType === '' ||
               animalType.name.toLowerCase() ===
               searchTerm.animalType.toLowerCase()
           )
       );
-      console.log(filteredBranches);
       handleFilteredBranches(filteredBranches);
     }
   }, [searchTerm]);
@@ -97,7 +98,7 @@ const Filter = ({ branches }) => {
                 id="peluqueria"
                 type="checkbox"
                 defaultChecked={false}
-                value="Peluqueria"
+                value="Peluquería"
                 name="peluqueria"
                 className="mr-2"
                 onChange={handleCheckboxChange}
@@ -111,7 +112,7 @@ const Filter = ({ branches }) => {
                 type="checkbox"
                 name="dieta"
                 defaultChecked={false}
-                value="dieta"
+                value="Dietas especiales"
                 className="mr-2"
                 onChange={handleCheckboxChange}
               />
@@ -124,7 +125,7 @@ const Filter = ({ branches }) => {
                 type="checkbox"
                 name="actividades"
                 defaultChecked={false}
-                value="actividades"
+                value="Juegos y actividades"
                 className="mr-2"
                 onChange={handleCheckboxChange}
               />
@@ -137,7 +138,7 @@ const Filter = ({ branches }) => {
                 type="checkbox"
                 name="paseo-personal"
                 defaultChecked={false}
-                value="paseo personal"
+                value="Paseos personales"
                 className="mr-2"
                 onChange={handleCheckboxChange}
               />
@@ -150,7 +151,7 @@ const Filter = ({ branches }) => {
                 type="checkbox"
                 name="paseo-manada"
                 defaultChecked={false}
-                value="paseos en manada"
+                value="Paseos en manada"
                 className="mr-2"
                 onChange={handleCheckboxChange}
               />
