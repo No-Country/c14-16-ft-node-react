@@ -73,6 +73,7 @@ const Filter = ({ branches }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(userFilter);
     console.log(branchFilter());
     handleFilteredBranches(branchFilter());
   };
