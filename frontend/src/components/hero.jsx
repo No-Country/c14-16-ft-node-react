@@ -1,5 +1,6 @@
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { useFetch } from "../customHooks/useFetch";
 import { SearchContext } from "../context/SearchContext";
 import Input from "./ui/inputs";
 import Select from "./ui/select";
@@ -11,9 +12,13 @@ function Hero() {
     animalType: "",
   });
 
-  const navigate = useNavigate();
+  const { data } = useFetch(
+    "https://doggyhouse.azurewebsites.net/api/branches"
+  );
 
   const { handleSearchTerm } = useContext(SearchContext);
+
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -48,44 +53,47 @@ function Hero() {
           <div className="flex justify-center">
             <form className="w-full max-w-md " onSubmit={handleSubmit}>
               <div className="flex flex-col items-center w-full space-y-3">
-                <Input
-                  name="city"
-                  type="text"
-                  place="Ingresa una localidad"
-                  value={userSearch.city}
-                  onChange={(e) => {
-                    setUserSearch((userSearch) => ({
-                      ...userSearch,
-                      [e.target.name]: e.target.value,
-                    }));
-                  }}
-                />
                 <div className="w-full">
-                  <Select
-                    name="animalType"
-                    value={userSearch.animalType}
-                    values={["", "perro", "gato", ""]}
-                    options={[
-                      "Seleccione una mascota",
-                      "Perro",
-                      "Gato",
-                      "Otro",
-                    ]}
+                  <select
+                    name="city"
+                    value={userSearch.city}
                     onChange={(e) => {
                       setUserSearch((userSearch) => ({
                         ...userSearch,
                         [e.target.name]: e.target.value,
                       }));
                     }}
-                  />
+                    className="w-full p-4 bg-gray-100 border-b-2 border-[#333] rounded-md outline-none"
+                  >
+                    <option value="">Seleccione una localidad</option>
+                    <option value="todas">Todas</option>
+                    {data?.result?.map((branch) => (
+                      <option key={branch.id} value={branch.city}>
+                        {branch.city}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div className="w-full">
+                  <select
+                    disabled={userSearch.city === "todas" ? true : false}
+                    name="animalType"
+                    value={userSearch.animalType}
+                    onChange={(e) => {
+                      setUserSearch((userSearch) => ({
+                        ...userSearch,
+                        [e.target.name]: e.target.value,
+                      }));
+                    }}
+                    className="w-full p-4 bg-gray-100 border-b-2 border-[#333] rounded-md outline-none"
+                  >
+                    <option value="">Seleccione una mascota</option>
+                    <option value="Perro">Perro</option>
+                    <option value="Perro">Gato</option>
+                    <option value="Otros">Otros</option>
+                  </select>
                 </div>
                 <Button label="Buscar" type="submit" />
-                {/* <button
-                    className="w-full max-w-lg py-4 md:mx-auto text-xl font-bold bg-amber-600 rounded-md hover:bg-amber-400"
-                    type="submit"
-                  >
-                    Buscar
-                  </button> */}
               </div>
             </form>
           </div>

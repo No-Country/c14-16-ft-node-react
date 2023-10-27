@@ -1,11 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import { SearchContext } from "../../../context/SearchContext";
-import scissors from "/assets/icons/scissors.svg";
-import foot from "/assets/icons/chicken-leg.svg";
-import walkplus from "/assets/icons/image 59.svg";
-import walk from "/assets/icons/image 61.svg";
-import stick from "/assets/icons/wood-stick.svg";
-import vet from "/assets/icons/map_veterinary-care.svg";
+import { useFetch } from "../../../customHooks/useFetch";
+import Checkbox from "../../ui/Checkbox";
 
 const Filter = ({ branches }) => {
   const [userFilter, setUserFilter] = useState({
@@ -14,43 +10,52 @@ const Filter = ({ branches }) => {
     services: [],
   });
 
+  const { data, loading } = useFetch(
+    "https://doggyhouse.azurewebsites.net/api/services"
+  );
+
   const { searchTerm, handleFilteredBranches } = useContext(SearchContext);
 
   const branchFilter = () => {
-    console.log(userFilter.services)
+    console.log(userFilter.services);
     const filteredBranches = branches.filter(
       (branch) =>
-      (userFilter.city.toLowerCase() == '' || branch.city.toLowerCase() === userFilter.city.toLowerCase()) &&
-          branch.animalTypes.some(
-            (animalType) =>
-              userFilter.animalType === '' ||
-              animalType.name.toLowerCase() ===
+        (userFilter.city.toLowerCase() == "" ||
+          branch.city.toLowerCase() === userFilter.city.toLowerCase()) &&
+        branch.animalTypes.some(
+          (animalType) =>
+            userFilter.animalType === "" ||
+            animalType.name.toLowerCase() ===
               userFilter.animalType.toLowerCase()
-          ) &&
+        ) &&
         userFilter.services.every((service) =>
-          branch.services.some(
-            (obj) => {
-              return(obj.name.toLowerCase() === service.toLowerCase())}
-          )
+          branch.services.some((obj) => {
+            return obj.name.toLowerCase() === service.toLowerCase();
+          })
         )
     );
     return filteredBranches;
   };
 
   useEffect(() => {
-    if (searchTerm) {
-      const filteredBranches = branches.filter(
+    let filteredBranches = [];
+    if (searchTerm && searchTerm.city !== "todas") {
+      filteredBranches = branches.filter(
         (branch) =>
-          (searchTerm.city === '' || branch.city.toLowerCase() === searchTerm.city.toLowerCase() ) &&
+          (searchTerm.city === "" ||
+            branch.city.toLowerCase() === searchTerm.city.toLowerCase()) &&
           branch.animalTypes.some(
             (animalType) =>
-              searchTerm.animalType === '' ||
+              searchTerm.animalType === "" ||
               animalType.name.toLowerCase() ===
-              searchTerm.animalType.toLowerCase()
+                searchTerm.animalType.toLowerCase()
           )
       );
-      handleFilteredBranches(filteredBranches);
+    } else {
+      filteredBranches = branches;
+      console.log(filteredBranches);
     }
+    handleFilteredBranches(filteredBranches);
   }, [searchTerm]);
 
   const handleCheckboxChange = (e) => {
@@ -74,8 +79,6 @@ const Filter = ({ branches }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(userFilter);
-    console.log(branchFilter());
     handleFilteredBranches(branchFilter());
   };
 
@@ -94,84 +97,13 @@ const Filter = ({ branches }) => {
             Servicios Disponibles
           </h3>
           <div className="mb-8 grid grid-cols-2 gap-4 md:flex md:flex-wrap md:flex-row ">
-            <label htmlFor="peluqueria" className="flex items-center">
-              <input
-                id="peluqueria"
-                type="checkbox"
-                defaultChecked={false}
-                value="Peluquería"
-                name="peluqueria"
-                className="mr-2"
-                onChange={handleCheckboxChange}
+            {data?.result?.map((service) => (
+              <Checkbox
+                key={service.id}
+                service={service}
+                handleCheckboxChange={handleCheckboxChange}
               />
-              Peluquería
-              <img src={scissors} alt="icono de tijeras" className="w-6 ml-2" />
-            </label>
-            <label htmlFor="dieta" className="flex items-center">
-              <input
-                id="dieta"
-                type="checkbox"
-                name="dieta"
-                defaultChecked={false}
-                value="Dietas especiales"
-                className="mr-2"
-                onChange={handleCheckboxChange}
-              />
-              Dietas especiales
-              <img src={foot} alt="icono de comida" className="w-6 ml-2" />
-            </label>
-            <label htmlFor="actividades" className="flex items-center">
-              <input
-                id="actividades"
-                type="checkbox"
-                name="actividades"
-                defaultChecked={false}
-                value="Juegos y actividades"
-                className="mr-2"
-                onChange={handleCheckboxChange}
-              />
-              Juegos y actividades
-              <img src={stick} alt="icono de rama" className="w-6 ml-2" />
-            </label>
-            <label htmlFor="paseo-personal" className="flex items-center">
-              <input
-                id="paseo-personal"
-                type="checkbox"
-                name="paseo-personal"
-                defaultChecked={false}
-                value="Paseos personales"
-                className="mr-2"
-                onChange={handleCheckboxChange}
-              />
-              Paseos personales
-              <img src={walk} alt="icono de paseos" className="w-6 ml-2" />
-            </label>
-            <label htmlFor="paseo-manada" className="flex items-center">
-              <input
-                id="paseo-manada"
-                type="checkbox"
-                name="paseo-manada"
-                defaultChecked={false}
-                value="Paseos en manada"
-                className="mr-2"
-                onChange={handleCheckboxChange}
-              />
-              Paseos en manada
-              <img src={walkplus} alt="icono de paseos" className="w-6 ml-2" />
-            </label>
-            <label htmlFor="veterinaria" className="flex items-center">
-              <input
-                id="veterinaria"
-                type="checkbox"
-                name="veterinaria"
-                defaultChecked={false}
-                value="veterinaria"
-                className="mr-2"
-                onChange={handleCheckboxChange}
-              />
-              Veterinaria
-              <img src={vet} alt="icono de veterinaria" className="w-6 ml-2" />
-            </label>
+            ))}
           </div>
         </div>
         <div className="w-full lg:w-[70%] mb-16 grid grid-cols-1 md:grid-cols-2 gap-8">
