@@ -3,27 +3,15 @@ import { SearchContext } from "../../../context/SearchContext";
 import BranchCard from "./BranchCard";
 import pets from "/assets/filter-pets.png";
 
-const ListBranches = ({ branches }) => {
-  const [filteredBranches, setFilteredBranches] = useState([]);
-
-  const { searchTerm } = useContext(SearchContext);
+const ListBranches = () => {
+  const { filteredBranches } = useContext(SearchContext);
+  const [branches, setBranches] = useState([]);
 
   useEffect(() => {
-    const branchesFiltered = branches.filter(
-      (branch) =>
-        branch.city === searchTerm.city ||
-        branch.animalTypes.some(
-          (animalType) => animalType.name === searchTerm.animalType
-        ) ||
-        searchTerm.services?.every((service) =>
-          branch.services?.some((obj) => obj.name === service)
-        )
-    );
-
-    console.log(branchesFiltered);
-
-    setFilteredBranches(branchesFiltered);
-  }, [searchTerm]);
+    if (filteredBranches) {
+      setBranches(filteredBranches);
+    }
+  }, [branches, filteredBranches]);
 
   return (
     <section className="container mx-auto my-8 text-center">
@@ -39,9 +27,7 @@ const ListBranches = ({ branches }) => {
           />
         </div>
       ) : (
-        filteredBranches.map((branch) => (
-          <BranchCard key={branch.id} branch={branch} />
-        ))
+        branches.map((branch) => <BranchCard key={branch.id} branch={branch} />)
       )}
     </section>
   );

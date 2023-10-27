@@ -4,9 +4,14 @@ import PropTypes from "prop-types";
 
 function SearchProvider({ children }) {
   const [searchTerm, setSearchTerm] = useState("");
+  const [filteredBranches, setFilteredBranches] = useState([]);
 
   const handleSearchTerm = (objSearch) => {
     setSearchTerm(objSearch);
+  };
+
+  const handleFilteredBranches = (branches) => {
+    setFilteredBranches(branches);
   };
 
   return (
@@ -14,6 +19,8 @@ function SearchProvider({ children }) {
       value={{
         searchTerm,
         handleSearchTerm,
+        filteredBranches,
+        handleFilteredBranches,
       }}
     >
       {children}

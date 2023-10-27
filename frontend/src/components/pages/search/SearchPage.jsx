@@ -6,8 +6,6 @@ import { SearchContext } from "../../../context/SearchContext";
 import ClipLoader from "react-spinners/ClipLoader";
 
 const SearchPage = () => {
-  const { searchTerm, handleSearchTerm } = useContext(SearchContext);
-
   const { data, loading, errorFetch } = useFetch(
     "https://doggyhouse.azurewebsites.net/api/branches"
   );
@@ -26,8 +24,8 @@ const SearchPage = () => {
         </main>
       ) : !loading && !errorFetch ? (
         <main>
-          <Filter handleSearchTerm={handleSearchTerm} />
-          <ListBranches branches={data.result} />
+          <Filter branches={data.result} />
+          <ListBranches />
         </main>
       ) : (
         <main>

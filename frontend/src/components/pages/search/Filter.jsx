@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect, useContext } from "react";
+import { SearchContext } from "../../../context/SearchContext";
 import scissors from "/assets/icons/scissors.svg";
 import foot from "/assets/icons/chicken-leg.svg";
 import walkplus from "/assets/icons/image 59.svg";
@@ -6,24 +7,65 @@ import walk from "/assets/icons/image 61.svg";
 import stick from "/assets/icons/wood-stick.svg";
 import vet from "/assets/icons/map_veterinary-care.svg";
 
-const Filter = ({ handleSearchTerm }) => {
+const Filter = ({ branches }) => {
+  console.log(branches);
   const [userFilter, setUserFilter] = useState({
     city: "",
     animalType: "",
     services: [],
   });
 
+  const { searchTerm, handleFilteredBranches } = useContext(SearchContext);
+
+  const branchFilter = () => {
+    const filteredBranches = branches.filter(
+      (branch) =>
+        branch.city.toLowerCase() === userFilter.city.toLowerCase() &&
+        branch.animalTypes.some(
+          (animalType) =>
+            animalType.name.toLowerCase() ===
+            userFilter.animalType.toLowerCase()
+        ) &&
+        userFilter.services.every((service) =>
+          branch.services.some(
+            (obj) => obj.name.toLowerCase() === service.toLowerCase()
+          )
+        )
+    );
+
+    return filteredBranches;
+  };
+
+  useEffect(() => {
+    if (searchTerm) {
+      const filteredBranches = branches.filter(
+        (branch) =>
+          branch.city.toLowerCase() === searchTerm.city.toLowerCase() &&
+          branch.animalTypes.some(
+            (animalType) =>
+              animalType.name.toLowerCase() ===
+              searchTerm.animalType.toLowerCase()
+          )
+      );
+      console.log(filteredBranches);
+      handleFilteredBranches(filteredBranches);
+    }
+  }, [searchTerm]);
+
   const handleCheckboxChange = (e) => {
-    if (e.target.checked && !userFilter.services.includes(e.target.value)) {
+    if (
+      e.target.checked &&
+      !userFilter.services.includes(e.target.value.toLowerCase())
+    ) {
       setUserFilter((userFilter) => ({
         ...userFilter,
-        services: [...userFilter.services, e.target.value],
+        services: [...userFilter.services, e.target.value.toLowerCase()],
       }));
     } else {
       setUserFilter((userFilter) => ({
         ...userFilter,
         services: userFilter.services.filter(
-          (service) => service !== e.target.value
+          (service) => service.toLowerCase() !== e.target.value.toLowerCase()
         ),
       }));
     }
@@ -31,7 +73,8 @@ const Filter = ({ handleSearchTerm }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleSearchTerm(userFilter);
+    console.log(branchFilter());
+    handleFilteredBranches(branchFilter());
   };
 
   return (
@@ -68,7 +111,7 @@ const Filter = ({ handleSearchTerm }) => {
                 type="checkbox"
                 name="dieta"
                 defaultChecked={false}
-                value="Dieta"
+                value="dieta"
                 className="mr-2"
                 onChange={handleCheckboxChange}
               />
@@ -81,7 +124,7 @@ const Filter = ({ handleSearchTerm }) => {
                 type="checkbox"
                 name="actividades"
                 defaultChecked={false}
-                value="Actividades"
+                value="actividades"
                 className="mr-2"
                 onChange={handleCheckboxChange}
               />
@@ -94,7 +137,7 @@ const Filter = ({ handleSearchTerm }) => {
                 type="checkbox"
                 name="paseo-personal"
                 defaultChecked={false}
-                value="Paseo personal"
+                value="paseo personal"
                 className="mr-2"
                 onChange={handleCheckboxChange}
               />
@@ -107,7 +150,7 @@ const Filter = ({ handleSearchTerm }) => {
                 type="checkbox"
                 name="paseo-manada"
                 defaultChecked={false}
-                value="Paseos en manada"
+                value="paseos en manada"
                 className="mr-2"
                 onChange={handleCheckboxChange}
               />
@@ -120,7 +163,7 @@ const Filter = ({ handleSearchTerm }) => {
                 type="checkbox"
                 name="veterinaria"
                 defaultChecked={false}
-                value="Veterinaria"
+                value="veterinaria"
                 className="mr-2"
                 onChange={handleCheckboxChange}
               />
@@ -148,9 +191,9 @@ const Filter = ({ handleSearchTerm }) => {
                 }
               >
                 <option value="">Selecciona una mascota</option>
-                <option value="Perro">Perro</option>
-                <option value="Gato">Gato</option>
-                <option value="Otros">Otros</option>
+                <option value="perro">Perro</option>
+                <option value="gato">Gato</option>
+                <option value="otros">Otros</option>
               </select>
             </div>
           </div>
@@ -170,10 +213,11 @@ const Filter = ({ handleSearchTerm }) => {
                 }
               >
                 <option value="">Selecciona tu Ciudad</option>
-                <option value="Buenos Aires">Buenos Aires</option>
-                <option value="Parana">Paraná</option>
-                <option value="La Plata">La Plata</option>
-                <option value="Montevideo">Montevideo</option>
+                {branches.map((branch, index) => (
+                  <option key={index} value={branch.city}>
+                    {branch.city}
+                  </option>
+                ))}
               </select>
             </div>
           </div>

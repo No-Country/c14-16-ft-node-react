@@ -6,28 +6,26 @@ import Select from "./ui/select";
 import Button from "./ui/button";
 
 function Hero() {
-  const [place, setPlace] = useState("");
-  const [pet, setPet] = useState("");
+  const [userSearch, setUserSearch] = useState({
+    city: "",
+    animalType: "",
+  });
+
   const navigate = useNavigate();
-  const userSearch = {
-    place,
-    pet,
-  };
 
   const { handleSearchTerm } = useContext(SearchContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(userSearch);
-    // if (Object.values(userSearch).includes("")) {
-    //   alert("Todos los campos son obligatorios");
-    //   return;
-    // }
     handleSearchTerm(userSearch);
-    setPet("");
-    setPlace("");
+    setUserSearch({
+      city: "",
+      animalType: "",
+    });
     navigate("/search");
   };
+
   return (
     <>
       <div className="container mx-auto px-4 h-[70vh]">
@@ -51,19 +49,22 @@ function Hero() {
             <form className="w-full max-w-md " onSubmit={handleSubmit}>
               <div className="flex flex-col items-center w-full space-y-3">
                 <Input
-                  name="ciudad"
+                  name="city"
                   type="text"
                   place="Ingresa una localidad"
-                  value={place}
+                  value={userSearch.city}
                   onChange={(e) => {
-                    //userSearch.place = e.target.value;
-                    setPlace(e.target.value);
+                    setUserSearch((userSearch) => ({
+                      ...userSearch,
+                      [e.target.name]: e.target.value,
+                    }));
                   }}
                 />
                 <div className="w-full">
                   <Select
-                    name="tipo-animal"
-                    values={["", "dog", "cat", "other"]}
+                    name="animalType"
+                    value={userSearch.animalType}
+                    values={["", "perro", "gato", "otros"]}
                     options={[
                       "Seleccione una mascota",
                       "Perro",
@@ -71,8 +72,10 @@ function Hero() {
                       "Otro",
                     ]}
                     onChange={(e) => {
-                      //userSearch.pet = e.target.value;
-                      setPet(e.target.value);
+                      setUserSearch((userSearch) => ({
+                        ...userSearch,
+                        [e.target.name]: e.target.value,
+                      }));
                     }}
                   />
                 </div>

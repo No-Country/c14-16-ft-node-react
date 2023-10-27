@@ -1,6 +1,7 @@
 import image from "/assets/sucursales/sucursal_004.jpg";
 import scissors from "/assets/icons/scissors.svg";
 const BranchCard = ({ branch }) => {
+  console.log(branch);
   return (
     <article className="flex flex-col gap-4 max-w-[750px] p-8  bg-gradient-to-r from-orange-400 via-orange-300 to-orange-100 rounded-xl shadow-lg">
       <div className="flex gap-4">
