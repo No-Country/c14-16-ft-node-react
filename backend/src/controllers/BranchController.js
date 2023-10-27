@@ -6,7 +6,7 @@ import { ServiceBranch } from "../models/ServiceBranch.js";
 import { BranchAnimalTypes } from "../models/BranchAnimalType.js"
 import { Service } from "../models/Service.js";
 import { AnimalTypes } from "../models/AnimalTypes.js";
-import { saveImages, getImages, deleteImages, updateImages } from "../services/ImageService.js";
+import { saveImages, getImages, deleteImages, updateImages, getImage } from "../services/ImageService.js";
 
 export const getBranches = async ( req, res ) => {
     try {
@@ -24,8 +24,23 @@ export const getBranches = async ( req, res ) => {
                   model: AnimalTypes,
                   as: 'animalTypes',
                 },
+                {
+                    model: Image,
+                    as: 'images',
+                    limit: 1, 
+                },
               ]
         });
+
+
+        for (const branch of branches) {
+            if (branch.images && branch.images.length > 0) {
+                const image = branch.images[0];
+                const imageData = await getImage(image.route);
+                branch.setDataValue('images', imageData);
+            }
+        }
+        
         return res.status( 200 ).json({ result: branches }); 
     } catch ( error ) {
         return res.status( 500 ).json({ message: error.message }); 
@@ -272,6 +287,32 @@ export const deleteBranch = async ( req, res ) =>{
         
         return res.status( 200 ).json({ result: `Sucursal ${id} eliminada correctamente` })
     } catch ( error ) {
+        return res.status( 500 ).json({ message: error.message });
+    }
+}
+
+
+export const insertImages = async(req, res) => {
+    try{
+        const { images, branch_id } = req.body
+
+        if(!branch_id || !images || images.length === 0){
+            return res.status( 400 ).json({ message: "El cuerpo de la solicitud está incompleto. Debes proporcionar todos los parámetros requeridos" }); 
+        }
+
+        const branch = await Branch.findByPk( branch_id )
+
+        if(!branch){
+            return res.status( 404 ).json({ message: "La sucursal no existe" });
+        }
+
+        const routes = await saveImages(images, branch.company_id, branch.name, res)
+
+
+        await Image.bulkCreate(routes.map(route => ({route: route , branch_id: branch.id})))
+
+        return res.status( 200 ).json({ result: `Imagenes generadas correctamente`})
+    }catch(error){
         return res.status( 500 ).json({ message: error.message });
     }
 }

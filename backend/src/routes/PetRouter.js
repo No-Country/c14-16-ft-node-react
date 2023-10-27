@@ -1,5 +1,5 @@
 import express from "express";
-import { getPets, getOnePets, createPets, updatePets, deletePets} from '../controllers/PetsController.js';
+import { getPets, getOnePets, createPets, updatePets, deletePets , getPetsByUser} from '../controllers/PetsController.js';
 import { checkSession } from "../middlewares/session.js";
 export const PetRouter = express.Router(); 
 
@@ -75,6 +75,55 @@ PetRouter.get('/', getPets);
 */
 PetRouter.get('/:id', getOnePets);
 
+
+/**
+ * @openapi
+ * /api/pets/byUser/{id}:
+ *   get:
+ *     tags:
+ *       - Pets
+ *     summary: Obtener las mascotas de un usuario.
+ *     description: Obtiene las mascotas asociadas a un usuario específico por su ID.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: ID del usuario cuyas mascotas se desean obtener.
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Mascotas obtenidas con éxito para el usuario.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 result:
+ *                   type: array
+ *                   description: Lista de mascotas asociadas al usuario.
+ *                   items:
+ *                     type: object
+ *       400:
+ *         description: Solicitud incorrecta. Falta el parámetro requerido o la solicitud no cumple con los requisitos.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *       500:
+ *         description: Error del servidor.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+*/
+PetRouter.get("/byUser/:id", getPetsByUser)
 /**
  * @openapi
  * /api/pets:

@@ -1,5 +1,5 @@
 import express from "express"
-import { getBranches, getBranch, getBranchesByCompany, createBranch, updateBranch,deleteBranch } from "../controllers/BranchController.js"
+import { getBranches, getBranch, getBranchesByCompany, createBranch, updateBranch,deleteBranch, insertImages } from "../controllers/BranchController.js"
 export const BranchRouter = express.Router()
 
 /**
@@ -399,3 +399,73 @@ BranchRouter.put("/:id", updateBranch)
  *                   type: string
 */
 BranchRouter.delete("/:id", deleteBranch)
+
+/**
+ * @openapi
+ * /api/branches/createImages:
+ *   post:
+ *     tags:
+ *       - Branches
+ *     summary: Crear imágenes para una sucursal.
+ *     description: Crea imágenes para una sucursal específica.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               branch_id:
+ *                 type: integer
+ *                 description: ID de la sucursal.
+ *               images:
+ *                 type: array
+ *                 description: Arreglo de objetos que contienen información sobre las imágenes a crear.
+ *                 items:
+ *                   type: object
+ *                   properties:
+ *                     name:
+ *                       type: string
+ *                       description: Nombre de la imagen.
+ *                     data:
+ *                       type: string
+ *                       description: Datos de la imagen en formato base64.
+ *     responses:
+ *       200:
+ *         description: Imágenes creadas con éxito para la sucursal.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 result:
+ *                   type: string
+ *       400:
+ *         description: Solicitud incorrecta. Falta uno o más parámetros requeridos o la solicitud no cumple con los requisitos.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *       404:
+ *         description: Sucursal no encontrada. La sucursal con el ID proporcionado no existe.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *       500:
+ *         description: Error del servidor.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+*/
+BranchRouter.post("/createImages", insertImages)

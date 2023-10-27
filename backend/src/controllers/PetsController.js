@@ -4,7 +4,11 @@ import { AnimalTypes } from '../models/AnimalTypes.js';
 
 export const getPets = async ( req, res ) =>{
     try {
-        const getPets = await Pet.findAll();
+        const getPets = await Pet.findAll({include: [
+            {
+              model: AnimalTypes,
+              as: 'types',
+            }]});
         return res.status( 200 ).json({ result: getPets }); 
     } catch ( error ) {
         return res.status( 500 ).json({message: error.message}); 
@@ -19,9 +23,34 @@ export const getOnePets = async ( req, res ) =>{
             return res.status( 400 ).json({ message: "El id es obligatorio" }); 
         }
         
-        const getPet = await Pet.findByPk( id );
+        const getPet = await Pet.findByPk( id , {include: [
+            {
+              model: AnimalTypes,
+              as: 'types',
+            }]});
 
         return res.status( 200 ).json({ result: getPet }); 
+    } catch (error) {
+        return res.status( 500 ).json({message: error.message});
+    }
+}
+
+export const getPetsByUser = async(req, res) => {
+    try {
+        const { id } = req.params;
+        
+        if(!id){
+            return res.status( 400 ).json({ message: "El id del usuario es obligatorio" }); 
+        }
+
+        const pets = await Pet.findAll({where: {client_id: id}, include: [
+            {
+              model: AnimalTypes,
+              as: 'types',
+            }]
+        })
+
+        return res.status( 200 ).json({ result: pets }); 
     } catch (error) {
         return res.status( 500 ).json({message: error.message});
     }

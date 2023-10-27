@@ -34,5 +34,6 @@ Pet.belongsTo(Client, {
 
 Pet.belongsTo(AnimalTypes, {
     foreignKey: 'type_id',
+    as: 'types',
     allowNull: false,
 });
