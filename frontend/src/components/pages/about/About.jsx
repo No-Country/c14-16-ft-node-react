@@ -83,7 +83,9 @@ const About = () => {
             </article>
           )}
         </ScrollTrigger>
-        <Link to="/#searchForm">Buscar una guardería</Link>
+        <Link id="search" to="/#searchForm">
+          Buscar una guardería
+        </Link>
       </section>
     </main>
   );

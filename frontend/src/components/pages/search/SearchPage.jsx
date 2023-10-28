@@ -1,8 +1,6 @@
+import { useFetch } from "../../../customHooks/useFetch.js";
 import ListBranches from "./ListBranches";
 import Filter from "./Filter";
-import { useFetch } from "../../../customHooks/useFetch.js";
-import { useContext, useEffect } from "react";
-import { SearchContext } from "../../../context/SearchContext";
 import ClipLoader from "react-spinners/ClipLoader";
 
 const SearchPage = () => {

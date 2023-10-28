@@ -10,9 +10,9 @@ import ForgotPass from "../components/pages/forgot-pass/forgot-pass";
 import Reserver from "../components/pages/reserver/reserver";
 import Footer from "../components/Footer/Footer";
 import SearchPage from "../components/pages/search/SearchPage";
+import BranchPage from "../components/pages/branch/BranchPage";
 
 const AppRouter = () => {
-  
   return (
     <div>
       <Navbar />
@@ -24,6 +24,7 @@ const AppRouter = () => {
         <Route path="/forgot-pass" element={<ForgotPass />} />
         <Route path="/search" element={<SearchPage />} />
         <Route path="/reserver" element={<Reserver />} />
+        <Route path="/branch/:id" element={<BranchPage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
