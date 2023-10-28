@@ -11,31 +11,6 @@ import Services from "../../services";
 import Prices from "../../prices";
 
 const Home = () => {
-  const [place, setPlace] = useState("");
-  const [pet, setPet] = useState("");
-
-  const navigate = useNavigate();
-
-  const userSearch = {
-    place,
-    pet,
-  };
-
-  const { handleSearchTerm } = useContext(SearchContext);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(userSearch);
-    // if (Object.values(userSearch).includes("")) {
-    //   alert("Todos los campos son obligatorios");
-    //   return;
-    // }
-    handleSearchTerm(userSearch);
-    setPet("");
-    setPlace("");
-    navigate("/search");
-  };
-
   const imageStyles = {
     background: "#f8d444",
   };
