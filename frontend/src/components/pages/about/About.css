@@ -1,7 +1,10 @@
-
 section a {
   padding: 16px 64px;
-  background-color: #ff8c00;
+  background-color: rgb(240, 162, 37);
   border-radius: 8px;
   font-size: 1.5rem;
+}
+
+section a:hover {
+  background-color: rgb(235, 148, 8);
 }
