@@ -12,6 +12,7 @@ const About = () => {
   );
 
   console.log(data);
+
   // Cards
   const cards = [
     {
@@ -77,7 +78,7 @@ const About = () => {
             <CounterInfo text="Días reservados" topCounter={data} />
             <CounterInfo
               text="Sucursales Habilitadas"
-              topCounter={data.result.length}
+              topCounter={data?.result?.length}
             />
             <CounterInfo text="Reseñas de 5 estrellas" topCounter={data} />
           </article>

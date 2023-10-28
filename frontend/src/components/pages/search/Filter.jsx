@@ -2,6 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import { SearchContext } from "../../../context/SearchContext";
 import { useFetch } from "../../../customHooks/useFetch";
 import Checkbox from "../../ui/Checkbox";
+import Button from "../../ui/button";
 
 const Filter = ({ branches }) => {
   const [userFilter, setUserFilter] = useState({
@@ -156,12 +157,7 @@ const Filter = ({ branches }) => {
             </div>
           </div>
         </div>
-        <button
-          type="submit"
-          className="w-full max-w-lg py-4 md:mx-auto text-xl text-white font-bold bg-primary rounded-md"
-        >
-          Buscar
-        </button>
+        <Button type="submit" label="Buscar" />
       </form>
     </section>
   );

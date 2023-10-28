@@ -57,6 +57,7 @@ function Hero() {
                   <select
                     name="city"
                     value={userSearch.city}
+                    required
                     onChange={(e) => {
                       setUserSearch((userSearch) => ({
                         ...userSearch,

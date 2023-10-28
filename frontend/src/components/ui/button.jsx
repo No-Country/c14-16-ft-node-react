@@ -6,7 +6,7 @@ function Button({ type, label, clase }) {
     <button
       type={type}
       className={Utils(
-        "text-gray-100 text-lg w-full rounded-lg py-3 my-5 font-semibold border-2 border-transparent hover:bg-transparent hover:border-primary hover:text-primary  transition-colors duration-300 bg-primary",
+        "text-gray-100 text-lg w-full md:max-w-[350px] rounded-lg py-3 my-5 font-semibold border-2 border-transparent hover:bg-transparent hover:border-primary hover:text-primary  transition-colors duration-300 bg-primary",
         clase
       )}
     >
