@@ -4,6 +4,8 @@ import { useFetch } from "../../../customHooks/useFetch";
 import Checkbox from "../../ui/Checkbox";
 import Button from "../../ui/button";
 
+import image from "/assets/Images/filter-bg_02.jpg";
+
 const Filter = ({ branches }) => {
   const [userFilter, setUserFilter] = useState({
     city: "",
@@ -83,9 +85,19 @@ const Filter = ({ branches }) => {
     handleFilteredBranches(branchFilter());
   };
 
+  // Estilos
+  const filterBg = {
+    backgroundImage: `linear-gradient(to right, rgba(240,162,37,0.13) 0%, rgba(0,0,10,0.7035189075630253) 35%, rgba(240,162,37,0.13) 100%), url(${image})`,
+    backgroundPosition: "center",
+    backgroundSize: "cover",
+  };
+
   return (
-    <section className="container mx-auto p-8 bg-[white] shadow-lg sm:rounded-xl">
-      <h2 className="my-8 text-xl text-center text-black font-bold">
+    <section
+      style={filterBg}
+      className="container mx-auto p-8 bg-[white] shadow-lg sm:rounded-xl"
+    >
+      <h2 className="my-8 text-xl text-center text-white font-bold font-roboto">
         Filtro de búsqueda
       </h2>
       <form
@@ -94,10 +106,10 @@ const Filter = ({ branches }) => {
         className="w-full flex flex-col items-center"
       >
         <div className="w-full lg:w-[70%]">
-          <h3 className="mb-4 text-md text-black font-bold">
+          <h3 className="mb-4 text-md text-white font-bold font-roboto">
             Servicios Disponibles
           </h3>
-          <div className="mb-8 grid grid-cols-2 gap-4 md:flex md:flex-wrap md:flex-row ">
+          <div className="mb-8 grid grid-cols-2 gap-8 place-content-center md:flex md:flex-wrap md:flex-row text-white font-josefin">
             {data?.result?.map((service) => (
               <Checkbox
                 key={service.id}
@@ -109,7 +121,7 @@ const Filter = ({ branches }) => {
         </div>
         <div className="w-full lg:w-[70%] mb-16 grid grid-cols-1 md:grid-cols-2 gap-8">
           <div>
-            <h3 className="mb-4 text-md text-black font-bold">
+            <h3 className="mb-4 text-md text-white font-bold font-roboto">
               Tipo de mascota
             </h3>
             <div>
@@ -133,7 +145,9 @@ const Filter = ({ branches }) => {
             </div>
           </div>
           <div>
-            <h3 className="mb-4 text-md text-black font-bold">Ciudad</h3>
+            <h3 className="mb-4 text-md text-white font-bold font-roboto">
+              Ciudad
+            </h3>
             <div>
               <select
                 type="select"
