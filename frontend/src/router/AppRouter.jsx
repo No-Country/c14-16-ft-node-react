@@ -11,7 +11,6 @@ import Reserver from "../components/pages/reserver/reserver";
 import Footer from "../components/Footer/Footer";
 import SearchPage from "../components/pages/search/SearchPage";
 
-
 const AppRouter = () => {
   
   return (
