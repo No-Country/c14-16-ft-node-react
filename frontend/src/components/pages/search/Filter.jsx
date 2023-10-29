@@ -18,7 +18,6 @@ const Filter = ({ branches }) => {
 
   const branchFilter = () => {
     console.log(userFilter.services);
-
     const filteredBranches = branches.filter(
       (branch) =>
         (userFilter.city.toLowerCase() == "" ||
@@ -27,7 +26,7 @@ const Filter = ({ branches }) => {
           (animalType) =>
             userFilter.animalType === "" ||
             animalType.name.toLowerCase() ===
-            userFilter.animalType.toLowerCase()
+              userFilter.animalType.toLowerCase()
         ) &&
         userFilter.services.every((service) =>
           branch.services.some((obj) => {
@@ -49,7 +48,7 @@ const Filter = ({ branches }) => {
             (animalType) =>
               searchTerm.animalType === "" ||
               animalType.name.toLowerCase() ===
-              searchTerm.animalType.toLowerCase()
+                searchTerm.animalType.toLowerCase()
           )
       );
     } else {
