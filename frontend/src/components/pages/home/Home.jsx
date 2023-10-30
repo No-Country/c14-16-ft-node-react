@@ -7,21 +7,6 @@ import Services from "../../services";
 import Prices from "../../prices";
 
 const Home = () => {
-  const imageStyles = {
-    background: "#f8d444",
-  };
-
-  const textStyles = {
-    color: "#000",
-    fontSize: "1.5em",
-    fontWeight: "bold",
-    padding: "2px 4px",
-  };
-
-  const boxStyle = {
-    background: "#f8d444",
-  };
-
   const HeaderStyle = {
     backgroundImage: `url(${DogHome})`,
     backgroundSize: "cover",

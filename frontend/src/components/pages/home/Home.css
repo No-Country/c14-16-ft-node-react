@@ -1,4 +1,4 @@
-.input-field {
+input.input-field {
     border: none;
     border-bottom: 2px solid #333;
     padding: 10px;
@@ -7,15 +7,10 @@
     width: 100%;
 }
 
-.input-field:focus {
-    border-bottom: 2px solid #007BFF;
-
-}
-
 .toggle>div {
     position: relative;
     padding: 10px;
-    width: 250px;
+    width: 100%;
     height: 50px;
     border-radius: 50px;
     box-shadow: 0 -1px 1px 0 rgba(0, 0, 0, .5), 0px 1px 1px 0 rgba(255, 255, 255, 1);
@@ -29,13 +24,13 @@
     opacity: 0;
     top: -3px;
     left: 17px;
-    width: 260px;
+    width: 100%; 
     height: 55px;
     z-index: 5;
 }
 
 .toggle>div>input[type=checkbox]~div {
-    width: 230px;
+    width: 100%; 
     height: 35px;
     border-radius: 50px;
     border: 1px solid #979797;
@@ -70,7 +65,7 @@
     position: absolute;
     border-radius: 10px;
     top: 15px;
-    left: 180px;
+    left: 80%; 
 }
 
 .toggle>div>input[type=checkbox]:checked~div:before {
@@ -87,12 +82,25 @@
     filter: dropshadow(none);
 }
 
-/* Estilo base para elementos */
-input.input-field {
-    border: none;
-    border-bottom: 2px solid #333;
-    padding: 10px;
-    margin: 10px 0;
-    outline: none;
-    width: 100%;
+
+@media screen and (min-width: 768px) {
+
+    .toggle>div {
+        width: 250px; 
+        height: 50px;
+    }
+
+    .toggle>div>input[type=checkbox] {
+        width: 260px; 
+        height: 55px;
+    }
+
+    .toggle>div>input[type=checkbox]~div {
+        width: 230px; 
+        height: 35px;
+    }
+
+    .toggle>div>input[type=checkbox]:checked~div:after {
+        left: 180px; 
+    }
 }

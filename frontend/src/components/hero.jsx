@@ -2,8 +2,6 @@ import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { useFetch } from "../customHooks/useFetch";
 import { SearchContext } from "../context/SearchContext";
-import Input from "./ui/inputs";
-import Select from "./ui/select";
 import Button from "./ui/button";
 
 function Hero() {

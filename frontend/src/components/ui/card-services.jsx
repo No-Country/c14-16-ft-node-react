@@ -8,7 +8,7 @@ function CardServices({ name, url }) {
           <img
             src={url}
             alt={name}
-            className="rounded-[50px] w-[90%] sm:w-[200px] shadow-3xl shadow-primary mx-auto"
+            className="rounded-[5px] w-[90%] sm:w-[200px] shadow-3xl shadow-primary mx-auto"
           />
         </div>
         <h2 className="text-xl font-semibold">{name}</h2>
