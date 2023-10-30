@@ -7,7 +7,7 @@ const Tarifas = ({ data }) => {
     <div className="mb-16">
       <h2 className="mb-2 text-lg text-left font-bold font-roboto">Tarifas</h2>
       <div className="overflow-x-auto rounded-lg shadow-lg">
-        <table className="w-full border-2 border-primary">
+        <table className="w-full max-lg border-2 border-primary">
           <thead>
             <tr className="bg-primary text-white">
               <th scope="col"></th>
