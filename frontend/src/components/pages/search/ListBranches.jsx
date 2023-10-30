@@ -16,7 +16,7 @@ const ListBranches = () => {
   return (
     <section className="container mx-auto my-8 text-center">
       {filteredBranches.length === 0 ? (
-        <div className="w-[100%] flex flex-col items-center">
+        <div className="w-full flex flex-col items-center">
           <p className="text-xl font-bold">
             No hay resultados para esa búsqueda
           </p>
@@ -27,7 +27,11 @@ const ListBranches = () => {
           />
         </div>
       ) : (
-        branches.map((branch) => <BranchCard key={branch.id} branch={branch} />)
+        <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-4 justify-items-center">
+          {branches.map((branch) => (
+            <BranchCard key={branch.id} branch={branch} />
+          ))}
+        </div>
       )}
     </section>
   );

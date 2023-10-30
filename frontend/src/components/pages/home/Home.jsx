@@ -1,8 +1,4 @@
-import { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { SearchContext } from "../../../context/SearchContext";
 import DogHome from "/assets/Images/DogHome.webp";
-import StyledImage from "./StyledImage";
 import "./Home.css";
 
 import Hero from "../../hero";
