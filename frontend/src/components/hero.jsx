@@ -2,8 +2,6 @@ import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { useFetch } from "../customHooks/useFetch";
 import { SearchContext } from "../context/SearchContext";
-import Input from "./ui/inputs";
-import Select from "./ui/select";
 import Button from "./ui/button";
 
 function Hero() {
@@ -38,10 +36,11 @@ function Hero() {
           Un lugar seguro para tu mascota
         </h1>
         <p className="text-2xl font-semibold font-josefin text-center text-gray-800 ">
-          Guarderias que cuidan cada detalle para que tu mascota se sienta en
-          como en casa, sin preocupaciones ni inquietudes. Aquí tendran un
-          espacio para jugar, tambien tendran ricas comidas, jugaran y pasearan
-          libremente. con los mejores profesionales y servicios de calidad.
+          Guarderias que cuidan cada detalle para que tu mascota se sienta como
+          en casa, sin preocupaciones ni inquietudes. Aquí tendrán un espacio
+          para jugar, también tendrán ricas comidas, jugarán y pasearán
+          libremente. Contando con la atención de los mejores profesionales y
+          servicios de calidad.
         </p>
       </div>
       {/* Formulario de Búsqueda */}
@@ -51,12 +50,17 @@ function Hero() {
             Reserva un lugar para tu peludito donde y cuando quieras
           </h2>
           <div className="flex justify-center">
-            <form className="w-full max-w-md " onSubmit={handleSubmit}>
+            <form
+              id="searchForm"
+              className="w-full max-w-md "
+              onSubmit={handleSubmit}
+            >
               <div className="flex flex-col items-center w-full space-y-3">
                 <div className="w-full">
                   <select
                     name="city"
                     value={userSearch.city}
+                    required
                     onChange={(e) => {
                       setUserSearch((userSearch) => ({
                         ...userSearch,

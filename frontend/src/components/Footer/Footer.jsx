@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react';
-import { Link, useNavigate } from 'react-router-dom'; // Importa useNavigate
+import { Link, useNavigate } from 'react-router-dom';
 import { BsWhatsapp } from 'react-icons/bs';
 import Modal from 'react-modal';
 import emailjs from '@emailjs/browser';
@@ -9,7 +9,7 @@ Modal.setAppElement('#root');
 const Footer = () => {
   const refForm = useRef();
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate(); // Usa useNavigate para la navegación
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -61,18 +61,28 @@ const Footer = () => {
 
   return (
     <footer className="bg-gray-900 text-white py-8 mt-auto">
-      <div className="container mx-auto px-4">
-        <div className="md:flex md:justify-between items-center flex-col-reverse md:flex-row text-center">
-          <div className="mb-4 md:text-left md:w-1/2 md:pr-8">
-            <h2 className="text-2xl text-center font-bold mb-2">
-              Doggy&apos;s House
+      <div className="container mx-auto">
+        <div className="md:flex md:justify-between items-center">
+          <div className="mb-4 text-center md:text-left md:w-1/2 md:pr-8">
+            <h2 className="text-2xl text-center font-bold mb-2 font-roboto">
+              Sobre Doggy&apos;s House
             </h2>
-            <p className="mb-6">
-              En Doggy&apos;s House, sabemos que tus mascotas son parte de tu familia, y nuestro compromiso es garantizar que reciban el amor, cuidado y atención que merecen.
+            <p className="mb-6 font-josefin">
+              En Doggy&apos;s House, entendemos que tus mascotas son parte de tu
+              familia, y nuestro compromiso es garantizar que reciban el amor,
+              cuidado y atención que merecen. Nuestro equipo de apasionados
+              amantes de los animales está dedicado a brindar un entorno seguro
+              y acogedor para tus peludos amigos. Estamos comprometidos a cuidar
+              de su bienestar, asegurándonos de que estén felices y saludables
+              en todo momento. Si deseas conocer más acerca de quiénes somos y
+              cómo trabajamos, te invitamos a explorar nuestra historia y
+              servicios.
             </p>
           </div>
           <div className="mb-4 md:w-1/2">
-            <h3 className="text-xl font-semibold mb-2">Enlaces</h3>
+            <h3 className="text-xl font-semibold mb-2 font-roboto">
+              Enlaces
+            </h3>
             <ul className="mb-4 md:mb-0">
               <li className="mb-2">
                 <Link to="/about" className="hover:underline">
@@ -93,10 +103,14 @@ const Footer = () => {
           </div>
           <div className="mb-4 md:w-1/2">
             <h3 className="text-xl font-semibold mb-2">Contacto</h3>
-            <a href={getWhatsAppLink()} className="hover:underline" target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
-              <span style={{ paddingRight: "5px" }}> Contáctanos </span> <BsWhatsapp />
-            </a>
-            <p className="mb-2">Tel: +549-12345678</p>
+            <p className="mb-2">Tel: +549-12345678 </p>
+            <li className="mb-2" style={{ display: 'flex', alignItems: 'center' }}>
+              <a href={getWhatsAppLink()} className="hover:underline" target="_blank" rel="noopener noreferrer">
+                <span style={{ paddingRight: '5px', display: 'flex' }} > Vía
+                  <BsWhatsapp style={{ alignItems: 'center', textAlign: 'center', width: '50px' }} />
+                </span>
+              </a>
+            </li>
             <p>
               Av. Pres. Figueroa Alcorta | 5200 | C1426CBO | CABA | Argentina
             </p>
@@ -171,7 +185,7 @@ const Footer = () => {
             ) : (
               <button
                 type="submit"
-                className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+                className="bg-blue-500 text-white px-4 py-2 rounded hover-bg-blue-600"
                 style={{ display: 'block', margin: '20px auto', minWidth: '30%' }}
               >
                 Enviar
@@ -183,7 +197,7 @@ const Footer = () => {
         <br />
         <button
           onClick={closeModal}
-          className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded"
+          className="bg-red-500 hover-bg-red-600 text-white px-4 py-2 rounded"
           style={{ display: 'block', margin: 'auto', minWidth: '30%' }}
         >
           Cerrar

@@ -1,8 +1,4 @@
-import { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { SearchContext } from "../../../context/SearchContext";
 import DogHome from "/assets/Images/DogHome.webp";
-import StyledImage from "./StyledImage";
 import "./Home.css";
 
 import Hero from "../../hero";
@@ -11,21 +7,6 @@ import Services from "../../services";
 import Prices from "../../prices";
 
 const Home = () => {
-  const imageStyles = {
-    background: "#f8d444",
-  };
-
-  const textStyles = {
-    color: "#000",
-    fontSize: "1.5em",
-    fontWeight: "bold",
-    padding: "2px 4px",
-  };
-
-  const boxStyle = {
-    background: "#f8d444",
-  };
-
   const HeaderStyle = {
     backgroundImage: `url(${DogHome})`,
     backgroundSize: "cover",
