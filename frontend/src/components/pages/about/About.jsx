@@ -22,18 +22,21 @@ const About = () => {
       title: "¿Quienes Somos?",
       desc: "Doggy’s House es la unión de distintas guarderías con sede en Buenos Aires y sucursales a lo largo del país; para que tus hijos peludos tengan siempre la mejor atención posible.",
       styles: "md:justify-end pr-4",
+      side: "left",
     },
     {
       id: 2,
       title: "¿De donde nace la idea?",
       desc: "Doggy’s House nace de la iniciativa de un grupo de estudiantes de sistemas, viendo un problema en el mercado encontraron esta solución tanto para los dueños de las guarderías como para los dueños de facilitar la reserva y seguridad a la hora de pagar.",
       styles: "md:justify-start pl-4",
+      side: "right",
     },
     {
       id: 3,
       title: "¿Por qué elegir Doggy’s House?",
       desc: "En Doogy’s house sabemos que la vida a veces puede complicarse. Nuestro objetivo es que viajes con tranquilidad y disfrutes de tus actividades favoritas sin la preocupación de quién cuidará a tu perro. Con cobertura veterinaria, fotos y videos semanales que recibirás y cuidadores verificados por el equipo de Doogy’s house. No volverás a tener dudas sobre dónde dejar a tu mascota cuando no te pueda acompañar.",
       styles: "md:justify-end pr-4",
+      side: "left",
     },
   ];
 
@@ -60,6 +63,7 @@ const About = () => {
               title={card.title}
               text={card.desc}
               styles={card.styles}
+              side={card.side}
             />
           ))}
         </div>

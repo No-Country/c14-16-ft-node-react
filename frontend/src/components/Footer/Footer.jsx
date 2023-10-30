@@ -80,9 +80,9 @@ const Footer = () => {
             </p>
           </div>
           <div className="mb-4 md:w-1/2">
-          <h3 className="text-xl font-semibold mb-2 font-roboto">
-                Enlaces
-              </h3>
+            <h3 className="text-xl font-semibold mb-2 font-roboto">
+              Enlaces
+            </h3>
             <ul className="mb-4 md:mb-0">
               <li className="mb-2">
                 <Link to="/about" className="hover:underline">
@@ -103,10 +103,14 @@ const Footer = () => {
           </div>
           <div className="mb-4 md:w-1/2">
             <h3 className="text-xl font-semibold mb-2">Contacto</h3>
-            <a href={getWhatsAppLink()} className="hover:underline" target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
-              <span style={{ paddingRight: "5px" }}> Contáctanos </span> <BsWhatsapp />
-            </a>
-            <p className="mb-2">Tel: +549-12345678</p>
+            <p className="mb-2">Tel: +549-12345678 </p>
+            <li className="mb-2" style={{ display: 'flex', alignItems: 'center' }}>
+              <a href={getWhatsAppLink()} className="hover:underline" target="_blank" rel="noopener noreferrer">
+                <span style={{ paddingRight: '5px', display: 'flex' }} > Vía
+                  <BsWhatsapp style={{ alignItems: 'center', textAlign: 'center', width: '50px' }} />
+                </span>
+              </a>
+            </li>
             <p>
               Av. Pres. Figueroa Alcorta | 5200 | C1426CBO | CABA | Argentina
             </p>
@@ -181,7 +185,7 @@ const Footer = () => {
             ) : (
               <button
                 type="submit"
-                className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+                className="bg-blue-500 text-white px-4 py-2 rounded hover-bg-blue-600"
                 style={{ display: 'block', margin: '20px auto', minWidth: '30%' }}
               >
                 Enviar
@@ -193,7 +197,7 @@ const Footer = () => {
         <br />
         <button
           onClick={closeModal}
-          className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded"
+          className="bg-red-500 hover-bg-red-600 text-white px-4 py-2 rounded"
           style={{ display: 'block', margin: 'auto', minWidth: '30%' }}
         >
           Cerrar

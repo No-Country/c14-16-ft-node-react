@@ -70,22 +70,8 @@ const BranchPage = () => {
             </h2>
             <p className="font-josefin">{data?.result?.description}</p>
           </div>
-          {/* Valoraciones */}
-          <div className="mb-16">
-            <h2 className="mb-2 text-lg text-left font-bold font-roboto">
-              Valoraciones
-            </h2>
-            <p className="font-josefin">lista de Cards</p>
-          </div>
           {/* Tarifas */}
           <Tarifas data={data} />
-          {/* Ubicacion */}
-          <div className="mb-16">
-            <h2 className="mb-2 text-lg text-left font-bold font-roboto">
-              Ubicación
-            </h2>
-            <p className="font-josefin">MAPA DE UBICACION</p>
-          </div>
           <div className="w-full flex justify-center py-8 mb-16 bg-gray-100">
             <Button type="button" label="Reservar" />
           </div>
