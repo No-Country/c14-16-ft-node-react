@@ -106,7 +106,7 @@ const Footer = () => {
             <p className="mb-2">Tel: +549-12345678 </p>
             <li className="mb-2" style={{ display: 'flex', alignItems: 'center' }}>
               <a href={getWhatsAppLink()} className="hover:underline" target="_blank" rel="noopener noreferrer">
-                <span style={{ paddingRight: '5px', display: 'flex' }} > Vía
+                <span style={{ paddingRight: '5px', display: 'flex' }} > WhatsApp
                   <BsWhatsapp style={{ alignItems: 'center', textAlign: 'center', width: '50px' }} />
                 </span>
               </a>
