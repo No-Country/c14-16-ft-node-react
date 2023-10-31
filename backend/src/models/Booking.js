@@ -37,11 +37,15 @@ Pet.belongsToMany(Branch, {
     through: Booking,
     foreignKey: 'pet_id',
 });
+
+Booking.belongsTo(Pet, { foreignKey: 'pet_id', as: 'pet', })
   
 Branch.belongsToMany(Pet, {
     through: Booking,
     foreignKey: 'branch_id',
 });
+
+Booking.belongsTo(Branch, { foreignKey: 'branch_id', as: 'branch', })
   
   
   

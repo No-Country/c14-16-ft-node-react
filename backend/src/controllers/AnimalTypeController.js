@@ -30,6 +30,10 @@ export const createType = async ( req, res ) =>{
     try {
         const { name } =  req.body
 
+        if(!name){
+            return res.status( 400 ).json({ message: "El cuerpo de la solicitud está incompleto. Debes proporcionar todos los parámetros requeridos" });
+        }
+
         const typeExist = await AnimalTypes.findOne( { where: { name } } );
 
         if (typeExist) {

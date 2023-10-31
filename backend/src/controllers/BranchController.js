@@ -128,13 +128,13 @@ export const getBranchesByCompany = async(req, res) => {
 
 export const createBranch = async(req, res) => {
     try {
-        const { name, description, city, capacity, amount, price_km,phone, address, company_id, rates, services, animalTypes, images } = req.body  
+        const { name, description, city, capacity, amount, price_km,phone, address, company_id, rates, services, animalTypes,long,lat, images } = req.body  
         let routes = []
 
         if(images){
             routes = await saveImages(images, company_id, name, res)
         }
-        if(!name || !description || !city || !capacity || !phone || !address || !company_id || !rates || !services || !animalTypes || !price_km){
+        if(!name || !description || !city || !capacity || !phone || !address || !company_id || !rates || !services || !animalTypes || !price_km || !long || !lat){
             return res.status( 400 ).json({ message: "El cuerpo de la solicitud está incompleto. Debes proporcionar todos los parámetros requeridos" }); 
         }
 
@@ -155,7 +155,7 @@ export const createBranch = async(req, res) => {
         const createdBranch = await sequelize.transaction(async (transaction) => {
             const createdBranch = await Branch.create(
                 { 
-                    name, description, city, capacity, amount, price_km, phone, address, company_id: company.id,
+                    name, description, city, capacity, amount, price_km, phone, address, long, lat, company_id: company.id,
                     images: routes.map((image) => ({route: image})),
                     rates: rates.map((rate) => ({ weightFrom: rate.weightFrom, weightTo: rate.weightTo, price: rate.price }))
                 },

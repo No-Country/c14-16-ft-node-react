@@ -1,5 +1,5 @@
 import express from "express"
-import {getBookings, getBooking, createBooking, updateBooking, deleteBooking, calculatePrice} from "../controllers/BookingController.js"
+import {getBookings, getBooking, createBooking, updateBooking, deleteBooking, calculatePrice, getBookingByUser} from "../controllers/BookingController.js"
 import { checkSession } from "../middlewares/session.js"
 
 export const BookingRouter = express.Router()
@@ -81,6 +81,8 @@ BookingRouter.get("/", getBookings)
 */
 BookingRouter.get("/:id", getBooking)
 
+
+BookingRouter.get("/byUser/:id" , getBookingByUser)
 /**
  * @openapi
  * /api/bookings:

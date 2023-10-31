@@ -164,6 +164,10 @@ BranchRouter.get("/byCompany/:id",getBranchesByCompany)
  *                 type: string
  *               address:
  *                 type: string
+*               long:
+ *                 type: number
+ *               lat:
+ *                 type: number
  *               company_id:
  *                 type: integer
  *               rates:

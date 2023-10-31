@@ -63,6 +63,7 @@ const bookingToDecrement = async(today) => {
                     by: 1,
                     where: { id: booking.branch_id }
                 });
+                await Booking.destroy({where: {id: booking.id}})
             }
         }
     }catch(error){

@@ -14,6 +14,10 @@ export const Service = sequelize.define('Service',{
     description:{
         type: DataTypes.STRING,
         allowNull: false
+    },
+    route:{
+        type: DataTypes.STRING,
+        allowNull: true
     }
 },{
     timestamps: false

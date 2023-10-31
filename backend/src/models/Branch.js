@@ -41,7 +41,15 @@ export const Branch = sequelize.define('Branch',{
     address:{
         type: DataTypes.STRING,
         allowNull: false
-    }
+    },
+    long:{
+        type: DataTypes.FLOAT,
+        allowNull: false
+    }, 
+    lat:{
+        type: DataTypes.FLOAT,
+        allowNull: false
+    },
 },{
     timestamps: false
 });
