@@ -1,5 +1,3 @@
-//import image from "/assets/sucursales/sucursal_004.jpg";
-import scissors from "/assets/icons/scissors.svg";
 import { Link } from "react-router-dom";
 const BranchCard = ({ branch }) => {
   return (
@@ -35,8 +33,8 @@ const BranchCard = ({ branch }) => {
               >
                 {service.name}
                 <img
-                  src={scissors}
-                  alt="icono de tijeras"
+                  src={`data:image/png;base64,${service.image}`}
+                  alt={`icono de ${service.name}`}
                   className="w-6 ml-2"
                 />
               </span>
