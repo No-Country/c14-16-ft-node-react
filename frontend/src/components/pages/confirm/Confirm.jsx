@@ -55,16 +55,13 @@ export const Confirm = () => {
           };
 
         reserver.price = price
-        reserver.description = "Reserva en DoggysHouse"
 
         const response = await fetch(`https://doggyhouse.azurewebsites.net/api/checkout/create-order`,{method: 'POST', headers: headers,
         body: JSON.stringify(reserver)});
         const responseData = await response.json()
-        console.log(responseData)
         const route = responseData.result.body.sandbox_init_point
 
         if(route){
-            console.log(route)
             window.location.href = route
         }
     }

@@ -127,6 +127,20 @@ const Reserver = () => {
                     <div className="w-11 h-6 bg-gray-400 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-primary rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[200px] sm:after:left-[178px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-primary"></div>
                   </div>
                 </label>
+                <div className="my-5 sm:my-10 w-full sm:w-[100%] mx-auto text-center sm:text-left">
+                  <label htmlFor="comentarios" className="mb-2">
+                    Comentarios
+                    <textarea
+                      name="comments"
+                      placeholder="Ingrese un comentario u observación"
+                      id="comments"
+                      cols="30"
+                      rows="8"
+                      onChange={handleChange}
+                      className="w-full p-2 bg-gray-200 resize-none rounded-md"
+                    ></textarea>
+                  </label>
+                </div>
               </div>
             </div>
 

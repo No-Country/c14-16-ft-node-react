@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Input from "../../ui/inputs";
 import Button from "../../ui/button";
-import { useNavigate } from "react-router-dom";
+import { useFetch } from "../../../customHooks/useFetch";
 
 // Estilos
 const filterBg = {
@@ -10,25 +10,41 @@ const filterBg = {
   backgroundSize: "cover",
 };
 
-const AddPet = () => {
+const AddPet = ({id, token, handleModalAdd}) => {
   const [pet, setPet] = useState({
     name: "",
     breed: "",
-    types: "",
-    description: "",
+    type_id: "",
+    client_id: id,
     weight: "0",
   });
 
-  const navigate = useNavigate();
 
-  const handleCancel = () => navigate("/mypets");
 
+  const { data } = useFetch(`https://doggyhouse.azurewebsites.net/api/animaltypes`)
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+
+      const headers = {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      };
+
+      pet.type_id = Number(pet.type_id)
+      try {
+          await fetch(`https://doggyhouse.azurewebsites.net/api/pets` , {method: 'POST' ,headers: headers, body: JSON.stringify(pet)})
+          handleModalAdd()
+      } catch (error) {
+        console.log(error)
+      }
+  }
   return (
     <div
       style={filterBg}
       className="w-screen py-16 grid place-items-center absolute top-0 left-0"
     >
-      <form className="w-full max-w-[550px] p-8 bg-gray-100 border-2 border-primary rounded-md">
+      <form onSubmit={handleSubmit} className="w-full max-w-[550px] p-8 bg-gray-100 border-2 border-primary rounded-md">
         <h2 className="py-4 text-center text-lg font-bold font-roboto">
           Agrega tu mascota
         </h2>
@@ -50,8 +66,8 @@ const AddPet = () => {
           ¿Qué animalito tenés?
           <select
             type="select"
-            name="types"
-            value={pet.types}
+            name="type_id"
+            value={pet.type_id}
             className="w-full p-4 bg-gray-100 border-b-2 border-[#333] rounded-md outline-none"
             onChange={(e) =>
               setPet((pet) => ({
@@ -61,11 +77,14 @@ const AddPet = () => {
             }
           >
             <option value="">Selecciona una mascota</option>
-            <option value="perro">Perro</option>
-            <option value="gato">Gato</option>
+            {data?.result?.map((type) => (
+                        <option key={type.id} value={type.id}>
+                          {type.name}
+                        </option>
+            ))}
           </select>
         </label>
-        {pet.types === "gato" && (
+        {pet.type_id === '3' && (
           <label htmlFor="name" className="block mb-6">
             ¿Que raza es?
             <select
@@ -90,7 +109,7 @@ const AddPet = () => {
             </select>
           </label>
         )}
-        {pet.types === "perro" && (
+        {pet.type_id === '2' && (
           <label htmlFor="name" className="block mb-6">
             ¿Que raza es?
             <select
@@ -134,23 +153,13 @@ const AddPet = () => {
             errors={""}
           />
         </label>
-        <label htmlFor="description" className="mb-2">
-          Descripción
-          <textarea
-            name="description"
-            id="description"
-            cols="30"
-            rows="8"
-            className="w-full p-2 bg-gray-200 resize-none rounded-md"
-          ></textarea>
-        </label>
         <div className="flex gap-4 items-center">
           <Button type="submit" label="Agregar" clase="" />
           <Button
             type="button"
             label="Cancelar"
             clase=""
-            click={handleCancel}
+            click={handleModalAdd}
           />
         </div>
       </form>
