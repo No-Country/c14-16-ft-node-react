@@ -19,6 +19,9 @@ function Login() {
   const setToken = (token) => {
     sessionStorage.setItem(TOKEN_KEY, token);
   }
+  const setUser = (user) => {
+    sessionStorage.setItem('User', JSON.stringify(user))
+  }
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -45,7 +48,8 @@ function Login() {
         }
 
         const data = await response.json();
-        setToken(data.token);
+        setToken(data.result.token);
+        setUser(data.result.client)
         navigate('/');
       } catch (error) {
         console.error('Error en la llamada a la API:', error);

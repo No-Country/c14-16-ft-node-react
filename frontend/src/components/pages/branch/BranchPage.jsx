@@ -1,16 +1,23 @@
 import { useParams } from "react-router-dom";
 import { useFetch } from "../../../customHooks/useFetch";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ClipLoader from "react-spinners/ClipLoader";
 import Tarifas from "./Tarifas";
-import Button from "../../ui/button";
 
 const BranchPage = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const { data, loading, errorFetch } = useFetch(
     `https://doggyhouse.azurewebsites.net/api/branches/${id}`
   );
+  const user = sessionStorage.getItem('User')
+  const handleCheckUser = (e) => {
+    if(!user){
+      e.preventDefault()
+      navigate(`/login`)
+    }
+  }
 
   return (
     <>
@@ -75,7 +82,7 @@ const BranchPage = () => {
           {/* Tarifas */}
           <Tarifas data={data} />
           <div className="w-full flex justify-center py-8 mb-16 bg-gray-100">
-            <Link to={`/reserver`} className="text-gray-100 text-lg w-full md:max-w-[350px] rounded-lg py-3 my-5 font-semibold border-2 border-transparent hover:bg-transparent hover:border-primary hover:text-primary transition-colors duration-300 bg-primary text-center">Reservar</Link>
+            <Link to={`/reserver/${id}`} onClick={handleCheckUser} className="text-gray-100 text-lg w-full md:max-w-[350px] rounded-lg py-3 my-5 font-semibold border-2 border-transparent hover:bg-transparent hover:border-primary hover:text-primary transition-colors duration-300 bg-primary text-center">Reservar</Link>
           </div>
         </main>
       ) : (
