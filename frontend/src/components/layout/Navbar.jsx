@@ -13,6 +13,7 @@ const Navbar = () => {
   const navigate = useNavigate();
   const logout = () => {
     sessionStorage.removeItem(TOKEN_KEY);
+    sessionStorage.removeItem('User');
     navigate("/login", { replace: true });
   };
   const buttonLabel = isLoggedIn ? (

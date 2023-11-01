@@ -1,6 +1,6 @@
 import { FaPaw } from "react-icons/fa";
 
-const PetCard = ({ name, breed, type, description, weight }) => {
+const PetCard = ({ name, breed, type,weight }) => {
   return (
     <article className="bg-gray-100 rounded-md overflow-hidden">
       <h2 className="px-8 py-4 flex gap-2 items-center text-xl text-white font-bold font-roboto bg-primary">
@@ -18,8 +18,6 @@ const PetCard = ({ name, breed, type, description, weight }) => {
           <h3 className="text-md font-bold font-roboto">
             Peso: <span className="font-normal font-josefin">{weight}</span>
           </h3>
-          <h3 className="text-md font-bold font-roboto">Descripción:</h3>
-          <p className="font-normal font-josefin">{description}</p>
         </div>
 
         <div className="flex flex-col gap-2 items-center justify-around">
