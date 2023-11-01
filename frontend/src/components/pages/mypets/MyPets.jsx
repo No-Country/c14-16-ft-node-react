@@ -6,7 +6,7 @@ const token =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzYsImlhdCI6MTY5ODcwNjcyMX0.t-o2H4Oeft3dqhxaFI8yJ-KrgSePWo25ZNAZq1oRLxQ";
 const MyPets = () => {
   const { data, loading, errorFetch } = useFetch(
-    `https://doggyhouse.azurewebsites.net/api/pets/byUser/${userId}`,
+    `https://doggyhouse.azurewebsites.net/api/pets`,
     {
       method: "GET",
       headers: {
@@ -18,7 +18,10 @@ const MyPets = () => {
   return (
     <section className="px-8">
       <div className="w-full p-8 my-4 flex gap-4 items-center bg-gray-100">
-        <Link className="py-2 px-4 flex items-center gap-2 text-white bg-primary rounded-md hover:bg-transparent hover:outline-2 hover:outline-primary hover:text-primary transition-colors duration-300">
+        <Link
+          to="add"
+          className="py-2 px-4 flex items-center gap-2 text-white bg-primary rounded-md hover:bg-transparent hover:outline-2 hover:outline-primary hover:text-primary transition-colors duration-300"
+        >
           <BsFillPlusCircleFill className="text-xl" /> Agregar Mascota
         </Link>
       </div>
@@ -26,7 +29,7 @@ const MyPets = () => {
         {data?.result?.map((pet) => (
           <li key={pet.id} className="mb-4 w-full max-w-[450px] shadow-md">
             <PetCard
-              name={pet.name}
+              name={pet.name.toUpperCase()}
               breed={pet.breed}
               type={pet.type}
               description={pet.description}

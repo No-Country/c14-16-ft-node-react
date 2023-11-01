@@ -17,7 +17,7 @@ const Checkbox = ({ service, handleCheckboxChange }) => {
       />
       {service.name}
       <img
-        src={scissors}
+        src={`{data:image/png;base64,${service.image}`}
         alt={`icono de ${service.name}`}
         className="w-6 ml-2 bg-white rounded"
       />
