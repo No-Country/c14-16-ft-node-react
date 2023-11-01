@@ -7,6 +7,7 @@ import Button from "../../ui/button";
 import image from "/assets/Images/filter-bg_02.jpg";
 
 const Filter = ({ branches }) => {
+  console.log("Branches en prop:", branches);
   const [userFilter, setUserFilter] = useState({
     city: "",
     animalType: "",
@@ -17,12 +18,18 @@ const Filter = ({ branches }) => {
     "https://doggyhouse.azurewebsites.net/api/services"
   );
 
-  console.log(data);
-
   const { searchTerm, handleFilteredBranches } = useContext(SearchContext);
 
   const branchFilter = () => {
-    const filteredBranches = branches.filter(
+    let filteredBranches = [];
+
+    if (userFilter.city === "todas") {
+      filteredBranches = branches;
+      console.log("retorna todas", filteredBranches);
+      return filteredBranches;
+    }
+
+    filteredBranches = branches.filter(
       (branch) =>
         (userFilter.city.toLowerCase() === "" ||
           branch.city.toLowerCase() === userFilter.city.toLowerCase()) &&
@@ -38,6 +45,7 @@ const Filter = ({ branches }) => {
           })
         )
     );
+    console.log("retorna filtradas", filteredBranches);
     return filteredBranches;
   };
 
@@ -121,7 +129,7 @@ const Filter = ({ branches }) => {
               <Checkbox
                 key={service.id}
                 service={service}
-                disabled={userFilter.city === "todas" ? true : undefined}
+                disabled={userFilter.city === "todas"}
                 handleCheckboxChange={handleCheckboxChange}
               />
             ))}

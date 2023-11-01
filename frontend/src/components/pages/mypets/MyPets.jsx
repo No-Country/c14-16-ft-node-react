@@ -25,19 +25,7 @@ const MyPets = () => {
           <BsFillPlusCircleFill className="text-xl" /> Agregar Mascota
         </Link>
       </div>
-      <ul className="w-full flex flex-wrap gap-8 justify-center">
-        {data?.result?.map((pet) => (
-          <li key={pet.id} className="mb-4 w-full max-w-[450px] shadow-md">
-            <PetCard
-              name={pet.name.toUpperCase()}
-              breed={pet.breed}
-              type={pet.type}
-              description={pet.description}
-              weight={pet.weight}
-            />
-          </li>
-        ))}
-      </ul>
+      <ul className="w-full flex flex-wrap gap-8 justify-center"></ul>
       <Outlet />
     </section>
   );
