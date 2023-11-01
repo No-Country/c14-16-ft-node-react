@@ -1,0 +1,18 @@
+section #search {
+  width: 100%;
+  max-width: 350px;
+  padding: 0.75rem 0 0.75rem 0;
+  background-color: rgb(240, 162, 37);
+  border-radius: 8px;
+  text-align: center;
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.75rem;
+  color: rgb(243 244 246 )
+}
+
+section #search:hover {
+  background-color: transparent;
+  outline:solid 2px rgb(240 162 37);
+  color: rgb(240, 162, 37);
+}
