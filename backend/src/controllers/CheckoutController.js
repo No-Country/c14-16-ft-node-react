@@ -1,66 +1,50 @@
 import dotenv from 'dotenv';
-import { MercadoPagoConfig, Preference } from 'MercadoPago';
+import mercadopago from "mercadopago"
 
 dotenv.config();
 
-const client = new MercadoPagoConfig({ accessToken: process.env.MERCADO_API_KEY });
+export const createOrder = async(req, res) => {
 
-export const createPreferences = (req, res) => {
-    try{
-        const { id, description , price } = req.body
+    const { description , from_date, to_date, price, transport, comments, pet_id, branch_id } = req.body
 
-        const preference = new Preference(client)
-        preference.create({
-            items: [
+    const token = req.get('Authorization') || req.headers['authorization'];
+    if(!description || !price){
+        return res.status( 400 ).json({ message: "El cuerpo de la solicitud está incompleto. Debes proporcionar todos los parámetros requeridos" }); 
+    }
+
+    mercadopago.configure({access_token: process.env.MERCADO_KEY})
+
+    const result = await mercadopago.preferences.create({
+        items: [
             {
-                id: id,
                 title: description,
                 currency_id: 'ARG',
                 picture_url: 'https://www.mercadopago.com/org-img/MP3/home/logomp3.gif',
-                description: description,
-                category_id: 'art',
                 quantity: 1,
                 unit_price: Number(price)
             }
             ],
             back_urls: {
-            success: '/api/checkout/feedback',
-            failure: '/api/checkout/feedback',
-            pending: '/api/checkout/feedback'
+                success: "https://c14-16-ft-node-react.vercel.app/",
+                failure: "https://c14-16-ft-node-react.vercel.app/"
             },
-            auto_return: 'approved',
-            payment_methods: {
-            excluded_payment_methods: [
-                    {
-                                id: "debcabal"
-                    }
-            ],
-            excluded_payment_types: [
-                    {
-                                id: "credit_card"
-                    }
-            ],
-            installments: 1
-            }
-        }).then(function (response) {
-                res.json({
-                    id: response.body.id
-                });
-            }).catch(function (error) {
-                console.log(error);
-                res.status(500).json({ error: 'Error al crear la preferencia' });
-        });
+            auto_return: "approved"
+    })
+
+    //se creara directamente la reserva sin espera de la confirmacion del pago
+    try{
+        await fetch(`${process.env.BACKEND_URL}/api/bookings` , {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': token
+            },
+            body: JSON.stringify({
+                from_date, to_date, price, transport, comments, pet_id, branch_id
+            })
+        })
     }catch(error){
-        console.log(error)
+        return res.status( 500).json({ result: error.message}); 
     }
-}
-
-
-export const statusPayment = (req, res) => {
-    console.log("entro aca")
-    res.json({
-		Payment: req.query.payment_id,
-		Status: req.query.status,
-		MerchantOrder: req.query.merchant_order_id
-	});
+    return res.status( 200 ).json({ result: result}); 
 }
