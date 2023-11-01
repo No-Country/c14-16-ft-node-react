@@ -16,9 +16,14 @@ export const ServiceBranch = sequelize.define('ServiceBranch', {
 Service.belongsToMany(Branch, {
     through: ServiceBranch,
     foreignKey: 'service_id',
+    onDelete: "CASCADE",
+    hooks: true
 });
   
 Branch.belongsToMany(Service, {
     through: ServiceBranch,
-    foreignKey: 'company_id',
+    foreignKey: 'branch_id',
+    as: 'services',
+    onDelete: "CASCADE",
+    hooks: true
 });

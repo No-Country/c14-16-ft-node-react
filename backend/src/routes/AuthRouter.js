@@ -19,7 +19,7 @@ export const AuthRouter = express.Router();
  *             properties:
  *               email:
  *                 type: string
- *               pass:
+ *               password:
  *                 type: string
  *     responses:
  *       200:
@@ -75,7 +75,7 @@ AuthRouter.post("/login", login)
  *                 type: string
  *               email:
  *                 type: string
- *               pass:
+ *               password:
  *                 type: string
  *               profile_picture:
  *                 type: string 

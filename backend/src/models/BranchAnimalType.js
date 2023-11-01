@@ -16,8 +16,14 @@ export const BranchAnimalTypes = sequelize.define('BranchAnimalType', {
 Branch.belongsToMany(AnimalTypes, {
     through: BranchAnimalTypes, 
     foreignKey: 'branch_id',
+    as: 'animalTypes',
+    onDelete: "CASCADE",
+    hooks: true
 });
+
 AnimalTypes.belongsToMany(Branch, {
     through: BranchAnimalTypes,
     foreignKey: 'animal_type_id',
+    onDelete: "CASCADE",
+    hooks: true
 });

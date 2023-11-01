@@ -20,7 +20,10 @@ const options = {
         },
       ],
     },
-    apis: ["./src/routes/AuthRouter.js", "./src/routes/AnimalTypeRouter.js" , "./src/routes/CompanyRouter.js"],
+    apis: ["./src/routes/AuthRouter.js", "./src/routes/AnimalTypeRouter.js" ,
+    "./src/routes/BookingRouter.js", "./src/routes/BranchRouter.js",
+    "./src/routes/ClientRouter.js" ,"./src/routes/CompanyRouter.js",
+    "./src/routes/PetRouter.js", "./src/routes/ServiceRouter.js",  "./src/routes/CheckoutRouter.js"],
 };
   
 

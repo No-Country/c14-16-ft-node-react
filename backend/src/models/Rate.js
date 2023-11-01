@@ -8,7 +8,11 @@ export const Rate = sequelize.define('Rate',{
         primaryKey: true,
         autoIncrement: true,
     },
-    weight:{
+    weightFrom:{
+        type: DataTypes.FLOAT,
+        allowNull: false
+    },
+    weightTo:{
         type: DataTypes.FLOAT,
         allowNull: false
     },

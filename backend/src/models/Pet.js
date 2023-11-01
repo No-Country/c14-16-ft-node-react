@@ -15,7 +15,7 @@ export const Pet = sequelize.define('Pet',{
     },
     breed:{
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: true
     },
     weight:{
         type: DataTypes.FLOAT,
@@ -34,5 +34,6 @@ Pet.belongsTo(Client, {
 
 Pet.belongsTo(AnimalTypes, {
     foreignKey: 'type_id',
+    as: 'types',
     allowNull: false,
 });

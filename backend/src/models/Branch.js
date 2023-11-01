@@ -34,10 +34,22 @@ export const Branch = sequelize.define('Branch',{
         type: DataTypes.STRING,
         allowNull: false
     },
+    price_km:{
+        type: DataTypes.FLOAT,
+        allowNull: false
+    },
     address:{
         type: DataTypes.STRING,
         allowNull: false
-    }
+    },
+    long:{
+        type: DataTypes.FLOAT,
+        allowNull: false
+    }, 
+    lat:{
+        type: DataTypes.FLOAT,
+        allowNull: false
+    },
 },{
     timestamps: false
 });
@@ -52,7 +64,8 @@ Branch.belongsTo(Company, {
 Branch.hasMany(Image, {
     foreignKey: 'branch_id',
     onDelete: 'CASCADE', 
-    hooks: true 
+    hooks: true,
+    as: 'images',
 }
 );
 
@@ -60,6 +73,7 @@ Branch.hasMany(Rate, {
     foreignKey: 'branch_id',
     onDelete: 'CASCADE',
     allowNull: false,
-    hooks: true 
+    hooks: true,
+    as: 'rates',
 }
 );

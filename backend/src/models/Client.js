@@ -28,7 +28,7 @@ export const Client = sequelize.define('Client',{
           isEmail: true,
         },
     },
-    pass: {
+    password: {
         type: DataTypes.STRING,
         allowNull: false,
     },
@@ -38,12 +38,12 @@ export const Client = sequelize.define('Client',{
     },
 },{
     defaultScope: {
-      attributes: { exclude: ['pass'] }
+      attributes: { exclude: ['password'] }
     },
     timestamps: false
 });
 
 Client.beforeCreate(async (client) => {
-    const hashedPassword = await hash(client.pass, 10);
-    client.pass = hashedPassword;
+    const hashedPassword = await hash(client.password, 10);
+    client.password = hashedPassword;
 });

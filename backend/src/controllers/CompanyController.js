@@ -5,9 +5,10 @@ export const getCompany = async (req ,res) =>{
         const getCompany = await Company.findAll();
         return res.status( 200 ).json({ result: getCompany }); 
     } catch ( error ) {
-        return res.status( 500 ).json({ message: error });
+        return res.status( 500 ).json({ message: error.message });
     }
 }
+
 export const getOneCompany = async (req ,res) =>{
     try {
         const { id } = req.params;
@@ -21,9 +22,10 @@ export const getOneCompany = async (req ,res) =>{
         }
         return res.status( 200 ).json({ result: getOneCompany }); 
     } catch ( error ) {
-        return res.status( 500 ).json({ message: error });
+        return res.status( 500 ).json({ message: error.message });
     }
 }
+
 export const createCompany = async (req ,res) =>{
     try {
         const { name } = req.body;
@@ -40,9 +42,10 @@ export const createCompany = async (req ,res) =>{
         const createdCompany = await Company.create({ name });
         return res.status( 200 ).json({ result: createdCompany });
     } catch ( error ) {
-        return res.status( 500 ).json({ message: error });
+        return res.status( 500 ).json({ message: error.message });
     }
 }
+
 export const updateCompany = async (req ,res) =>{
     try {
         const { id } = req.params;
@@ -62,9 +65,10 @@ export const updateCompany = async (req ,res) =>{
         companyToUpdate.save();
         return res.status( 200 ).json({ result: companyToUpdate });
     } catch ( error ) {
-        return res.status( 500 ).json({ message: error });
+        return res.status( 500 ).json({ message: error.message });
     }
 }
+
 export const deleteCompany = async (req ,res) =>{
     try {
         const { id } = req.params;
@@ -73,14 +77,14 @@ export const deleteCompany = async (req ,res) =>{
             return res.status( 400 ).json({ message: 'El id es obligatorio' });
         }
 
-        const deleteCompany = await Company.destroy({
+        await Company.destroy({
             where: {
                 id
             }
         });
         
-        return res.status( 200 ).json({ result: deleteCompany })
+        return res.status( 200 ).json({ result: `Empresa ${id} borrada correctamente` })
     } catch ( error ) {
-        return res.status( 500 ).json({ message: error });
+        return res.status( 500 ).json({ message: error.message });
     }
 }
