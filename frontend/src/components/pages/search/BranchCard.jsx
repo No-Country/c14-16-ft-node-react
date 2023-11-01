@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const BranchCard = ({ branch }) => {
   return (
     <Link to={`/branch/${branch.id}`} className="max-w-[600px]">
-      <article className="p-4 flex flex-col gap-4 bg-gray-100 rounded-xl shadow-lg hover:translate-y-2">
+      <article className="p-4 flex flex-col gap-4 bg-gray-100 rounded-xl shadow-lg hover:-translate-y-2 transition-transform duration-300">
         <div className="flex gap-4">
           <img
             src={image}

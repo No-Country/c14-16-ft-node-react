@@ -11,8 +11,9 @@ import Reserver from "../components/pages/reserver/reserver";
 import Footer from "../components/Footer/Footer";
 import SearchPage from "../components/pages/search/SearchPage";
 import BranchPage from "../components/pages/branch/BranchPage";
-import MisReservas from "../components/pages/misReservas/MisReservas";
-import MisMascotas from "../components/pages/misMascotas/MisMascotas";
+import MyPets from "../components/pages/mypets/MyPets";
+import AddPet from "../components/pages/mypets/AddPet";
+
 const AppRouter = () => {
   return (
     <div>
@@ -25,9 +26,13 @@ const AppRouter = () => {
         <Route path="/forgot-pass" element={<ForgotPass />} />
         <Route path="/search" element={<SearchPage />} />
         <Route path="/reserver" element={<Reserver />} />
-        <Route path="/branch" element={<BranchPage />} />
-        <Route path="/misReservas" element={<MisReservas />} />
-        <Route path="/misMascotas" element={<MisMascotas />} />
+        <Route path="/branch/:id" element={<BranchPage />} />
+        <Route path="/mypets/*" element={<MyPets />}>
+          <Route path="add" element={<AddPet />} />
+        </Route>
+        <Route path="/mybookings/*" element={"LISTADO DE BOOKINGS"}>
+          <Route path="add" element={"BOOKING CARD"} />
+        </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />

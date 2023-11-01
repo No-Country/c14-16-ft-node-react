@@ -7,7 +7,7 @@ function Select({ name, value, values, options, onChange }) {
         name={name}
         value={value}
         id={name}
-        className="w-full p-4 bg-gray-100 border-b-2 border-[#333] rounded-md outline-none"
+        className="w-full p-4 bg-gray-200 border-b-2 border-[#333] rounded-md outline-none"
         onChange={onChange}
       >
         {values.map((val, index) => (
