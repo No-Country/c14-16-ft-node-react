@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Input from "../../ui/inputs";
 import Button from "../../ui/button";
+import { useNavigate } from "react-router-dom";
 
 // Estilos
 const filterBg = {
@@ -18,17 +19,20 @@ const AddPet = () => {
     weight: "0",
   });
 
-  console.log(pet);
+  const navigate = useNavigate();
+
+  const handleCancel = () => navigate("/mypets");
+
   return (
     <div
       style={filterBg}
       className="w-screen py-16 grid place-items-center absolute top-0 left-0"
     >
       <form className="w-full max-w-[550px] p-8 bg-gray-100 border-2 border-primary rounded-md">
-        <h2 className="py-4 text-center font-bold font-roboto">
+        <h2 className="py-4 text-center text-lg font-bold font-roboto">
           Agrega tu mascota
         </h2>
-        <label htmlFor="name">
+        <label htmlFor="name" className="block mb-6">
           ¿Cómo se llama tu mascota?
           <Input
             id="name"
@@ -42,7 +46,7 @@ const AddPet = () => {
             errors={""}
           />
         </label>
-        <label htmlFor="types">
+        <label htmlFor="types" className="block mb-6">
           ¿Qué animalito tenés?
           <select
             type="select"
@@ -62,7 +66,7 @@ const AddPet = () => {
           </select>
         </label>
         {pet.types === "gato" && (
-          <label htmlFor="name">
+          <label htmlFor="name" className="block mb-6">
             ¿Que raza es?
             <select
               type="select"
@@ -87,7 +91,7 @@ const AddPet = () => {
           </label>
         )}
         {pet.types === "perro" && (
-          <label htmlFor="name">
+          <label htmlFor="name" className="block mb-6">
             ¿Que raza es?
             <select
               type="select"
@@ -112,7 +116,7 @@ const AddPet = () => {
             </select>
           </label>
         )}
-        <label htmlFor="weight">
+        <label htmlFor="weight" className="block mb-6">
           ¿Cuanto Pesa?
           <Input
             id="weight"
@@ -126,21 +130,29 @@ const AddPet = () => {
                 [e.target.name]: e.target.value,
               }))
             }
+            clase="bg-gray-100"
             errors={""}
           />
         </label>
-        <label htmlFor="description">
+        <label htmlFor="description" className="mb-2">
           Descripción
           <textarea
             name="description"
-            sizable="false"
             id="description"
             cols="30"
-            rows="10"
-            className="w-full p-2 bg-gray-100"
+            rows="8"
+            className="w-full p-2 bg-gray-200 resize-none rounded-md"
           ></textarea>
         </label>
-        <Button type="submit" label="Agregar" clase="" />
+        <div className="flex gap-4 items-center">
+          <Button type="submit" label="Agregar" clase="" />
+          <Button
+            type="button"
+            label="Cancelar"
+            clase=""
+            click={handleCancel}
+          />
+        </div>
       </form>
     </div>
   );
