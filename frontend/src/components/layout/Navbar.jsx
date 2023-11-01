@@ -20,7 +20,7 @@ const Navbar = () => {
             className="box"
             onClick={logout}
         >
-            <Link className="box"  to="/login" onClick={closeMenu}>
+            <Link className="box" to="/login" onClick={closeMenu}>
                 Cerrar Sesión
             </Link>
         </button>
@@ -61,6 +61,14 @@ const Navbar = () => {
                 </Link>
                 <Link className="box" to="/about" onClick={closeMenu}>
                     Nosotros
+                </Link>
+                
+                <Link className="box" to="/misReservas" onClick={closeMenu}>
+                    Mis Reservas
+                </Link>
+                
+                <Link className="box" to="/misMascotas" onClick={closeMenu}>
+                    Mis Mascotas
                 </Link>
                 {buttonLabel}
             </div>
