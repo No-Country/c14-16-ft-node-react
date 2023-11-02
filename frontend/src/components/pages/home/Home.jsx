@@ -1,15 +1,14 @@
 import DogHome from "/assets/Images/DogHome.webp";
-import HeroImage from "/assets/Images/hero.jpg";
+import HeroImage from "/assets/Images/hero_3.jpg";
 import "./Home.css";
 
 import Hero from "../../hero";
 import Offer from "../../offer";
 import Services from "../../services";
-import Prices from "../../prices";
 
 const Home = () => {
   const HeaderStyle = {
-    backgroundImage: `url(${DogHome})`,
+    backgroundImage: `linear-gradient(to right, rgb(250,250,250,0.2), rgb(250,250,250, 0.3)),url(${HeroImage})`,
     backgroundSize: "cover",
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat",
@@ -17,7 +16,7 @@ const Home = () => {
 
   return (
     <>
-      <header style={HeaderStyle} className="py-8">
+      <header className="py-8">
         <Hero />
       </header>
 
