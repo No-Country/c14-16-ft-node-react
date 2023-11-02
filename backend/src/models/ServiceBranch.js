@@ -1,0 +1,29 @@
+import { sequelize } from '../config/config.js';
+import { DataTypes } from 'sequelize';
+import { Branch } from './Branch.js';
+import { Service } from './Service.js';
+
+export const ServiceBranch = sequelize.define('ServiceBranch', {
+    id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+    },
+  },{
+    timestamps: false
+});
+  
+Service.belongsToMany(Branch, {
+    through: ServiceBranch,
+    foreignKey: 'service_id',
+    onDelete: "CASCADE",
+    hooks: true
+});
+  
+Branch.belongsToMany(Service, {
+    through: ServiceBranch,
+    foreignKey: 'branch_id',
+    as: 'services',
+    onDelete: "CASCADE",
+    hooks: true
+});
