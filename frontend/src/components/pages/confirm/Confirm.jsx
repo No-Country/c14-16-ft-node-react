@@ -2,24 +2,30 @@ import { useEffect, useState } from "react";
 import { TOKEN_KEY } from "../../../constants/api";
 import Button from "../../ui/button";
 import { BsXCircle } from "react-icons/bs";
+import {format} from "date-fns"
 
 import "./Confirm.css";
 
 export const Confirm = ({ reserver, setShowModal }) => {
   const [price, setPrice] = useState(0);
 
+<<<<<<< HEAD
   const user = JSON.parse(localStorage.getItem("User"));
   const token = localStorage.getItem(TOKEN_KEY);
+=======
+    const user = JSON.parse(localStorage.getItem('User'))
+    const token = localStorage.getItem(TOKEN_KEY)
+>>>>>>> frontend
 
   useEffect(() => {
     if (reserver) {
-      console.log("entra");
       const fromDate = new Date(reserver.from_date);
       const toDate = new Date(reserver.to_date);
 
       const timeDifference = toDate - fromDate;
-      const daysDifference = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+      const daysDifference = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
 
+      console.log(daysDifference)
       const data = JSON.stringify({
         branch_id: reserver.branch_id,
         pet_id: reserver.pet_id,
@@ -58,6 +64,8 @@ export const Confirm = ({ reserver, setShowModal }) => {
     };
 
     reserver.price = price;
+    reserver.from_date = format(reserver.from_date, "yyyy-MM-dd");
+    reserver.to_date = format(reserver.to_date, "yyyy-MM-dd");
 
     const response = await fetch(
       `https://doggyhouse.azurewebsites.net/api/checkout/create-order`,

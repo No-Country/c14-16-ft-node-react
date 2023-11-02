@@ -7,7 +7,6 @@ import { Outlet, useParams } from "react-router-dom";
 import Button from "../../ui/button";
 import Label from "../../ui/label";
 import { useNavigate } from "react-router-dom";
-import { format } from "date-fns";
 import Confirm from "../confirm/Confirm";
 
 const Reserver = () => {
@@ -26,8 +25,8 @@ const Reserver = () => {
     price: 0,
     description: "Reserva en DoggysHouse",
   });
-  const user = JSON.parse(sessionStorage.getItem("User"));
-  const token = sessionStorage.getItem(TOKEN_KEY);
+  const user = JSON.parse(localStorage.getItem("User"));
+  const token = localStorage.getItem(TOKEN_KEY);
 
   useEffect(() => {
     const getPets = async () => {
@@ -50,6 +49,10 @@ const Reserver = () => {
     getPets();
   }, []);
 
+  const closeModal = () =>{
+    setShowModal(false)
+  }
+
   const handleChange = (e) => {
     setReserver({ ...reserver, [e.target.name]: e.target.value });
   };
@@ -60,10 +63,6 @@ const Reserver = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    reserver.from_date = format(reserver.from_date, "yyyy-MM-dd");
-    reserver.to_date = format(reserver.to_date, "yyyy-MM-dd");
-    console.log(reserver);
     setShowModal(true);
   };
   return (
