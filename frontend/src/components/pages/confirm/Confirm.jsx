@@ -2,20 +2,15 @@ import { useEffect, useState } from "react";
 import { TOKEN_KEY } from "../../../constants/api";
 import Button from "../../ui/button";
 import { BsXCircle } from "react-icons/bs";
-import {format} from "date-fns"
+import { format } from "date-fns";
 
 import "./Confirm.css";
 
-export const Confirm = ({ reserver, setShowModal }) => {
+export const Confirm = ({ reserver, closeModal }) => {
   const [price, setPrice] = useState(0);
 
-<<<<<<< HEAD
   const user = JSON.parse(localStorage.getItem("User"));
   const token = localStorage.getItem(TOKEN_KEY);
-=======
-    const user = JSON.parse(localStorage.getItem('User'))
-    const token = localStorage.getItem(TOKEN_KEY)
->>>>>>> frontend
 
   useEffect(() => {
     if (reserver) {
@@ -25,7 +20,7 @@ export const Confirm = ({ reserver, setShowModal }) => {
       const timeDifference = toDate - fromDate;
       const daysDifference = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
 
-      console.log(daysDifference)
+      console.log(daysDifference);
       const data = JSON.stringify({
         branch_id: reserver.branch_id,
         pet_id: reserver.pet_id,
@@ -84,14 +79,14 @@ export const Confirm = ({ reserver, setShowModal }) => {
       <div className="popup container max-w-[350px] mx-auto py-10 px-4 flex flex-col gap-4 items-center bg-white border-2 border-primary rounded-md shadow-md">
         <BsXCircle
           className="text-lg text-primary absolute top-2 right-2 cursor-pointer"
-          onClick={() => setShowModal(false)}
+          onClick={() => closeModal(false)}
         />
         <h2 className="font-bold text-2xl text-center">
           ¿Queres confirmar tu reserva?
         </h2>
         <p className="font-josefin">
           El precio total de la reserva es:{" "}
-          <span className="font-roboto font-bold">{price}</span>
+          <span className="font-roboto font-bold">${price}</span>
         </p>
         <Button
           type="submit"

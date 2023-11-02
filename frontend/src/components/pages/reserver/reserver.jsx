@@ -49,9 +49,9 @@ const Reserver = () => {
     getPets();
   }, []);
 
-  const closeModal = () =>{
-    setShowModal(false)
-  }
+  const closeModal = () => {
+    setShowModal(false);
+  };
 
   const handleChange = (e) => {
     setReserver({ ...reserver, [e.target.name]: e.target.value });
@@ -67,7 +67,7 @@ const Reserver = () => {
   };
   return (
     <>
-      {showModal && <Confirm reserver={reserver} setShowModal={setShowModal} />}
+      {showModal && <Confirm reserver={reserver} closeModal={closeModal} />}
       <div className="min-h-screen container bg-gray-100 mx-auto pt-10 ">
         <div className="space-y-4 px-10 ">
           <h2 className="text-2xl font-bold font-roboto text-center lg:text-start ">
