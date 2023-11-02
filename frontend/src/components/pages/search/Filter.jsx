@@ -7,6 +7,7 @@ import Button from "../../ui/button";
 import image from "/assets/Images/filter-bg_02.jpg";
 
 const Filter = ({ branches }) => {
+  console.log("Branches en prop:", branches);
   const [userFilter, setUserFilter] = useState({
     city: "",
     animalType: "",
@@ -20,10 +21,17 @@ const Filter = ({ branches }) => {
   const { searchTerm, handleFilteredBranches } = useContext(SearchContext);
 
   const branchFilter = () => {
-    console.log(userFilter.services);
-    const filteredBranches = branches.filter(
+    let filteredBranches = [];
+
+    if (userFilter.city === "todas") {
+      filteredBranches = branches;
+      console.log("retorna todas", filteredBranches);
+      return filteredBranches;
+    }
+
+    filteredBranches = branches.filter(
       (branch) =>
-        (userFilter.city.toLowerCase() == "" ||
+        (userFilter.city.toLowerCase() === "" ||
           branch.city.toLowerCase() === userFilter.city.toLowerCase()) &&
         branch.animalTypes.some(
           (animalType) =>
@@ -37,12 +45,19 @@ const Filter = ({ branches }) => {
           })
         )
     );
+    console.log("retorna filtradas", filteredBranches);
     return filteredBranches;
   };
 
   useEffect(() => {
     let filteredBranches = [];
-    if (searchTerm && searchTerm.city !== "todas") {
+
+    if (
+      searchTerm &&
+      searchTerm.city !== "todas" &&
+      userFilter &&
+      userFilter.city !== "todas"
+    ) {
       filteredBranches = branches.filter(
         (branch) =>
           (searchTerm.city === "" ||
@@ -114,6 +129,7 @@ const Filter = ({ branches }) => {
               <Checkbox
                 key={service.id}
                 service={service}
+                disabled={userFilter.city === "todas"}
                 handleCheckboxChange={handleCheckboxChange}
               />
             ))}
@@ -129,7 +145,8 @@ const Filter = ({ branches }) => {
                 type="select"
                 name="animalType"
                 value={userFilter.animalType}
-                className="w-full p-4 bg-gray-100 border-b-2 border-[#333] rounded-md outline-none"
+                disabled={userFilter.city === "todas" ? true : undefined}
+                className="w-full p-4 bg-gray-200 border-b-2 border-[#333] rounded-md outline-none"
                 onChange={(e) =>
                   setUserFilter((userFilter) => ({
                     ...userFilter,
@@ -153,7 +170,7 @@ const Filter = ({ branches }) => {
                 type="select"
                 name="city"
                 value={userFilter.city}
-                className="w-full p-4 bg-gray-100 border-b-2 border-[#333] rounded-md outline-none"
+                className="w-full p-4 bg-gray-200 border-b-2 border-[#333] rounded-md outline-none"
                 onChange={(e) =>
                   setUserFilter((userFilter) => ({
                     ...userFilter,
@@ -162,6 +179,7 @@ const Filter = ({ branches }) => {
                 }
               >
                 <option value="">Selecciona tu Ciudad</option>
+                <option value="todas">Todas</option>
                 {branches.map((branch, index) => (
                   <option key={index} value={branch.city}>
                     {branch.city}
