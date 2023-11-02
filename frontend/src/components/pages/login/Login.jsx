@@ -20,10 +20,10 @@ function Login() {
   const navigate = useNavigate();
 
   const setToken = (token) => {
-    sessionStorage.setItem(TOKEN_KEY, token);
+    localStorage.setItem(TOKEN_KEY, token);
   };
   const setUser = (user) => {
-    sessionStorage.setItem("User", JSON.stringify(user));
+    localStorage.setItem("User", JSON.stringify(user));
   };
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });

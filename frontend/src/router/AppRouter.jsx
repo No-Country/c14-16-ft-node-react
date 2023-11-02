@@ -18,7 +18,7 @@ import Confirm from "../components/pages/confirm/Confirm";
 
 const AppRouter = () => {
   return (
-    <div>
+    <div className="min-h-screen flex flex-col">
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -35,7 +35,7 @@ const AppRouter = () => {
         <Route path="/mybookings/*" element={<MyBookings />}>
           <Route path="add" element={"BOOKING CARD"} />
         </Route>
-        <Route path="/confirm" element={<Confirm />} />
+
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />

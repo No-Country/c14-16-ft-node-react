@@ -3,16 +3,17 @@ import { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import { TOKEN_KEY } from "../../../constants/api";
 import "react-datepicker/dist/react-datepicker.css";
-import { useParams } from "react-router-dom";
+import { Outlet, useParams } from "react-router-dom";
 import Button from "../../ui/button";
 import Label from "../../ui/label";
 import { useNavigate } from "react-router-dom";
-import { format } from "date-fns";
+import Confirm from "../confirm/Confirm";
 
 const Reserver = () => {
   const { id } = useParams();
 
   const navigate = useNavigate();
+  const [showModal, setShowModal] = useState(false);
   const [pets, setPets] = useState([]);
   const [reserver, setReserver] = useState({
     pet_id: null,
@@ -24,8 +25,8 @@ const Reserver = () => {
     price: 0,
     description: "Reserva en DoggysHouse",
   });
-  const user = JSON.parse(sessionStorage.getItem("User"));
-  const token = sessionStorage.getItem(TOKEN_KEY);
+  const user = JSON.parse(localStorage.getItem("User"));
+  const token = localStorage.getItem(TOKEN_KEY);
 
   useEffect(() => {
     const getPets = async () => {
@@ -48,6 +49,10 @@ const Reserver = () => {
     getPets();
   }, []);
 
+  const closeModal = () => {
+    setShowModal(false);
+  };
+
   const handleChange = (e) => {
     setReserver({ ...reserver, [e.target.name]: e.target.value });
   };
@@ -58,13 +63,11 @@ const Reserver = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    reserver.from_date = format(reserver.from_date, "yyyy-MM-dd");
-    reserver.to_date = format(reserver.to_date, "yyyy-MM-dd");
-
-    navigate(`/confirm`, { state: { reserver } });
+    setShowModal(true);
   };
   return (
     <>
+      {showModal && <Confirm reserver={reserver} closeModal={closeModal} />}
       <div className="min-h-screen container bg-gray-100 mx-auto pt-10 ">
         <div className="space-y-4 px-10 ">
           <h2 className="text-2xl font-bold font-roboto text-center lg:text-start ">
