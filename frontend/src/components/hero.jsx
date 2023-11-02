@@ -31,7 +31,7 @@ function Hero() {
 
   return (
     <>
-      <div className="container mx-auto px-4 py-8 min-h-[50vh] ">
+      <div className="container mx-auto px-4 py-8 min-h-[50vh]">
         <h1 className="text-4xl font-semibold font-roboto text-center pt-5 mb-4 font-mono">
           Un lugar seguro para tu mascota
         </h1>

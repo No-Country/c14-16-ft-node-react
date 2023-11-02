@@ -7,13 +7,6 @@ import Offer from "../../offer";
 import Services from "../../services";
 
 const Home = () => {
-  const HeaderStyle = {
-    backgroundImage: `linear-gradient(to right, rgb(250,250,250,0.2), rgb(250,250,250, 0.3)),url(${HeroImage})`,
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-    backgroundRepeat: "no-repeat",
-  };
-
   return (
     <>
       <header className="py-8">
