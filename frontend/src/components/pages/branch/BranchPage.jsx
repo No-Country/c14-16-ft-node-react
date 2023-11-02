@@ -3,21 +3,23 @@ import { useFetch } from "../../../customHooks/useFetch";
 import { Link, useNavigate } from "react-router-dom";
 import ClipLoader from "react-spinners/ClipLoader";
 import Tarifas from "./Tarifas";
+import { FaAngleLeft } from "react-icons/fa";
 
 const BranchPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
+
   const { data, loading, errorFetch } = useFetch(
     `https://doggyhouse.azurewebsites.net/api/branches/${id}`
   );
-  const user = localStorage.getItem('User')
+  const user = sessionStorage.getItem("User");
   const handleCheckUser = (e) => {
-    if(!user){
-      e.preventDefault()
-      navigate(`/login`)
+    if (!user) {
+      e.preventDefault();
+      navigate(`/login`);
     }
-  }
+  };
 
   return (
     <>
@@ -33,10 +35,14 @@ const BranchPage = () => {
         </main>
       ) : !loading && !errorFetch ? (
         <main className="container mx-auto py-16 px-2 md:px-8">
-              <Link to={`/search`} className="bg-gray-300 text-white px-2 py-1 rounded-lg">
-                Atrás
-              </Link>
-              
+          <Link
+            to={`/search`}
+            className="w-[100px] py-2 px-4 flex gap-2 items-center bg-primary text-white rounded-md hover:bg-transparent hover:shadow-md hover:shadow-primary hover:text-primary transition-colors duration-300 "
+          >
+            <FaAngleLeft />
+            Atrás
+          </Link>
+
           <div className="mb-8 flex gap-8 mt-4">
             <img
               src={`data:image/png;base64,${data?.result?.images[0]}`}
@@ -82,7 +88,13 @@ const BranchPage = () => {
           {/* Tarifas */}
           <Tarifas data={data} />
           <div className="w-full flex justify-center py-8 mb-16 bg-gray-100">
-            <Link to={`/reserver/${id}`} onClick={handleCheckUser} className="text-gray-100 text-lg w-full md:max-w-[350px] rounded-lg py-3 my-5 font-semibold border-2 border-transparent hover:bg-transparent hover:border-primary hover:text-primary transition-colors duration-300 bg-primary text-center">Reservar</Link>
+            <Link
+              to={`/reserver/${id}`}
+              onClick={handleCheckUser}
+              className="text-gray-100 text-lg w-full md:max-w-[350px] rounded-lg py-3 my-5 font-semibold border-2 border-transparent hover:bg-transparent hover:border-primary hover:text-primary transition-colors duration-300 bg-primary text-center"
+            >
+              Reservar
+            </Link>
           </div>
         </main>
       ) : (
@@ -91,7 +103,6 @@ const BranchPage = () => {
         </main>
       )}
     </>
-
   );
 };
 

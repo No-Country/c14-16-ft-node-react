@@ -1,5 +1,4 @@
-const Checkbox = ({ service, handleCheckboxChange }) => {
-
+const Checkbox = ({ service, handleCheckboxChange, disabled }) => {
   return (
     <label
       htmlFor={service.id}
@@ -11,6 +10,7 @@ const Checkbox = ({ service, handleCheckboxChange }) => {
         name={service.name}
         defaultChecked={false}
         value={service.name}
+        disabled={disabled}
         className="mr-2"
         onChange={handleCheckboxChange}
       />

@@ -1,39 +1,30 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { LoginContext } from "../../context/login/LoginContext";
 import "./Navbar.css";
-import { TOKEN_KEY } from "../../constants/api";
 
 const Navbar = () => {
-  const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
+  const { isLogin, handleLogin } = useContext(LoginContext);
+
+  const location = useLocation();
   const isAboutPage = location.pathname === "/";
   const toggleMenu = () => setMenuOpen(!menuOpen);
   const closeMenu = () => setMenuOpen(false);
-  const isLoggedIn = localStorage.getItem(TOKEN_KEY) !== null;
   const navigate = useNavigate();
+
   const logout = () => {
-    localStorage.removeItem(TOKEN_KEY);
-    localStorage.removeItem('User');
+    sessionStorage.removeItem("TOKEN");
+    sessionStorage.removeItem("User");
+    handleLogin(false);
     navigate("/login", { replace: true });
   };
-  const buttonLabel = isLoggedIn ? (
-    <button className="box" onClick={logout}>
-      <Link className="box" to="/login" onClick={closeMenu}>
-        Cerrar Sesión
-      </Link>
-    </button>
-  ) : (
-    <Link className="box" to="/login" onClick={closeMenu}>
-      Iniciar Sesión
-    </Link>
-  );
 
   return (
     <nav
       id="container-global"
-      className={`navbar px-4 py-6 text-xl md:text-2xl flex text-black-100 font-semibold justify-between items-center ${
-        isAboutPage ? "bg-yellow-400" : ""
-      }`}
+      className={`navbar px-4 py-6 text-xl md:text-2xl flex text-black-100 font-semibold justify-between items-center ${isAboutPage ? "bg-yellow-400" : ""
+        }`}
     >
       <div className="flex items-center">
         <Link to="/">
@@ -79,27 +70,50 @@ const Navbar = () => {
         </button>
       </div>
       <div
-        className={`md:flex ${
-          menuOpen
-            ? "md:flex-col md:space-y-4 md:items-center menu-open"
-            : "hidden"
-        }`}
+        className={`md:flex ${menuOpen
+          ? "md:flex-col md:space-y-4 md:items-center menu-open"
+          : "hidden"
+          }`}
       >
         <Link className="box" to="/" onClick={closeMenu}>
-          Inicio
+          <span className="links-nav">
+            Inicio
+          </span>
         </Link>
         <Link className="box" to="/about" onClick={closeMenu}>
-          Nosotros
+          <span className="links-nav">
+            Nosotros
+          </span>
         </Link>
-
-        <Link className="box" to="/mybookings" onClick={closeMenu}>
-          Mis Reservas
-        </Link>
-
-        <Link className="box" to="/mypets" onClick={closeMenu}>
-          Mis Mascotas
-        </Link>
-        {buttonLabel}
+        {isLogin && (
+          <Link className="box" to="/mybookings" onClick={closeMenu}>
+            <span className="links-nav">
+              Mis Reservas
+            </span>
+          </Link>
+        )}
+        {isLogin && (
+          <Link className="box" to="/mypets" onClick={closeMenu}>
+            <span className="links-nav">
+              Mis Mascotas
+            </span>
+          </Link>
+        )}
+        {isLogin ? (
+          <button className="box" onClick={logout}>
+            <Link className="box" to="/login" onClick={closeMenu}>
+              <span className="links-nav">
+                Cerrar Sesión
+              </span>
+            </Link>
+          </button>
+        ) : (
+          <Link className="box" to="/login" onClick={closeMenu}>
+            <span className="links-nav">
+              Iniciar Sesión
+            </span>
+          </Link>
+        )}
       </div>
     </nav>
   );

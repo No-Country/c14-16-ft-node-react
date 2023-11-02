@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 const BranchCard = ({ branch }) => {
   return (
     <Link to={`/branch/${branch.id}`} className="max-w-[600px]">
-      <article className="p-4 flex flex-col gap-4 bg-gray-100 rounded-xl shadow-lg hover:-translate-y-2 transition-transform duration-300">
+      <article className="min-h-[300px] p-4 flex flex-col gap-4 bg-gray-100 rounded-xl shadow-lg hover:-translate-y-2 transition-transform duration-300">
         <div className="flex gap-4">
           <img
             src={`data:image/png;base64,${branch.images}`}
@@ -42,12 +42,15 @@ const BranchCard = ({ branch }) => {
           </div>
         </div>
 
-        <div className="w-full flex gap-2">
+        <div className="w-full mt-auto flex gap-2">
           <h2 className="text-left text-md font-bold">Capacidad Actual:</h2>
-          <div className="w-[75%] flex gap-2 items-center">
+          <div className="w-[75%]  flex gap-2 items-center">
             <span>{branch.amount}</span>
-            <div className="w-full h-4 bg-yellow-700 rounded-full overflow-hidden">
-              <div className="h-4 bg-primary" style={{ width: `${(branch.amount / branch.capacity) * 100}%` }}></div>
+            <div className="w-full h-4  bg-yellow-700 rounded-full overflow-hidden">
+              <div
+                className="h-4 bg-primary"
+                style={{ width: `${(branch.amount / branch.capacity) * 100}%` }}
+              ></div>
             </div>
             <span>{branch.capacity}</span>
           </div>

@@ -13,6 +13,7 @@ import SearchPage from "../components/pages/search/SearchPage";
 import BranchPage from "../components/pages/branch/BranchPage";
 import MyPets from "../components/pages/mypets/MyPets";
 import AddPet from "../components/pages/mypets/AddPet";
+import MyBookings from "../components/pages/mybookings/MyBookings";
 import Confirm from "../components/pages/confirm/Confirm";
 
 const AppRouter = () => {
@@ -31,7 +32,7 @@ const AppRouter = () => {
         <Route path="/mypets/*" element={<MyPets />}>
           <Route path="add" element={<AddPet />} />
         </Route>
-        <Route path="/mybookings/*" element={"LISTADO DE BOOKINGS"}>
+        <Route path="/mybookings/*" element={<MyBookings />}>
           <Route path="add" element={"BOOKING CARD"} />
         </Route>
         <Route path="/confirm" element={<Confirm />} />

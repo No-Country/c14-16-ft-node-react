@@ -1,27 +1,30 @@
-import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import ImageBlock from '../../ui/image-block';
-import Input from '../../ui/inputs';
-import Button from '../../ui/button';
-import { FcGoogle } from 'react-icons/fc';
-import { API_LOGIN, TOKEN_KEY } from '../../../constants/api';
-import './Login.css';
-import { loginGoogle } from '../../../firebaseConfig';
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import ImageBlock from "../../ui/image-block";
+import Input from "../../ui/inputs";
+import Button from "../../ui/button";
+import { FcGoogle } from "react-icons/fc";
+import { API_LOGIN, TOKEN_KEY } from "../../../constants/api";
+import "./Login.css";
+import { loginGoogle } from "../../../firebaseConfig";
+import { useContext } from "react";
+import { LoginContext } from "../../../context/login/LoginContext";
 function Login() {
   const [formData, setFormData] = useState({
-    email: '',
-    password: '',
+    email: "",
+    password: "",
   });
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
-
+  const { handleLogin } = useContext(LoginContext);
   const navigate = useNavigate();
+
   const setToken = (token) => {
-    localStorage.setItem(TOKEN_KEY, token);
-  }
+    sessionStorage.setItem(TOKEN_KEY, token);
+  };
   const setUser = (user) => {
-    localStorage.setItem('User', JSON.stringify(user))
-  }
+    sessionStorage.setItem("User", JSON.stringify(user));
+  };
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -29,51 +32,56 @@ function Login() {
   async function handleSubmit(e) {
     e.preventDefault();
     if (!formData.email || !formData.password) {
-      setErrors({ email: 'Campo requerido', password: 'Campo requerido' });
+      setErrors({ email: "Campo requerido", password: "Campo requerido" });
     } else {
       setLoading(true);
       setErrors({});
 
       try {
         const response = await fetch(API_LOGIN, {
-          method: 'POST',
+          method: "POST",
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
           body: JSON.stringify(formData),
         });
 
         if (!response.ok) {
-          throw new Error('Error en la llamada a la API');
+          throw new Error("Error en la llamada a la API");
         }
 
         const data = await response.json();
         setToken(data.result.token);
-        setUser(data.result.client)
-        navigate('/');
+        setUser(data.result.client);
+        navigate("/");
       } catch (error) {
-        console.error('Error en la llamada a la API:', error);
+        console.error("Error en la llamada a la API:", error);
       } finally {
         setLoading(false);
+        handleLogin(true);
       }
     }
   }
 
   const googleSignIn = async () => {
-    let res = await loginGoogle()
+    let res = await loginGoogle();
     console.log(res);
-  }
+  };
 
   return (
     <div className="min-h-screen container grid grid-cols-1 lg:grid-cols-2 p-5 mx-auto">
-      <ImageBlock url="/assets/gatito.webp" clase="w-[60%]" claseSection="h-[100%]" />
+      <ImageBlock
+        url="/assets/gatito.webp"
+        clase="w-[60%]"
+        claseSection="h-[100%]"
+      />
       <div className="bg-white p-8 rounded shadow-2xl shadow-black/30 w-[80%] mx-auto h-[100%]">
         <h2 className="text-2xl font-semibold mb-6">Iniciar sesión</h2>
         <form onSubmit={handleSubmit} className="flex flex-col space-y-5">
           <Input
             type="email"
             name="email"
-            label="Correo Electrónico"
+            place="Correo Electrónico"
             value={formData.email}
             onChange={handleChange}
             errors={errors.email}
@@ -81,7 +89,7 @@ function Login() {
           <Input
             type="password"
             name="password"
-            label="Contraseña"
+            place="Contraseña"
             value={formData.password}
             required
             autoComplete="current-password"
@@ -112,7 +120,7 @@ function Login() {
             )}
           </div>
           <div className="text-sm text-gray-600">
-            ¿No estás registrado?{' '}
+            ¿No estás registrado?{" "}
             <Link to="/register" className="text-blue-500 hover:underline">
               Regístrate aquí
             </Link>
@@ -123,9 +131,10 @@ function Login() {
               <span className="px-4 -mt-4 bg-white">or</span>
             </div>
           </div>
-          <button 
-          onClick={googleSignIn}
-          className="bg-primary text-white font-semibold flex justify-center items-center w-full py-3 gap-4 rounded-lg border-2 hover:bg-transparent hover.border-primary hover.text-primary transition-colors duration-300">
+          <button
+            onClick={googleSignIn}
+            className="bg-primary text-white font-semibold flex justify-center items-center w-full py-3 gap-4 rounded-lg border-2 hover:bg-transparent hover.border-primary hover.text-primary transition-colors duration-300"
+          >
             <FcGoogle className="text-2xl" />
             Iniciar con Google
           </button>

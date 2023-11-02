@@ -7,27 +7,28 @@ import { useEffect, useState } from "react";
 import AddPet from "./AddPet.jsx";
 
 const MyPets = () => {
-  const [showAdd , setShowAdd] = useState(false)
-  const [pets, setPets] = useState([])
-  const user = JSON.parse(localStorage.getItem('User'))
-  const token = localStorage.getItem(TOKEN_KEY)
-
+  const [showAdd, setShowAdd] = useState(false);
+  const [pets, setPets] = useState([]);
+  const user = JSON.parse(sessionStorage.getItem("User"));
+  const token = sessionStorage.getItem(TOKEN_KEY);
 
   useEffect(() => {
-    if(!showAdd){
-      const getPets = async() =>{
-        const response = await fetch( `https://doggyhouse.azurewebsites.net/api/pets/byUser/${user.id}`, {headers: {Authorization: `Bearer ${token}`}})
-        const responseData = await response.json()
-        setPets(responseData.result)
-      }
-      getPets()
+    if (!showAdd) {
+      const getPets = async () => {
+        const response = await fetch(
+          `https://doggyhouse.azurewebsites.net/api/pets/byUser/${user.id}`,
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
+        const responseData = await response.json();
+        setPets(responseData.result);
+      };
+      getPets();
     }
-  }, [showAdd, token, user.id])
+  }, [showAdd, token, user.id]);
 
-
-  const handleModalAdd = () =>{
-    setShowAdd(!showAdd)
-  }
+  const handleModalAdd = () => {
+    setShowAdd(!showAdd);
+  };
 
   return (
     <section className="px-8">
@@ -39,7 +40,9 @@ const MyPets = () => {
           <BsFillPlusCircleFill className="text-xl" /> Agregar Mascota
         </Link>
 
-        {showAdd && <AddPet id={user.id} token={token} handleModalAdd={handleModalAdd}/>}
+        {showAdd && (
+          <AddPet id={user.id} token={token} handleModalAdd={handleModalAdd} />
+        )}
       </div>
       <ul className="w-full flex flex-wrap gap-8 justify-center">
         {pets.map((pet) => (
