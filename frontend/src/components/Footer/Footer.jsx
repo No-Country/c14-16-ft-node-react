@@ -1,10 +1,10 @@
-import { useState, useRef } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { BsWhatsapp } from 'react-icons/bs';
-import Modal from 'react-modal';
-import emailjs from '@emailjs/browser';
+import { useState, useRef } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { BsWhatsapp } from "react-icons/bs";
+import Modal from "react-modal";
+import emailjs from "@emailjs/browser";
 
-Modal.setAppElement('#root');
+Modal.setAppElement("#root");
 
 const Footer = () => {
   const refForm = useRef();
@@ -14,9 +14,9 @@ const Footer = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const serviceId = 'service_u911zeg';
-    const templateId = 'template_3i8w50b';
-    const apikey = 'C3LoktKQHrny5PP2Q';
+    const serviceId = "service_u911zeg";
+    const templateId = "template_3i8w50b";
+    const apikey = "C3LoktKQHrny5PP2Q";
 
     setLoading(true);
 
@@ -26,7 +26,7 @@ const Footer = () => {
         console.log(result.text);
         resetForm();
         closeModal();
-        navigate('/');
+        navigate("/");
       })
       .catch((error) => {
         console.error(error);
@@ -47,7 +47,8 @@ const Footer = () => {
     return `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
   };
 
-  const googleMapsUrl = "https://www.google.com/maps?q=Av.+Pres.+Figueroa+Alcorta+5200+CABA+Argentina";
+  const googleMapsUrl =
+    "https://www.google.com/maps?q=Av.+Pres.+Figueroa+Alcorta+5200+CABA+Argentina";
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -68,16 +69,16 @@ const Footer = () => {
               Sobre Doggy&apos;s House
             </h2>
             <p className="mb-6 font-josefin">
-              En Doggy&apos;s House, nos preocupamos por tus mascotas como si fueran de tu familia. 
-              Nuestro equipo apasionado por los animales proporciona un ambiente seguro y acogedor para tus amigos peludos.
-              Nos comprometemos a cuidar de su bienestar, asegurándonos de que estén felices y saludables.
-              Si deseas saber más sobre nosotros y te invitamos a explorar nuestra historia y lo que ofrecemos.
+              En Doggy&apos;s House, nos preocupamos por tus mascotas como si
+              fueran de tu familia. Nuestro equipo apasionado por los animales
+              proporciona un ambiente seguro y acogedor para tus amigos peludos.
+              Nos comprometemos a cuidar de su bienestar, asegurándonos de que
+              estén felices y saludables. Si deseas saber más sobre nosotros y
+              te invitamos a explorar nuestra historia y lo que ofrecemos.
             </p>
           </div>
           <div className="mb-4 md:w-1/2">
-            <h3 className="text-xl font-semibold mb-2 font-roboto">
-              Enlaces
-            </h3>
+            <h3 className="text-xl font-semibold mb-2 font-roboto">Enlaces</h3>
             <ul className="mb-4 md:mb-0">
               <li className="mb-2">
                 <Link to="/about" className="hover:underline">
@@ -85,12 +86,25 @@ const Footer = () => {
                 </Link>
               </li>
               <li className="mb-2">
-                <button onClick={openModal} className="hover:underline" style={{ border: 'none', background: 'none', cursor: 'pointer' }}>
+                <button
+                  onClick={openModal}
+                  className="hover:underline"
+                  style={{
+                    border: "none",
+                    background: "none",
+                    cursor: "pointer",
+                  }}
+                >
                   Envianos un email
                 </button>
               </li>
               <li className="mb-2">
-                <a href={googleMapsUrl} target="_blank" rel="noopener noreferrer" className="hover:underline">
+                <a
+                  href={googleMapsUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:underline"
+                >
                   Ubicación en Google Maps
                 </a>
               </li>
@@ -99,10 +113,26 @@ const Footer = () => {
           <div className="mb-4 md:w-1/2">
             <h3 className="text-xl font-semibold mb-2">Contacto</h3>
             <p className="mb-2">Tel: +549-12345678 </p>
-            <li className="mb-2" style={{ display: 'flex', alignItems: 'center' }}>
-              <a href={getWhatsAppLink()} className="hover:underline" target="_blank" rel="noopener noreferrer">
-                <span style={{ paddingRight: '5px', display: 'flex' }} > WhatsApp
-                  <BsWhatsapp style={{ alignItems: 'center', textAlign: 'center', width: '50px' }} />
+            <li
+              className="mb-2"
+              style={{ display: "flex", alignItems: "center" }}
+            >
+              <a
+                href={getWhatsAppLink()}
+                className="hover:underline"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span style={{ paddingRight: "5px", display: "flex" }}>
+                  {" "}
+                  WhatsApp
+                  <BsWhatsapp
+                    style={{
+                      alignItems: "center",
+                      textAlign: "center",
+                      width: "50px",
+                    }}
+                  />
                 </span>
               </a>
             </li>
@@ -113,11 +143,20 @@ const Footer = () => {
         </div>
         <div className="border-t border-gray-600 mt-8 pt-4 text-center">
           <p className="text-sm">
-            &copy; {new Date().getFullYear()} Doggy&apos;s House.com. Todos los derechos reservados.
-            <a href="/assets/files/Terminos.pdf" target="_blank" className="ml-2 hover:underline">
+            &copy; {new Date().getFullYear()} Doggy&apos;s House.com. Todos los
+            derechos reservados.
+            <a
+              href="/assets/files/Terminos.pdf"
+              target="_blank"
+              className="ml-2 hover:underline"
+            >
               Términos y Condiciones
             </a>
-            <a href="/assets/files/Privacidad.pdf" target="_blank" className="ml-2 hover:underline">
+            <a
+              href="/assets/files/Privacidad.pdf"
+              target="_blank"
+              className="ml-2 hover:underline"
+            >
               Política de Privacidad
             </a>
           </p>
@@ -130,38 +169,108 @@ const Footer = () => {
         contentLabel="Formulario de Trabaja con nosotros"
         style={{
           overlay: {
-            backgroundColor: 'rgba(0, 0, 0, 0.75)',
-            backdropFilter: 'blur(5px)',
+            backgroundColor: "rgba(0, 0, 0, 0.75)",
+            backdropFilter: "blur(5px)",
           },
           content: {
-            maxWidth: '80%',
-            maxHeight: '70%',
-            margin: '0 auto',
-            padding: '20px',
-            background: 'transparent',
-            borderRadius: '8px',
-            color: '#000',
-            fontSize: '1em',
-            backdropFilter: 'blur(2px)',
+            maxWidth: "80%",
+            maxHeight: "70%",
+            margin: "0 auto",
+            padding: "20px",
+            background: "transparent",
+            borderRadius: "8px",
+            color: "#000",
+            fontSize: "1em",
+            backdropFilter: "blur(2px)",
           },
         }}
       >
-        <h2 style={{ color: 'white', fontFamily: 'Serif', fontWeight: 'bolder', fontSize: '24px', textAlign: 'center' }}>En que te podemos ayudar ?</h2>
+        <h2
+          style={{
+            color: "white",
+            fontFamily: "Serif",
+            fontWeight: "bolder",
+            fontSize: "24px",
+            textAlign: "center",
+          }}
+        >
+          En que te podemos ayudar ?
+        </h2>
 
-        <form ref={refForm} action='' onSubmit={handleSubmit}>
-          <div className="mb-4" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <label htmlFor="name" style={{ width: '80%' }}>Nombre:</label>
-            <input type="text" id="name" name="username" placeholder='Ingrese su nombre' required style={{ width: '80%', padding: '8px', margin: '4px 0', border: '1px solid #ccc' }} />
+        <form ref={refForm} action="" onSubmit={handleSubmit}>
+          <div
+            className="mb-4"
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            <label htmlFor="name" style={{ width: "80%" }}>
+              Nombre:
+            </label>
+            <input
+              type="text"
+              id="name"
+              name="username"
+              placeholder="Ingrese su nombre"
+              required
+              style={{
+                width: "80%",
+                padding: "8px",
+                margin: "4px 0",
+                border: "1px solid #ccc",
+              }}
+            />
           </div>
-          <div className="mb-4" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <label htmlFor="email" style={{ width: '80%' }}>Correo Electrónico:</label>
-            <input type="email" id="email" name="email" required placeholder='ingresa_tu@email.com'
-              style={{ width: '80%', padding: '8px', margin: '4px 0', border: '1px solid #ccc' }} />
+          <div
+            className="mb-4"
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            <label htmlFor="email" style={{ width: "80%" }}>
+              Correo Electrónico:
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              required
+              placeholder="ingresa_tu@email.com"
+              style={{
+                width: "80%",
+                padding: "8px",
+                margin: "4px 0",
+                border: "1px solid #ccc",
+              }}
+            />
           </div>
-          <div className="mb-4" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <label htmlFor="message" style={{ width: '80%' }}>Mensaje:</label>
-            <textarea id="message" name="message" rows="4" placeholder='Ingresa aquí tu mensaje'
-              style={{ width: '80%', padding: '8px', margin: '4px 0', border: '1px solid #ccc' }} />
+          <div
+            className="mb-4"
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            <label htmlFor="message" style={{ width: "80%" }}>
+              Mensaje:
+            </label>
+            <textarea
+              id="message"
+              name="message"
+              rows="4"
+              placeholder="Ingresa aquí tu mensaje"
+              style={{
+                width: "80%",
+                padding: "8px",
+                margin: "4px 0",
+                border: "1px solid #ccc",
+              }}
+            />
           </div>
 
           <div>
@@ -181,23 +290,25 @@ const Footer = () => {
               <button
                 type="submit"
                 className="bg-blue-500 text-white px-4 py-2 rounded hover-bg-blue-600"
-                style={{ display: 'block', margin: '20px auto', minWidth: '30%' }}
+                style={{
+                  display: "block",
+                  margin: "20px auto",
+                  minWidth: "30%",
+                }}
               >
                 Enviar
               </button>
             )}
           </div>
-
         </form>
         <br />
         <button
           onClick={closeModal}
           className="bg-red-500 hover-bg-red-600 text-white px-4 py-2 rounded"
-          style={{ display: 'block', margin: 'auto', minWidth: '30%' }}
+          style={{ display: "block", margin: "auto", minWidth: "30%" }}
         >
           Cerrar
         </button>
-
       </Modal>
     </footer>
   );
