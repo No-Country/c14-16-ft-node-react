@@ -136,7 +136,8 @@ const Reserver = () => {
                     <div className="w-11 h-6 mb-8 relative bg-gray-400 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-primary rounded-full peer dark:bg-gray-600 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[3px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-primary"></div>
                   </div>
                 </label>
-                <div className="w-full sm:w-[100%] mx-auto text-center sm:text-left">
+
+                <div className="sm:w-[100%] mx-auto text-center sm:text-left">
                   <Label label="Comentarios adicionales" />
                   <textarea
                     name="comments"
@@ -149,20 +150,19 @@ const Reserver = () => {
                   ></textarea>
                 </div>
               </div>
-            </div>
-
-            <div className="mt-5 flex justify-center">
-              <Button
-                type="submit"
-                label="Pagar reserva"
-                clase=" sm:w-[40%] text-center"
-              />
-              <Button
-                type="button"
-                label="Cancelar"
-                clase=""
-                click={() => navigate("/search")}
-              />
+              <div className="w-full self-center mt-5 flex flex-col gap-1 items-center justify-center">
+                <Button
+                  type="submit"
+                  label="Pagar reserva"
+                  clase="w-full text-center"
+                />
+                <Button
+                  type="button"
+                  label="Cancelar"
+                  clase="w-full text-center"
+                  click={() => navigate("/search")}
+                />
+              </div>
             </div>
           </form>
         </div>

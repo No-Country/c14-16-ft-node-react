@@ -31,11 +31,14 @@ function Hero() {
 
   return (
     <>
-      <div className="container mx-auto px-4 h-[70vh]">
-        <h1 className="text-4xl text-gray-700 font-semibold font-roboto text-center pt-5 mb-4 font-mono">
+      <div className="container mx-auto px-4 py-8 min-h-[50vh]">
+        <h1 className="text-4xl font-semibold font-roboto text-center pt-5 mb-4 font-mono">
           Un lugar seguro para tu mascota
         </h1>
-        <p className="text-2xl font-semibold font-josefin text-center text-gray-800 ">
+        <p
+          style={{ textShadow: "2px 2px 2px black" }}
+          className="max-w-xl mx-auto text-2xl font-semibold font-josefin text-center text-white"
+        >
           Guarderias que cuidan cada detalle para que tu mascota se sienta como
           en casa, sin preocupaciones ni inquietudes. Aquí tendrán un espacio
           para jugar, también tendrán ricas comidas, jugarán y pasearán
@@ -45,7 +48,7 @@ function Hero() {
       </div>
       {/* Formulario de Búsqueda */}
       <section className=" py-6 sm:py-8 lg:py-0">
-        <div className="bg-[rgb(250,250,250)] backdrop-blur-md rounded-t-lg px-6 pt-5 pb-10 text-center w-[90%] sm:w-3/5 md:w-2/5 mx-auto mt-0">
+        <div className="bg-[rgb(250,250,250,0.1)] backdrop-blur-md rounded-t-lg px-6 pt-5 pb-10 text-center w-[90%] sm:w-3/5 md:w-2/5 mx-auto mt-0">
           <h2 className="text-xl font-roboto text-black mb-4">
             Reserva un lugar para tu peludito donde y cuando quieras
           </h2>
