@@ -24,8 +24,8 @@ const Reserver = () => {
     price: 0,
     description: "Reserva en DoggysHouse",
   });
-  const user = JSON.parse(sessionStorage.getItem("User"));
-  const token = sessionStorage.getItem(TOKEN_KEY);
+  const user = JSON.parse(localStorage.getItem("User"));
+  const token = localStorage.getItem(TOKEN_KEY);
 
   useEffect(() => {
     const getPets = async () => {

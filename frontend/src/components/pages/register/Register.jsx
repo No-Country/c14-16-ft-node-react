@@ -119,14 +119,6 @@ function Register() {
             errors={errors.address}
             classInput="py-2"
           />
-          <div className="flex justify-end">
-            <input
-              type="file"
-              name="profile_picture"
-              accept="image/*"
-              onChange={handleChange}
-            />
-          </div>
           <Input
             type="email"
             name="email"
