@@ -31,13 +31,13 @@ const Navbar = () => {
           <img
             src="/assets/LogoDog.png"
             alt="Doggy's House"
-            className="w-12 h-12 mr-2"
+            className="w-10 h-10 items-center mr-4 ml-4"
           />
         </Link>
-        <span className="text-xl md:text-2xl lg:text-4xl xl:text-5xl pl-3">
-          <span className="text-gray-100 font-bold">Doggy&apos;s</span>
-          <span className="text-gray-100 font-bold">House</span>
-        </span>
+        <div className="mb-1.5  top-1/3 text-sm text-center md:text-3xl lg:text-4xl xl:text-5xl p-1">
+          <span className="text-gray-100 text-3xl font-bold ">Doggy&apos;s </span>
+          <span className="text-gray-100 text-3xl font-bold"> House</span>
+        </div>
       </div>
       <div className="md:hidden">
         <button
@@ -101,7 +101,7 @@ const Navbar = () => {
         )}
         {isLogin ? (
           <button className="box" onClick={logout}>
-            <Link className="box" to="/login" onClick={closeMenu}>
+            <Link className="" to="/login" onClick={closeMenu}>
               <span className="links-nav">
                 Cerrar Sesión
               </span>

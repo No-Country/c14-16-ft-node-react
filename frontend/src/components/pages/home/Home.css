@@ -92,7 +92,7 @@ input.input-field {
 
 @media screen and (min-width: 768px) {
 header {
-    background-image: linear-gradient(to right, rgb(250,250,250,0.2), rgb(250,250,250, 0.3)),url("../../../../public/assets/Images/hero_3.jpg");
+    background-image: linear-gradient(to right, rgb(250,250,250,0.2), rgb(250,250,250, 0.3)),url("/assets/Images/hero_3.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat

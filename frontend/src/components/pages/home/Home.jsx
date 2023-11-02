@@ -1,10 +1,8 @@
-import DogHome from "/assets/Images/DogHome.webp";
-import HeroImage from "/assets/Images/hero_3.jpg";
-import "./Home.css";
-
 import Hero from "../../hero";
 import Offer from "../../offer";
 import Services from "../../services";
+import "./Home.css";
+
 
 const Home = () => {
   return (
