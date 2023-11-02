@@ -10,7 +10,7 @@ const filterBg = {
   backgroundSize: "cover",
 };
 
-const AddPet = ({id, token, handleModalAdd}) => {
+const AddPet = ({ id, token, handleModalAdd }) => {
   const [pet, setPet] = useState({
     name: "",
     breed: "",
@@ -19,32 +19,39 @@ const AddPet = ({id, token, handleModalAdd}) => {
     weight: "0",
   });
 
-
-
-  const { data } = useFetch(`https://doggyhouse.azurewebsites.net/api/animaltypes`)
+  const { data } = useFetch(
+    `https://doggyhouse.azurewebsites.net/api/animaltypes`
+  );
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
-      const headers = {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-      };
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    };
 
-      pet.type_id = Number(pet.type_id)
-      try {
-          await fetch(`https://doggyhouse.azurewebsites.net/api/pets` , {method: 'POST' ,headers: headers, body: JSON.stringify(pet)})
-          handleModalAdd()
-      } catch (error) {
-        console.log(error)
-      }
-  }
+    pet.type_id = Number(pet.type_id);
+    try {
+      await fetch(`https://doggyhouse.azurewebsites.net/api/pets`, {
+        method: "POST",
+        headers: headers,
+        body: JSON.stringify(pet),
+      });
+      handleModalAdd();
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div
       style={filterBg}
       className="w-screen py-16 grid place-items-center absolute top-0 left-0"
     >
-      <form onSubmit={handleSubmit} className="w-full max-w-[550px] p-8 bg-gray-100 border-2 border-primary rounded-md">
+      <form
+        onSubmit={handleSubmit}
+        className="w-full max-w-[550px] p-8 bg-gray-100 border-2 border-primary rounded-md"
+      >
         <h2 className="py-4 text-center text-lg font-bold font-roboto">
           Agrega tu mascota
         </h2>
@@ -78,13 +85,13 @@ const AddPet = ({id, token, handleModalAdd}) => {
           >
             <option value="">Selecciona una mascota</option>
             {data?.result?.map((type) => (
-                        <option key={type.id} value={type.id}>
-                          {type.name}
-                        </option>
+              <option key={type.id} value={type.id}>
+                {type.name}
+              </option>
             ))}
           </select>
         </label>
-        {pet.type_id === '3' && (
+        {pet.type_id === "3" && (
           <label htmlFor="name" className="block mb-6">
             ¿Que raza es?
             <select
@@ -109,7 +116,7 @@ const AddPet = ({id, token, handleModalAdd}) => {
             </select>
           </label>
         )}
-        {pet.type_id === '2' && (
+        {pet.type_id === "2" && (
           <label htmlFor="name" className="block mb-6">
             ¿Que raza es?
             <select
