@@ -2,31 +2,26 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import "./Navbar.css";
 import { TOKEN_KEY } from "../../constants/api";
+import { useContext } from "react";
+import { LoginContext } from "../../context/login/LoginContext";
 
 const Navbar = () => {
-  const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
+  const { isLogin, handleLogin } = useContext(LoginContext);
+
+  const location = useLocation();
   const isAboutPage = location.pathname === "/";
   const toggleMenu = () => setMenuOpen(!menuOpen);
   const closeMenu = () => setMenuOpen(false);
-  const isLoggedIn = sessionStorage.getItem(TOKEN_KEY) !== null;
+
   const navigate = useNavigate();
+
   const logout = () => {
-    sessionStorage.removeItem(TOKEN_KEY);
-    sessionStorage.removeItem('User');
+    sessionStorage.removeItem("TOKEN");
+    sessionStorage.removeItem("User");
+    handleLogin(false);
     navigate("/login", { replace: true });
   };
-  const buttonLabel = isLoggedIn ? (
-    <button className="box" onClick={logout}>
-      <Link className="box" to="/login" onClick={closeMenu}>
-        Cerrar Sesión
-      </Link>
-    </button>
-  ) : (
-    <Link className="box" to="/login" onClick={closeMenu}>
-      Iniciar Sesión
-    </Link>
-  );
 
   return (
     <nav
@@ -91,15 +86,27 @@ const Navbar = () => {
         <Link className="box" to="/about" onClick={closeMenu}>
           Nosotros
         </Link>
-
-        <Link className="box" to="/mybookings" onClick={closeMenu}>
-          Mis Reservas
-        </Link>
-
-        <Link className="box" to="/mypets" onClick={closeMenu}>
-          Mis Mascotas
-        </Link>
-        {buttonLabel}
+        {isLogin && (
+          <Link className="box" to="/mybookings" onClick={closeMenu}>
+            Mis Reservas
+          </Link>
+        )}
+        {isLogin && (
+          <Link className="box" to="/mypets" onClick={closeMenu}>
+            Mis Mascotas
+          </Link>
+        )}
+        {isLogin ? (
+          <button className="box" onClick={logout}>
+            <Link className="box" to="/login" onClick={closeMenu}>
+              Cerrar Sesión
+            </Link>
+          </button>
+        ) : (
+          <Link className="box" to="/login" onClick={closeMenu}>
+            Iniciar Sesión
+          </Link>
+        )}
       </div>
     </nav>
   );
