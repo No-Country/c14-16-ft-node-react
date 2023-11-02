@@ -8,8 +8,13 @@ import "./Confirm.css";
 export const Confirm = ({ reserver }) => {
   const [price, setPrice] = useState(0);
 
+<<<<<<< HEAD
   const user = JSON.parse(sessionStorage.getItem("User"));
   const token = sessionStorage.getItem(TOKEN_KEY);
+=======
+    const user = JSON.parse(localStorage.getItem('User'))
+    const token = localStorage.getItem(TOKEN_KEY)
+>>>>>>> e9980ff642f58f1dc5818d565896f5b75abd4cd3
 
   useEffect(() => {
     if (reserver) {

@@ -3,7 +3,7 @@ import { LoginContext } from "./LoginContext";
 
 const LoginProvider = ({ children }) => {
   const [isLogin, setIsLogin] = useState(
-    Boolean(sessionStorage.getItem("User")) ?? false
+    Boolean(localStorage.getItem("User")) ?? false
   );
 
   const handleLogin = (value) => setIsLogin(value);

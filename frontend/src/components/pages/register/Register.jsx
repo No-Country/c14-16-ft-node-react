@@ -93,6 +93,7 @@ function Register() {
             name="name"
             label="Nombre de Usuario"
             value={formData.name}
+            place={"Nombre"}
             onChange={handleChange}
             errors={errors.name}
             classInput="py-2"
@@ -103,6 +104,7 @@ function Register() {
             name="phone"
             label="Telefono"
             value={formData.phone}
+            place={"Teléfono"}
             onChange={handleChange}
             errors={errors.phone}
             classInput="py-2"
@@ -111,25 +113,19 @@ function Register() {
             type="text"
             name="address"
             label="Direccion"
+            place={"Dirección"}
             value={formData.address}
             onChange={handleChange}
             errors={errors.address}
             classInput="py-2"
           />
-          <div className="flex justify-end">
-            <input
-              type="file"
-              name="profile_picture"
-              accept="image/*"
-              onChange={handleChange}
-            />
-          </div>
           <Input
             type="email"
             name="email"
             label="Correo electrónico"
             value={formData.email}
             onChange={handleChange}
+            place={"Email"}
             errors={errors.email}
             classInput="py-2"
           />
@@ -139,6 +135,7 @@ function Register() {
             label="Contraseña"
             value={formData.password}
             onChange={handleChange}
+            place={"Contraseña"}
             errors={errors.password}
             classInput="py-2"
           />
@@ -149,6 +146,7 @@ function Register() {
             label="Confirmar contraseña"
             value={formData.confirmPassword}
             onChange={handleChange}
+            place={"Confirmar contraseña"}
             errors={errors.confirmPassword}
             classInput="py-2"
 
