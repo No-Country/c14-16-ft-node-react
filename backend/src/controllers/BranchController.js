@@ -7,6 +7,11 @@ import { BranchAnimalTypes } from "../models/BranchAnimalType.js"
 import { Service } from "../models/Service.js";
 import { AnimalTypes } from "../models/AnimalTypes.js";
 import { saveImages, getImages, deleteImages, updateImages, getImage } from "../services/ImageService.js";
+import { fileURLToPath } from "url"
+import { join, dirname } from "path"
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 export const getBranches = async ( req, res ) => {
     try {
@@ -39,8 +44,13 @@ export const getBranches = async ( req, res ) => {
                 const imageData = await getImage(image.route);
                 branch.setDataValue('images', imageData);
             }
+            for (const service of branch.services) {
+                const image = service.route;
+                const imageData = await (getImage(image))
+                service.setDataValue('image', imageData)
+            }
         }
-        
+
         return res.status( 200 ).json({ result: branches }); 
     } catch ( error ) {
         return res.status( 500 ).json({ message: error.message }); 
@@ -84,6 +94,13 @@ export const getBranch = async (req, res ) => {
             getBranch.setDataValue("images", images)
         }
 
+
+        for (const service of getBranch.services) {
+            const image = service.route
+            const imageData = await (getImage(image))
+            service.setDataValue('image', imageData)
+        }
+
         return res.status( 200 ).json({ result: getBranch }); 
     } catch (error) {
         return res.status( 500 ).json({ message: error.message }); 
@@ -119,6 +136,13 @@ export const getBranchesByCompany = async(req, res) => {
                     },
                 ]
         });
+
+        for (const service of branchesByCompany.services) {
+            const image = service.route
+            const imageData = await (getImage(image))
+            service.setDataValue('image', imageData)
+        }
+
 
         return res.status( 200 ).json({ result: branchesByCompany }); 
     } catch ( error ) {
