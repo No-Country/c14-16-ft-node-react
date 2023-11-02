@@ -1,9 +1,7 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useState } from "react";
-import "./Navbar.css";
-import { TOKEN_KEY } from "../../constants/api";
-import { useContext } from "react";
+import { useState, useContext } from "react";
 import { LoginContext } from "../../context/login/LoginContext";
+import "./Navbar.css";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -26,9 +24,8 @@ const Navbar = () => {
   return (
     <nav
       id="container-global"
-      className={`navbar px-4 py-6 text-xl md:text-2xl flex text-black-100 font-semibold justify-between items-center ${
-        isAboutPage ? "bg-yellow-400" : ""
-      }`}
+      className={`navbar px-4 py-6 text-xl md:text-2xl flex text-black-100 font-semibold justify-between items-center ${isAboutPage ? "bg-yellow-400" : ""
+        }`}
     >
       <div className="flex items-center">
         <Link to="/">
@@ -74,37 +71,48 @@ const Navbar = () => {
         </button>
       </div>
       <div
-        className={`md:flex ${
-          menuOpen
-            ? "md:flex-col md:space-y-4 md:items-center menu-open"
-            : "hidden"
-        }`}
+        className={`md:flex ${menuOpen
+          ? "md:flex-col md:space-y-4 md:items-center menu-open"
+          : "hidden"
+          }`}
       >
         <Link className="box" to="/" onClick={closeMenu}>
-          Inicio
+          <span className="links-nav">
+            Inicio
+          </span>
         </Link>
         <Link className="box" to="/about" onClick={closeMenu}>
-          Nosotros
+          <span className="links-nav">
+            Nosotros
+          </span>
         </Link>
         {isLogin && (
           <Link className="box" to="/mybookings" onClick={closeMenu}>
-            Mis Reservas
+            <span className="links-nav">
+              Mis Reservas
+            </span>
           </Link>
         )}
         {isLogin && (
           <Link className="box" to="/mypets" onClick={closeMenu}>
-            Mis Mascotas
+            <span className="links-nav">
+              Mis Mascotas
+            </span>
           </Link>
         )}
         {isLogin ? (
           <button className="box" onClick={logout}>
             <Link className="box" to="/login" onClick={closeMenu}>
-              Cerrar Sesión
+              <span className="links-nav">
+                Cerrar Sesión
+              </span>
             </Link>
           </button>
         ) : (
           <Link className="box" to="/login" onClick={closeMenu}>
-            Iniciar Sesión
+            <span className="links-nav">
+              Iniciar Sesión
+            </span>
           </Link>
         )}
       </div>

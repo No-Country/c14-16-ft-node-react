@@ -9,6 +9,7 @@ const BranchPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
+
   const { data, loading, errorFetch } = useFetch(
     `https://doggyhouse.azurewebsites.net/api/branches/${id}`
   );
