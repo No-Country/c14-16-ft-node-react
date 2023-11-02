@@ -3,16 +3,18 @@ import { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import { TOKEN_KEY } from "../../../constants/api";
 import "react-datepicker/dist/react-datepicker.css";
-import { useParams } from "react-router-dom";
+import { Outlet, useParams } from "react-router-dom";
 import Button from "../../ui/button";
 import Label from "../../ui/label";
 import { useNavigate } from "react-router-dom";
 import { format } from "date-fns";
+import Confirm from "../confirm/Confirm";
 
 const Reserver = () => {
   const { id } = useParams();
 
   const navigate = useNavigate();
+  const [showModal, setShowModal] = useState(false);
   const [pets, setPets] = useState([]);
   const [reserver, setReserver] = useState({
     pet_id: null,
@@ -58,13 +60,15 @@ const Reserver = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     reserver.from_date = format(reserver.from_date, "yyyy-MM-dd");
     reserver.to_date = format(reserver.to_date, "yyyy-MM-dd");
-
-    navigate(`/confirm`, { state: { reserver } });
+    console.log(reserver);
+    setShowModal(true);
   };
   return (
     <>
+      {showModal && <Confirm reserver={reserver} />}
       <div className="min-h-screen container bg-gray-100 mx-auto pt-10 ">
         <div className="space-y-4 px-10 ">
           <h2 className="text-2xl font-bold font-roboto text-center lg:text-start ">

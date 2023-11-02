@@ -35,7 +35,7 @@ const AppRouter = () => {
         <Route path="/mybookings/*" element={<MyBookings />}>
           <Route path="add" element={"BOOKING CARD"} />
         </Route>
-        <Route path="/confirm" element={<Confirm />} />
+
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
