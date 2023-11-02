@@ -68,15 +68,10 @@ const Footer = () => {
               Sobre Doggy&apos;s House
             </h2>
             <p className="mb-6 font-josefin">
-              En Doggy&apos;s House, entendemos que tus mascotas son parte de tu
-              familia, y nuestro compromiso es garantizar que reciban el amor,
-              cuidado y atención que merecen. Nuestro equipo de apasionados
-              amantes de los animales está dedicado a brindar un entorno seguro
-              y acogedor para tus peludos amigos. Estamos comprometidos a cuidar
-              de su bienestar, asegurándonos de que estén felices y saludables
-              en todo momento. Si deseas conocer más acerca de quiénes somos y
-              cómo trabajamos, te invitamos a explorar nuestra historia y
-              servicios.
+              En Doggy&apos;s House, nos preocupamos por tus mascotas como si fueran de tu familia. 
+              Nuestro equipo apasionado por los animales proporciona un ambiente seguro y acogedor para tus amigos peludos.
+              Nos comprometemos a cuidar de su bienestar, asegurándonos de que estén felices y saludables.
+              Si deseas saber más sobre nosotros y te invitamos a explorar nuestra historia y lo que ofrecemos.
             </p>
           </div>
           <div className="mb-4 md:w-1/2">
@@ -106,7 +101,7 @@ const Footer = () => {
             <p className="mb-2">Tel: +549-12345678 </p>
             <li className="mb-2" style={{ display: 'flex', alignItems: 'center' }}>
               <a href={getWhatsAppLink()} className="hover:underline" target="_blank" rel="noopener noreferrer">
-                <span style={{ paddingRight: '5px', display: 'flex' }} > Vía
+                <span style={{ paddingRight: '5px', display: 'flex' }} > WhatsApp
                   <BsWhatsapp style={{ alignItems: 'center', textAlign: 'center', width: '50px' }} />
                 </span>
               </a>

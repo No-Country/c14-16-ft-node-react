@@ -1,13 +1,11 @@
-import image from "/assets/sucursales/sucursal_004.jpg";
-import scissors from "/assets/icons/scissors.svg";
 import { Link } from "react-router-dom";
 const BranchCard = ({ branch }) => {
   return (
     <Link to={`/branch/${branch.id}`} className="max-w-[600px]">
-      <article className="p-4 flex flex-col gap-4 bg-gray-100 rounded-xl shadow-lg hover:translate-y-2">
+      <article className="min-h-[300px] p-4 flex flex-col gap-4 bg-gray-100 rounded-xl shadow-lg hover:-translate-y-2 transition-transform duration-300">
         <div className="flex gap-4">
           <img
-            src={image}
+            src={`data:image/png;base64,${branch.images}`}
             alt="imagen de sucursal"
             className="max-w-[35%] rounded-xl"
           />
@@ -35,8 +33,8 @@ const BranchCard = ({ branch }) => {
               >
                 {service.name}
                 <img
-                  src={scissors}
-                  alt="icono de tijeras"
+                  src={`data:image/png;base64,${service.image}`}
+                  alt={`icono de ${service.name}`}
                   className="w-6 ml-2"
                 />
               </span>
@@ -44,14 +42,17 @@ const BranchCard = ({ branch }) => {
           </div>
         </div>
 
-        <div className="w-full flex gap-2">
+        <div className="w-full mt-auto flex gap-2">
           <h2 className="text-left text-md font-bold">Capacidad Actual:</h2>
-          <div className="w-[75%] flex gap-2 items-center">
-            <span>5</span>
-            <div className="w-full h-4 bg-yellow-700 rounded-full overflow-hidden">
-              <div className="w-[25%] h-4 bg-primary"></div>
+          <div className="w-[75%]  flex gap-2 items-center">
+            <span>{branch.amount}</span>
+            <div className="w-full h-4  bg-yellow-700 rounded-full overflow-hidden">
+              <div
+                className="h-4 bg-primary"
+                style={{ width: `${(branch.amount / branch.capacity) * 100}%` }}
+              ></div>
             </div>
-            <span>20</span>
+            <span>{branch.capacity}</span>
           </div>
         </div>
       </article>

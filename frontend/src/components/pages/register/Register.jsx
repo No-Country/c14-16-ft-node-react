@@ -33,13 +33,11 @@ function Register() {
       }
     }
 
-    setFormData({ ...formData, [name]: newValue });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Validación de datos
     if (!formData.email || !formData.password || !formData.confirmPassword) {
       setErrors({
         email: 'Campo requerido',
@@ -54,8 +52,7 @@ function Register() {
     // Datos válidos, procede con la llamada fetch a la API
     setLoading(true);
     setErrors({});
-
-          //llamada fetch a la URL 
+    // Llamada fetch a la URL
     try {
       const response = await fetch(API_REGISTER, {
         method: 'POST',
@@ -69,12 +66,9 @@ function Register() {
       if (!response.ok) {
         throw new Error('Error en la llamada a la API');
       }
-
       const data = await response.json();
-
       // Manejar la respuesta de la API aquí
       console.log('Respuesta de la API:', data);
-
       navigate('/login');
     } catch (error) {
       console.error('Error en la llamada a la API:', error);
@@ -82,6 +76,7 @@ function Register() {
       setLoading(false);
     }
   };
+
 
   return (
     <div className="min-h-screen container grid grid-cols-1 lg:grid-cols-2 p-5 mx-auto">
