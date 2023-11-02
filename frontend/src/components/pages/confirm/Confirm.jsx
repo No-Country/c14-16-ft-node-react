@@ -5,11 +5,11 @@ import { BsXCircle } from "react-icons/bs";
 
 import "./Confirm.css";
 
-export const Confirm = ({ reserver }) => {
+export const Confirm = ({ reserver, setShowModal }) => {
   const [price, setPrice] = useState(0);
 
-  const user = JSON.parse(sessionStorage.getItem("User"));
-  const token = sessionStorage.getItem(TOKEN_KEY);
+  const user = JSON.parse(localStorage.getItem("User"));
+  const token = localStorage.getItem(TOKEN_KEY);
 
   useEffect(() => {
     if (reserver) {
@@ -74,7 +74,10 @@ export const Confirm = ({ reserver }) => {
   return (
     <>
       <div className="popup container max-w-[350px] mx-auto py-10 px-4 flex flex-col gap-4 items-center bg-white border-2 border-primary rounded-md shadow-md">
-        <BsXCircle className="text-lg text-primary absolute top-2 right-2" />
+        <BsXCircle
+          className="text-lg text-primary absolute top-2 right-2 cursor-pointer"
+          onClick={() => setShowModal(false)}
+        />
         <h2 className="font-bold text-2xl text-center">
           ¿Queres confirmar tu reserva?
         </h2>
