@@ -9,11 +9,11 @@ const Navbar = () => {
   const isAboutPage = location.pathname === "/";
   const toggleMenu = () => setMenuOpen(!menuOpen);
   const closeMenu = () => setMenuOpen(false);
-  const isLoggedIn = sessionStorage.getItem(TOKEN_KEY) !== null;
+  const isLoggedIn = localStorage.getItem(TOKEN_KEY) !== null;
   const navigate = useNavigate();
   const logout = () => {
-    sessionStorage.removeItem(TOKEN_KEY);
-    sessionStorage.removeItem('User');
+    localStorage.removeItem(TOKEN_KEY);
+    localStorage.removeItem('User');
     navigate("/login", { replace: true });
   };
   const buttonLabel = isLoggedIn ? (

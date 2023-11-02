@@ -11,7 +11,7 @@ const BranchPage = () => {
   const { data, loading, errorFetch } = useFetch(
     `https://doggyhouse.azurewebsites.net/api/branches/${id}`
   );
-  const user = sessionStorage.getItem('User')
+  const user = localStorage.getItem('User')
   const handleCheckUser = (e) => {
     if(!user){
       e.preventDefault()
