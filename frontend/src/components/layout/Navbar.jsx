@@ -101,7 +101,7 @@ const Navbar = () => {
         )}
         {isLogin ? (
           <button className="box" onClick={logout}>
-            <Link className="box" to="/login" onClick={closeMenu}>
+            <Link className="" to="/login" onClick={closeMenu}>
               <span className="links-nav">
                 Cerrar Sesión
               </span>

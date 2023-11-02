@@ -1,21 +1,21 @@
 .pagination {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 30px;
-  
-    .swiper-pagination-bullet {
-      background-color: #F0A225;
-      height: 15px;
-      width: 15px;
-      margin-right: 15px;
-      opacity: 1;
-      cursor: pointer;
-      border-radius: 100%;
-    }
-  
-    .swiper-pagination-bullet-active {
-      background-color: rgb(117, 117, 117);
-      opacity: 1;
-    }
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 30px;
+
+  .swiper-pagination-bullet {
+    background-color: #F0A225;
+    height: 15px;
+    width: 15px;
+    margin-right: 15px;
+    opacity: 1;
+    cursor: pointer;
+    border-radius: 100%;
   }
+
+  .swiper-pagination-bullet-active {
+    background-color: rgb(117, 117, 117);
+    opacity: 1;
+  }
+}

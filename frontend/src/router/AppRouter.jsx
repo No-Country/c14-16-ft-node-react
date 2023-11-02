@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router-dom";
-
+import { useLocation } from 'react-router-dom';
+import { useEffect } from "react";
 import Login from "../components/pages/login/Login";
 import NotFound from "../components/NotFound/NotFound";
 import Home from "../components/pages/home/Home";
@@ -14,11 +15,17 @@ import BranchPage from "../components/pages/branch/BranchPage";
 import MyPets from "../components/pages/mypets/MyPets";
 import AddPet from "../components/pages/mypets/AddPet";
 import MyBookings from "../components/pages/mybookings/MyBookings";
-import Confirm from "../components/pages/confirm/Confirm";
+
 
 const AppRouter = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
   return (
-    <div className="min-h-screen flex flex-col">
+    <div>
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
