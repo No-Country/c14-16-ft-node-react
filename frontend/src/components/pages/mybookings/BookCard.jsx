@@ -6,12 +6,12 @@ const BookCard = ({booking}) => {
   const to_date = format(new Date(booking.to_date), "dd-MM-yyyy");
   return (
     <tr className="border-b-2 border-primary">
-      <td className="py-2 text-center text-md font-josefin">
-        Nombre de la sucursal
-      </td>
-      <td className="text-center text-md font-josefin">Nombre de la Mascota</td>
+      <td className="py-2 text-center text-md font-josefin">{booking.branch.name}</td>
+      <td className="text-center text-md font-josefin">{booking.branch.address}</td>
+      <td className="text-center text-md font-josefin">{booking.pet.name}</td>
       <td className="text-center text-md font-josefin">{from_date}</td>
       <td className="text-center text-md font-josefin">{to_date}</td>
+      <td className="text-center text-md font-josefin">{booking.price}</td>
     </tr>
   );
 };

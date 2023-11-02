@@ -21,13 +21,16 @@ const MyBookings = () => {
   return (
     <div className="container mx-auto py-4 ">
       {bookings.length !== 0 ?
+     <div className="my-8">
       <table className="w-full">
         <thead className="text-white font-bold font-roboto bg-primary">
           <tr>
-            <th className="py-4">Sucursal</th>
-            <th className="py-4">Mascota</th>
-            <th className="py-4">Fecha de entrada</th>
-            <th className="py-4">Fecha de salida</th>
+            <th className="py-6">Sucursal</th>
+            <th className="py-6">Dirección</th>
+            <th className="py-6">Mascota</th>
+            <th className="py-6">Fecha de entrada</th>
+            <th className="py-6">Fecha de salida</th>
+            <th className="py-6">Precio</th>
           </tr>
         </thead>
         <tbody>
@@ -36,6 +39,7 @@ const MyBookings = () => {
           ))}
         </tbody>
       </table>
+      </div>
       :
       <div>No hay datos</div>}
     </div>
