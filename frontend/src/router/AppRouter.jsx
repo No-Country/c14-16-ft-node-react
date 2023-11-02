@@ -18,7 +18,7 @@ import Confirm from "../components/pages/confirm/Confirm";
 
 const AppRouter = () => {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div>
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
