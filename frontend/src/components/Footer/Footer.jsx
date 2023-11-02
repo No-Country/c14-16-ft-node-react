@@ -62,7 +62,7 @@ const Footer = () => {
 
   return (
     <footer className="bg-gray-900 text-white py-8 mt-auto">
-      <div className="container mx-auto">
+      <div className="container px-2 mx-auto">
         <div className="md:flex md:justify-between items-center">
           <div className="mb-4 text-center md:text-left md:w-1/2 md:pr-8">
             <h2 className="text-2xl text-center font-bold mb-2 font-roboto">
