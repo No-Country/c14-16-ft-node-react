@@ -6,20 +6,41 @@ import Home from "../components/pages/home/Home";
 import Register from "../components/pages/register/Register";
 import Navbar from "../components/layout/Navbar";
 import About from "../components/pages/about/About";
+import ForgotPass from "../components/pages/forgot-pass/forgot-pass";
+import Reserver from "../components/pages/reserver/reserver";
+import Footer from "../components/Footer/Footer";
+import SearchPage from "../components/pages/search/SearchPage";
+import BranchPage from "../components/pages/branch/BranchPage";
+import MyPets from "../components/pages/mypets/MyPets";
+import AddPet from "../components/pages/mypets/AddPet";
+import MyBookings from "../components/pages/mybookings/MyBookings";
+import Confirm from "../components/pages/confirm/Confirm";
 
 const AppRouter = () => {
-    return (
-        <div>
-            <Navbar />
-            <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Register />} />
-                <Route path="/about" element={<About />} />
-                <Route path="*" element={<NotFound />} />
-            </Routes>
-        </div>
-    );
+  return (
+    <div>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/forgot-pass" element={<ForgotPass />} />
+        <Route path="/search" element={<SearchPage />} />
+        <Route path="/reserver/:id" element={<Reserver />} />
+        <Route path="/branch/:id" element={<BranchPage />} />
+        <Route path="/mypets/*" element={<MyPets />}>
+          <Route path="add" element={<AddPet />} />
+        </Route>
+        <Route path="/mybookings/*" element={<MyBookings />}>
+          <Route path="add" element={"BOOKING CARD"} />
+        </Route>
+        <Route path="/confirm" element={<Confirm />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+      <Footer />
+    </div>
+  );
 };
 
 export default AppRouter;
