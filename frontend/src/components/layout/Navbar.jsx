@@ -34,7 +34,7 @@ const Navbar = () => {
             className="w-10 h-10 items-center mr-4 ml-4"
           />
         </Link>
-        <div className="mb-1.5  top-1/3 sm-text-sm text-center  md:text-2xl lg:text-3xl xl:text-4xl p-1">
+        <div className="mb-1.5  top-1/3 text-sm text-center md:text-3xl lg:text-4xl xl:text-5xl p-1">
           <span className="text-gray-100 text-3xl font-bold ">Doggy&apos;s </span>
           <span className="text-gray-100 text-3xl font-bold"> House</span>
         </div>

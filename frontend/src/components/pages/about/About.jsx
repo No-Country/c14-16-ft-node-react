@@ -52,11 +52,7 @@ const About = () => {
     <main>
       <section style={mainStyle} className="px-4 py-8 md:px-0">
         <div className="container mx-auto">
-<<<<<<< HEAD
-          <h1 className="py-32 text-center text-white text-6xl">
-=======
           <h1 className="py-16 text-center text-black text-4xl font-bold font-roboto">
->>>>>>> origin/frontend
             Sobre Nosotros
           </h1>
         </div>

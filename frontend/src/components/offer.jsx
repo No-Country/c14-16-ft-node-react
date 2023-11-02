@@ -8,7 +8,7 @@ function Offer() {
       <div className="container mx-auto px-5 lg:px-0">
         <section
           id="offer"
-          /* className="min-h-screen flex items-center justify-center" */
+        /* className="min-h-screen flex items-center justify-center" */
         >
           <div className="md:mt-10 md:mb-20">
             <div className="swiperContainer">
